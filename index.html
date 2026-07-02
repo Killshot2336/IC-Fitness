@@ -104,17 +104,114 @@
         .footer-gradient {
             background: linear-gradient(to bottom, var(--dark-gray), var(--deep-charcoal));
         }
+        
+        /* Navigation transition styles */
+        .nav-transition {
+            transition: all 0.3s ease;
+        }
+        
+        /* Fade-in animation styles */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Membership toggle styles */
+        .toggle-container {
+            position: relative;
+            display: inline-block;
+            width: 300px;
+            height: 50px;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, var(--neon-orange), var(--neon-lime));
+            transition: 0.4s;
+            border-radius: 25px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 42px;
+            width: 42px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(250px);
+        }
+        
+        .price-card {
+            transition: all 0.3s ease;
+        }
+        
+        .price-card.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            position: absolute;
+            pointer-events: none;
+        }
+        
+        .price-card.visible {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+            pointer-events: auto;
+        }
+        
+        /* Shrink navigation on scroll */
+        .nav-shrink {
+            padding: 0.5rem 0;
+        }
+        
+        .nav-logo-shrink {
+            font-size: 1.2rem;
+        }
+        
+        /* Pulse animation for CTA buttons */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(171, 255, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(171, 255, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(171, 255, 0, 0);
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
     </style>
 </head>
 <body class="bg-black text-white font-roboto">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <nav id="navbar" class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800 nav-transition">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center nav-transition">
             <div class="flex items-center space-x-2">
                 <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
                     <span class="font-bold text-black">IC</span>
                 </div>
-                <span class="text-xl font-bold">IC Fitness</span>
+                <span id="nav-logo" class="text-xl font-bold nav-transition">IC Fitness</span>
             </div>
             <div class="hidden md:flex space-x-8">
                 <a href="#features" class="hover:text-green-400 transition">Features</a>
@@ -141,7 +238,7 @@
 
     <!-- Hero Section -->
     <section class="hero-gradient min-h-screen flex items-center justify-center pt-16">
-        <div class="container mx-auto px-4 text-center">
+        <div class="container mx-auto px-4 text-center fade-in">
             <h1 class="text-5xl md:text-7xl font-bold mb-4 font-oswald">
                 <span class="neon-text">IC</span> FITNESS
             </h1>
@@ -149,7 +246,7 @@
             <p class="text-lg mb-8 italic">"Let me <span class="neon-orange-text">INSPIRE</span> you so that you can <span class="neon-orange-text">INSPIRE</span> others!"</p>
             
             <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
-                <a href="#" class="cta-button bg-green-500 hover:bg-green-600 text-black font-bold py-4 px-8 rounded-lg text-lg uppercase transition">
+                <a href="#" class="cta-button bg-green-500 hover:bg-green-600 text-black font-bold py-4 px-8 rounded-lg text-lg uppercase transition pulse-animation">
                     Join Local Membership
                 </a>
                 <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg text-lg uppercase transition">
@@ -166,13 +263,13 @@
     <!-- Features Section -->
     <section id="features" class="py-20 bg-gradient-to-b from-black to-gray-900">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
                 ELITE <span class="neon-text">FEATURES</span>
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Feature 1 -->
-                <div class="feature-card rounded-lg p-6 text-center">
+                <div class="feature-card rounded-lg p-6 text-center fade-in">
                     <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-clock text-black text-2xl"></i>
                     </div>
@@ -181,7 +278,7 @@
                 </div>
                 
                 <!-- Feature 2 -->
-                <div class="feature-card rounded-lg p-6 text-center">
+                <div class="feature-card rounded-lg p-6 text-center fade-in">
                     <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-dumbbell text-black text-2xl"></i>
                     </div>
@@ -190,7 +287,7 @@
                 </div>
                 
                 <!-- Feature 3 -->
-                <div class="feature-card rounded-lg p-6 text-center">
+                <div class="feature-card rounded-lg p-6 text-center fade-in">
                     <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-fire text-black text-2xl"></i>
                     </div>
@@ -199,7 +296,7 @@
                 </div>
                 
                 <!-- Feature 4 -->
-                <div class="feature-card rounded-lg p-6 text-center">
+                <div class="feature-card rounded-lg p-6 text-center fade-in">
                     <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-users text-black text-2xl"></i>
                     </div>
@@ -210,40 +307,101 @@
         </div>
     </section>
 
-    <!-- Tourist Section -->
+    <!-- Membership Section -->
     <section id="tourist" class="py-20 bg-gradient-to-b from-gray-900 to-black">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald">
-                <span class="neon-orange-text">TOURIST</span> FRIENDLY
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
+                MEMBERSHIP <span class="neon-orange-text">OPTIONS</span>
             </h2>
             
             <div class="max-w-4xl mx-auto">
-                <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg p-8 border-l-4 border-orange-500">
-                    <h3 class="text-2xl font-bold mb-4 font-oswald">Perfect for Cabin Visitors</h3>
-                    <p class="text-lg mb-6">Visiting Broken Bow for the weekend? Don't let your fitness routine fall behind! IC Fitness offers flexible drop-in and weekly passes perfect for tourists staying in the area.</p>
+                <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg p-8 border-l-4 border-orange-500 fade-in">
+                    <h3 class="text-2xl font-bold mb-6 font-oswald text-center">Choose Your Path</h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-orange-400 mb-2">$20</div>
-                            <p class="font-semibold">Day Pass</p>
-                            <p class="text-sm text-gray-400">Full day access</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-orange-400 mb-2">$50</div>
-                            <p class="font-semibold">3-Day Pass</p>
-                            <p class="text-sm text-gray-400">Perfect for weekend trips</p>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-3xl font-bold text-orange-400 mb-2">$75</div>
-                            <p class="font-semibold">Weekly Pass</p>
-                            <p class="text-sm text-gray-400">7 consecutive days</p>
+                    <!-- Membership Toggle -->
+                    <div class="flex justify-center items-center mb-8">
+                        <span class="mr-4 font-semibold">Local Memberships</span>
+                        <label class="toggle-container">
+                            <input type="checkbox" id="membership-toggle">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="ml-4 font-semibold">Visitor Passes</span>
+                    </div>
+                    
+                    <!-- Local Membership Cards (default visible) -->
+                    <div id="local-memberships" class="price-card visible">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="bg-gray-700 rounded-lg p-6 text-center">
+                                <div class="text-3xl font-bold text-green-400 mb-2">$45<span class="text-lg font-normal">/month</span></div>
+                                <p class="font-semibold mb-3">Monthly Membership</p>
+                                <p class="text-sm text-gray-400 mb-4">Unlimited 24/7 access to all equipment and facilities</p>
+                                <ul class="text-left mb-6 text-sm">
+                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>24/7 Key Fob Access</li>
+                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Full Equipment Use</li>
+                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Free Fitness Assessment</li>
+                                </ul>
+                                <a href="#" class="cta-button bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded-lg uppercase transition w-full">
+                                    Sign Up Now
+                                </a>
+                            </div>
+                            <div class="bg-gray-700 rounded-lg p-6 text-center border-2 border-green-400">
+                                <div class="text-3xl font-bold text-green-400 mb-2">$40<span class="text-lg font-normal">/month</span></div>
+                                <p class="font-semibold mb-3">Annual Membership</p>
+                                <p class="text-sm text-gray-400 mb-4">Best value! Save $60 with annual commitment</p>
+                                <ul class="text-left mb-6 text-sm">
+                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Everything in Monthly</li>
+                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>2 Guest Passes/Month</li>
+                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Priority Class Booking</li>
+                                </ul>
+                                <a href="#" class="cta-button bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded-lg uppercase transition w-full">
+                                    Sign Up Now
+                                </a>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="text-center">
-                        <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg uppercase transition">
-                            Get Your Tourist Pass
-                        </a>
+                    <!-- Visitor Pass Cards (hidden by default) -->
+                    <div id="visitor-passes" class="price-card hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-gray-700 rounded-lg p-6 text-center">
+                                <div class="text-3xl font-bold text-orange-400 mb-2">$20</div>
+                                <p class="font-semibold mb-3">Day Pass</p>
+                                <p class="text-sm text-gray-400 mb-4">Full day access</p>
+                                <ul class="text-left mb-6 text-sm">
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>24-Hour Access</li>
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>Full Equipment Use</li>
+                                </ul>
+                                <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg uppercase transition w-full">
+                                    Get Day Pass
+                                </a>
+                            </div>
+                            <div class="bg-gray-700 rounded-lg p-6 text-center border-2 border-orange-400">
+                                <div class="text-3xl font-bold text-orange-400 mb-2">$50</div>
+                                <p class="font-semibold mb-3">3-Day Pass</p>
+                                <p class="text-sm text-gray-400 mb-4">Perfect for weekend trips</p>
+                                <ul class="text-left mb-6 text-sm">
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>72-Hour Access</li>
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>Full Equipment Use</li>
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>1 Guest Pass</li>
+                                </ul>
+                                <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg uppercase transition w-full">
+                                    Get 3-Day Pass
+                                </a>
+                            </div>
+                            <div class="bg-gray-700 rounded-lg p-6 text-center">
+                                <div class="text-3xl font-bold text-orange-400 mb-2">$75</div>
+                                <p class="font-semibold mb-3">Weekly Pass</p>
+                                <p class="text-sm text-gray-400 mb-4">7 consecutive days</p>
+                                <ul class="text-left mb-6 text-sm">
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>7-Day Access</li>
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>Full Equipment Use</li>
+                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>2 Guest Passes</li>
+                                </ul>
+                                <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg uppercase transition w-full">
+                                    Get Weekly Pass
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -253,13 +411,13 @@
     <!-- Testimonials Section -->
     <section id="testimonials" class="py-20 bg-gradient-to-b from-black to-gray-900">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
                 WHAT <span class="neon-text">MEMBERS</span> SAY
             </h2>
             
             <div class="testimonial-container flex overflow-x-auto space-x-6 pb-6">
                 <!-- Testimonial 1 -->
-                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500">
+                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500 fade-in">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gray-700 rounded-full mr-4"></div>
                         <div>
@@ -277,7 +435,7 @@
                 </div>
                 
                 <!-- Testimonial 2 -->
-                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500">
+                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500 fade-in">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gray-700 rounded-full mr-4"></div>
                         <div>
@@ -295,7 +453,7 @@
                 </div>
                 
                 <!-- Testimonial 3 -->
-                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500">
+                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500 fade-in">
                     <div class="flex items-center mb-4">
                         <div class="w-12 h-12 bg-gray-700 rounded-full mr-4"></div>
                         <div>
@@ -318,20 +476,20 @@
     <!-- Contact Section -->
     <section id="contact" class="footer-gradient py-20">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
                 FIND <span class="neon-text">US</span>
             </h2>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
                 <!-- Map -->
-                <div class="h-64 md:h-96 bg-gray-800 rounded-lg overflow-hidden">
+                <div class="h-64 md:h-96 bg-gray-800 rounded-lg overflow-hidden fade-in">
                     <div class="w-full h-full flex items-center justify-center text-gray-500">
                         <p>Google Maps Placeholder</p>
                     </div>
                 </div>
                 
                 <!-- Contact Info -->
-                <div class="flex flex-col justify-center space-y-6">
+                <div class="flex flex-col justify-center space-y-6 fade-in">
                     <div>
                         <h3 class="text-2xl font-bold mb-2 font-oswald">IC Fitness</h3>
                         <p class="text-lg">2716 S Park Dr, Broken Bow, Oklahoma 74728</p>
@@ -383,19 +541,104 @@
     </footer>
 
     <script>
+        // Sticky Navigation Bar - Shrinks and changes opacity as user scrolls
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const navLogo = document.getElementById('nav-logo');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('nav-shrink');
+                navLogo.classList.add('nav-logo-shrink');
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+            } else {
+                navbar.classList.remove('nav-shrink');
+                navLogo.classList.remove('nav-logo-shrink');
+                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.9)';
+            }
+        });
+
+        // Interactive Membership Toggle
+        const membershipToggle = document.getElementById('membership-toggle');
+        const localMemberships = document.getElementById('local-memberships');
+        const visitorPasses = document.getElementById('visitor-passes');
+
+        membershipToggle.addEventListener('change', function() {
+            if (this.checked) {
+                // Show visitor passes
+                localMemberships.classList.remove('visible');
+                localMemberships.classList.add('hidden');
+                
+                setTimeout(() => {
+                    visitorPasses.classList.remove('hidden');
+                    visitorPasses.classList.add('visible');
+                }, 300);
+            } else {
+                // Show local memberships
+                visitorPasses.classList.remove('visible');
+                visitorPasses.classList.add('hidden');
+                
+                setTimeout(() => {
+                    localMemberships.classList.remove('hidden');
+                    localMemberships.classList.add('visible');
+                }, 300);
+            }
+        });
+
+        // Smooth Scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
         // Mobile menu toggle
         document.getElementById('mobile-menu-btn').addEventListener('click', function() {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
+
+        // Fade-in animations using Intersection Observer API
+        const fadeElements = document.querySelectorAll('.fade-in');
         
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        const fadeInObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        fadeElements.forEach(element => {
+            fadeInObserver.observe(element);
+        });
+
+        // Staggered animation for feature cards
+        const featureCards = document.querySelectorAll('.feature-card');
+        
+        const featureObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('visible');
+                    }, index * 100);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        featureCards.forEach(card => {
+            featureObserver.observe(card);
         });
     </script>
 </body>
