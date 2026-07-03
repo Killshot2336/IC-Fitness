@@ -5,116 +5,757 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IC Fitness - Broken Bow, Oklahoma | 24/7 Elite Training Facility</title>
     
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Custom Tailwind Configuration -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'neon-lime': '#abff00',
-                        'neon-orange': '#ff5e00',
-                        'deep-charcoal': '#0a0a0a',
-                        'dark-gray': '#1a1a1a',
-                        'medium-gray': '#2a2a2a',
-                    },
-                    fontFamily: {
-                        'oswald': ['Oswald', 'sans-serif'],
-                        'roboto': ['Roboto', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* CSS Variables */
+        :root {
+            --deep-charcoal: #121212;
+            --matte-black: #1a1a1a;
+            --dark-gray: #252525;
+            --neon-green: #39FF14;
+            --athletic-orange: #FF5733;
+            --light-gray: #f5f5f5;
+            --text-gray: #e0e0e0;
+        }
+        
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
         body {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--deep-charcoal);
+            color: var(--text-gray);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Oswald', sans-serif;
+            font-weight: 700;
         }
         
-        .neon-text {
-            text-shadow: 0 0 10px var(--neon-lime);
+        /* Typography */
+        .uppercase {
+            text-transform: uppercase;
         }
         
-        .neon-orange-text {
-            text-shadow: 0 0 10px var(--neon-orange);
+        .text-neon {
+            color: var(--neon-green);
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
         }
         
-        .hero-gradient {
-            background: linear-gradient(to bottom, rgba(10,10,10,0.7), rgba(10,10,10,0.9)), 
-                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600') center/cover;
+        .text-orange {
+            color: var(--athletic-orange);
+            text-shadow: 0 0 8px rgba(255, 87, 51, 0.5);
         }
         
-        .feature-card {
-            background: linear-gradient(to bottom, var(--dark-gray), var(--medium-gray));
-            border-bottom: 2px solid var(--neon-lime);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
-        
-        .cta-button {
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .cta-button::before {
-            content: "";
-            position: absolute;
+        /* Navigation */
+        .navbar {
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: left 0.5s;
-            z-index: -1;
-        }
-        
-        .cta-button:hover::before {
-            left: 100%;
-        }
-        
-        .testimonial-container {
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-        }
-        
-        .testimonial-card {
-            scroll-snap-align: start;
-        }
-        
-        .footer-gradient {
-            background: linear-gradient(to bottom, var(--dark-gray), var(--deep-charcoal));
-        }
-        
-        /* Navigation transition styles */
-        .nav-transition {
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
             transition: all 0.3s ease;
         }
         
-        /* Fade-in animation styles */
+        .navbar.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--light-gray);
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            font-weight: 900;
+            color: var(--deep-charcoal);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--neon-green);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 70%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--matte-black);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            padding: 2rem;
+            transition: right 0.3s ease;
+            z-index: 999;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2rem;
+        }
+        
+        .mobile-menu-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.8), rgba(18, 18, 18, 0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1600') center/cover;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            color: var(--text-gray);
+        }
+        
+        .hero-tagline {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 3rem;
+            line-height: 1.3;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .btn-neon {
+            background-color: rgba(57, 255, 20, 0.2);
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+        }
+        
+        .btn-neon:hover {
+            background-color: var(--neon-green);
+            color: var(--deep-charcoal);
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+        }
+        
+        .btn-orange {
+            background-color: rgba(255, 87, 51, 0.2);
+            border: 2px solid var(--athletic-orange);
+            color: var(--athletic-orange);
+        }
+        
+        .btn-orange:hover {
+            background-color: var(--athletic-orange);
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 87, 51, 0.5);
+        }
+        
+        /* Glassmorphism Button Effect */
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .glass-btn-neon {
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid rgba(57, 255, 20, 0.3);
+            color: var(--neon-green);
+        }
+        
+        .glass-btn-neon:hover {
+            background: rgba(57, 255, 20, 0.2);
+            border: 1px solid var(--neon-green);
+            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
+        }
+        
+        .glass-btn-orange {
+            background: rgba(255, 87, 51, 0.1);
+            border: 1px solid rgba(255, 87, 51, 0.3);
+            color: var(--athletic-orange);
+        }
+        
+        .glass-btn-orange:hover {
+            background: rgba(255, 87, 51, 0.2);
+            border: 1px solid var(--athletic-orange);
+            box-shadow: 0 0 15px rgba(255, 87, 51, 0.4);
+        }
+        
+        /* Section Styles */
+        .section {
+            padding: 5rem 0;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background-color: var(--neon-green);
+        }
+        
+        /* Features Section */
+        .features {
+            background-color: var(--matte-black);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background-color: var(--dark-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(57, 255, 20, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--neon-green);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: var(--deep-charcoal);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Membership Section */
+        .membership {
+            background-color: var(--deep-charcoal);
+        }
+        
+        .tabs-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .tab {
+            padding: 1rem 2rem;
+            background-color: var(--dark-gray);
+            border: none;
+            color: var(--text-gray);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .tab:first-child {
+            border-radius: 8px 0 0 8px;
+        }
+        
+        .tab:last-child {
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .tab.active {
+            background-color: var(--neon-green);
+            color: var(--deep-charcoal);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .membership-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .membership-card {
+            background-color: var(--dark-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .membership-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .membership-card.featured {
+            border: 2px solid var(--neon-green);
+        }
+        
+        .membership-card.featured::before {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--neon-green);
+            color: var(--deep-charcoal);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        
+        .membership-price {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--neon-green);
+        }
+        
+        .membership-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .membership-desc {
+            margin-bottom: 2rem;
+            color: var(--text-gray);
+        }
+        
+        .membership-features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+        
+        .membership-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .membership-features li i {
+            color: var(--neon-green);
+            margin-right: 0.5rem;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            background-color: var(--matte-black);
+        }
+        
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background-color: var(--dark-gray);
+            border-radius: 8px;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 1.5rem;
+            font-size: 3rem;
+            color: var(--neon-green);
+            opacity: 0.3;
+        }
+        
+        .testimonial-text {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--neon-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            color: var(--deep-charcoal);
+            font-weight: 700;
+        }
+        
+        .testimonial-name {
+            font-weight: 600;
+        }
+        
+        .testimonial-rating {
+            color: var(--athletic-orange);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: var(--deep-charcoal);
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--deep-charcoal);
+        }
+        
+        .contact-details h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-details p {
+            color: var(--text-gray);
+        }
+        
+        .contact-form {
+            background-color: var(--dark-gray);
+            border-radius: 8px;
+            padding: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--matte-black);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            color: var(--text-gray);
+            font-family: inherit;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--neon-green);
+        }
+        
+        .form-btn {
+            background-color: var(--neon-green);
+            color: var(--deep-charcoal);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .form-btn:hover {
+            background-color: var(--athletic-orange);
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--matte-black);
+            padding: 3rem 0 1rem;
+            border-top: 1px solid var(--dark-gray);
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--light-gray);
+        }
+        
+        .footer-logo-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--neon-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            font-weight: 900;
+            color: var(--deep-charcoal);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--neon-green);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--neon-green);
+            color: var(--deep-charcoal);
+        }
+        
+        .footer-copyright {
+            text-align: center;
+            color: var(--text-gray);
+            padding-top: 2rem;
+            border-top: 1px solid var(--dark-gray);
+            width: 100%;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
         }
         
         .fade-in.visible {
@@ -122,307 +763,224 @@
             transform: translateY(0);
         }
         
-        /* Membership toggle styles */
-        .toggle-container {
-            position: relative;
-            display: inline-block;
-            width: 300px;
-            height: 50px;
-        }
-        
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(to right, var(--neon-orange), var(--neon-lime));
-            transition: 0.4s;
-            border-radius: 25px;
-        }
-        
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 42px;
-            width: 42px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: 0.4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .toggle-slider:before {
-            transform: translateX(250px);
-        }
-        
-        .price-card {
-            transition: all 0.3s ease;
-        }
-        
-        .price-card.hidden {
-            opacity: 0;
-            transform: scale(0.9);
-            position: absolute;
-            pointer-events: none;
-        }
-        
-        .price-card.visible {
-            opacity: 1;
-            transform: scale(1);
-            position: relative;
-            pointer-events: auto;
-        }
-        
-        /* Shrink navigation on scroll */
-        .nav-shrink {
-            padding: 0.5rem 0;
-        }
-        
-        .nav-logo-shrink {
-            font-size: 1.2rem;
-        }
-        
-        /* Pulse animation for CTA buttons */
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(171, 255, 0, 0.7);
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
             }
-            70% {
-                box-shadow: 0 0 0 10px rgba(171, 255, 0, 0);
+            
+            .mobile-menu-btn {
+                display: block;
             }
-            100% {
-                box-shadow: 0 0 0 0 rgba(171, 255, 0, 0);
+            
+            .mobile-menu {
+                display: flex;
             }
-        }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
+            
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                max-width: 300px;
+                border-radius: 8px !important;
+                margin-bottom: 0.5rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="bg-black text-white font-roboto">
+<body>
     <!-- Navigation -->
-    <nav id="navbar" class="fixed top-0 w-full bg-black/90 backdrop-blur-sm z-50 border-b border-gray-800 nav-transition">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center nav-transition">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
-                    <span class="font-bold text-black">IC</span>
-                </div>
-                <span id="nav-logo" class="text-xl font-bold nav-transition">IC Fitness</span>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <div class="logo-icon">IC</div>
+                <span>IC Fitness</span>
             </div>
-            <div class="hidden md:flex space-x-8">
-                <a href="#features" class="hover:text-green-400 transition">Features</a>
-                <a href="#tourist" class="hover:text-green-400 transition">Tourist Passes</a>
-                <a href="#testimonials" class="hover:text-green-400 transition">Reviews</a>
-                <a href="#contact" class="hover:text-green-400 transition">Contact</a>
+            <div class="nav-links">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#membership" class="nav-link">Membership</a>
+                <a href="#testimonials" class="nav-link">Testimonials</a>
+                <a href="#contact" class="nav-link">Contact</a>
             </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-btn" class="text-white">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
-            </div>
-        </div>
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-black/95 px-4 py-3 border-t border-gray-800">
-            <div class="flex flex-col space-y-3">
-                <a href="#features" class="hover:text-green-400 transition">Features</a>
-                <a href="#tourist" class="hover:text-green-400 transition">Tourist Passes</a>
-                <a href="#testimonials" class="hover:text-green-400 transition">Reviews</a>
-                <a href="#contact" class="hover:text-green-400 transition">Contact</a>
-            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </nav>
-
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <button class="mobile-menu-close" id="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#home" class="mobile-menu-link">Home</a>
+        <a href="#features" class="mobile-menu-link">Features</a>
+        <a href="#membership" class="mobile-menu-link">Membership</a>
+        <a href="#testimonials" class="mobile-menu-link">Testimonials</a>
+        <a href="#contact" class="mobile-menu-link">Contact</a>
+    </div>
+    
     <!-- Hero Section -->
-    <section class="hero-gradient min-h-screen flex items-center justify-center pt-16">
-        <div class="container mx-auto px-4 text-center fade-in">
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 font-oswald">
-                <span class="neon-text">IC</span> FITNESS
-            </h1>
-            <p class="text-xl md:text-2xl mb-2 font-medium">24/7 ELITE TRAINING FACILITY</p>
-            <p class="text-lg mb-8 italic">"Let me <span class="neon-orange-text">INSPIRE</span> you so that you can <span class="neon-orange-text">INSPIRE</span> others!"</p>
-            
-            <div class="flex flex-col md:flex-row gap-4 justify-center mb-12">
-                <a href="#" class="cta-button bg-green-500 hover:bg-green-600 text-black font-bold py-4 px-8 rounded-lg text-lg uppercase transition pulse-animation">
-                    Join Local Membership
-                </a>
-                <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg text-lg uppercase transition">
-                    Get Tourist/Drop-In Pass
-                </a>
-            </div>
-            
-            <div class="max-w-2xl mx-auto">
-                <p class="text-lg">Located in the heart of Broken Bow, Oklahoma, IC Fitness offers elite bodybuilding equipment, CrossFit training, and group fitness classes for serious athletes and weekend warriors.</p>
+    <section class="hero" id="home">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title uppercase"><span class="text-neon">IC</span> FITNESS</h1>
+            <p class="hero-subtitle">24/7 ELITE TRAINING FACILITY</p>
+            <p class="hero-tagline">"LET ME <span class="text-orange">INSPIRE</span> YOU SO THAT YOU CAN <span class="text-orange">INSPIRE</span> OTHERS!"</p>
+            <div class="hero-buttons">
+                <a href="#membership" class="glass-btn glass-btn-neon">Join Local Membership</a>
+                <a href="#membership" class="glass-btn glass-btn-orange">Get Tourist/Drop-In Pass</a>
             </div>
         </div>
     </section>
-
+    
     <!-- Features Section -->
-    <section id="features" class="py-20 bg-gradient-to-b from-black to-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
-                ELITE <span class="neon-text">FEATURES</span>
-            </h2>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Feature 1 -->
-                <div class="feature-card rounded-lg p-6 text-center fade-in">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-clock text-black text-2xl"></i>
+    <section class="section features" id="features">
+        <div class="container">
+            <h2 class="section-title uppercase fade-in">Elite Features</h2>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 font-oswald">24/7 Access</h3>
+                    <h3 class="feature-title uppercase">24/7 Access</h3>
                     <p>Train on your schedule with round-the-clock access to our facility. No excuses, no limitations.</p>
                 </div>
-                
-                <!-- Feature 2 -->
-                <div class="feature-card rounded-lg p-6 text-center fade-in">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-dumbbell text-black text-2xl"></i>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-dumbbell"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 font-oswald">Elite Equipment</h3>
+                    <h3 class="feature-title uppercase">Elite Equipment</h3>
                     <p>Professional-grade bodybuilding equipment from top brands. Everything you need for serious gains.</p>
                 </div>
-                
-                <!-- Feature 3 -->
-                <div class="feature-card rounded-lg p-6 text-center fade-in">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-fire text-black text-2xl"></i>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-fire"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 font-oswald">CrossFit Rig</h3>
+                    <h3 class="feature-title uppercase">CrossFit Rig</h3>
                     <p>Full CrossFit setup with rigs, ropes, and functional training equipment for intense workouts.</p>
                 </div>
-                
-                <!-- Feature 4 -->
-                <div class="feature-card rounded-lg p-6 text-center fade-in">
-                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-users text-black text-2xl"></i>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
                     </div>
-                    <h3 class="text-2xl font-bold mb-3 font-oswald">Group Classes</h3>
+                    <h3 class="feature-title uppercase">Group Classes</h3>
                     <p>High-energy group fitness classes led by certified instructors. Motivation through community.</p>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Membership Section -->
-    <section id="tourist" class="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
-                MEMBERSHIP <span class="neon-orange-text">OPTIONS</span>
-            </h2>
-            
-            <div class="max-w-4xl mx-auto">
-                <div class="bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg p-8 border-l-4 border-orange-500 fade-in">
-                    <h3 class="text-2xl font-bold mb-6 font-oswald text-center">Choose Your Path</h3>
-                    
-                    <!-- Membership Toggle -->
-                    <div class="flex justify-center items-center mb-8">
-                        <span class="mr-4 font-semibold">Local Memberships</span>
-                        <label class="toggle-container">
-                            <input type="checkbox" id="membership-toggle">
-                            <span class="toggle-slider"></span>
-                        </label>
-                        <span class="ml-4 font-semibold">Visitor Passes</span>
-                    </div>
-                    
-                    <!-- Local Membership Cards (default visible) -->
-                    <div id="local-memberships" class="price-card visible">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                            <div class="bg-gray-700 rounded-lg p-6 text-center">
-                                <div class="text-3xl font-bold text-green-400 mb-2">$45<span class="text-lg font-normal">/month</span></div>
-                                <p class="font-semibold mb-3">Monthly Membership</p>
-                                <p class="text-sm text-gray-400 mb-4">Unlimited 24/7 access to all equipment and facilities</p>
-                                <ul class="text-left mb-6 text-sm">
-                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>24/7 Key Fob Access</li>
-                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Full Equipment Use</li>
-                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Free Fitness Assessment</li>
-                                </ul>
-                                <a href="#" class="cta-button bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded-lg uppercase transition w-full">
-                                    Sign Up Now
-                                </a>
-                            </div>
-                            <div class="bg-gray-700 rounded-lg p-6 text-center border-2 border-green-400">
-                                <div class="text-3xl font-bold text-green-400 mb-2">$40<span class="text-lg font-normal">/month</span></div>
-                                <p class="font-semibold mb-3">Annual Membership</p>
-                                <p class="text-sm text-gray-400 mb-4">Best value! Save $60 with annual commitment</p>
-                                <ul class="text-left mb-6 text-sm">
-                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Everything in Monthly</li>
-                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>2 Guest Passes/Month</li>
-                                    <li class="mb-2"><i class="fas fa-check text-green-400 mr-2"></i>Priority Class Booking</li>
-                                </ul>
-                                <a href="#" class="cta-button bg-green-500 hover:bg-green-600 text-black font-bold py-2 px-4 rounded-lg uppercase transition w-full">
-                                    Sign Up Now
-                                </a>
-                            </div>
+    <section class="section membership" id="membership">
+        <div class="container">
+            <h2 class="section-title uppercase fade-in">Membership Options</h2>
+            <div class="tabs-container fade-in">
+                <div class="tabs">
+                    <button class="tab active" data-tab="local">Local Memberships</button>
+                    <button class="tab" data-tab="visitor">Visitor Passes</button>
+                </div>
+                
+                <!-- Local Memberships Tab -->
+                <div class="tab-content active" id="local">
+                    <div class="membership-cards">
+                        <div class="membership-card">
+                            <div class="membership-price">$45<span style="font-size: 1.5rem;">/mo</span></div>
+                            <h3 class="membership-title uppercase">Monthly Membership</h3>
+                            <p class="membership-desc">Unlimited 24/7 access to all equipment and facilities</p>
+                            <ul class="membership-features">
+                                <li><i class="fas fa-check"></i> 24/7 Key Fob Access</li>
+                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
+                                <li><i class="fas fa-check"></i> Free Fitness Assessment</li>
+                            </ul>
+                            <a href="#" class="btn btn-neon">Sign Up Now</a>
+                        </div>
+                        <div class="membership-card featured">
+                            <div class="membership-price">$40<span style="font-size: 1.5rem;">/mo</span></div>
+                            <h3 class="membership-title uppercase">Annual Membership</h3>
+                            <p class="membership-desc">Best value! Save $60 with annual commitment</p>
+                            <ul class="membership-features">
+                                <li><i class="fas fa-check"></i> Everything in Monthly</li>
+                                <li><i class="fas fa-check"></i> 2 Guest Passes/Month</li>
+                                <li><i class="fas fa-check"></i> Priority Class Booking</li>
+                            </ul>
+                            <a href="#" class="btn btn-neon">Sign Up Now</a>
                         </div>
                     </div>
-                    
-                    <!-- Visitor Pass Cards (hidden by default) -->
-                    <div id="visitor-passes" class="price-card hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div class="bg-gray-700 rounded-lg p-6 text-center">
-                                <div class="text-3xl font-bold text-orange-400 mb-2">$20</div>
-                                <p class="font-semibold mb-3">Day Pass</p>
-                                <p class="text-sm text-gray-400 mb-4">Full day access</p>
-                                <ul class="text-left mb-6 text-sm">
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>24-Hour Access</li>
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>Full Equipment Use</li>
-                                </ul>
-                                <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg uppercase transition w-full">
-                                    Get Day Pass
-                                </a>
-                            </div>
-                            <div class="bg-gray-700 rounded-lg p-6 text-center border-2 border-orange-400">
-                                <div class="text-3xl font-bold text-orange-400 mb-2">$50</div>
-                                <p class="font-semibold mb-3">3-Day Pass</p>
-                                <p class="text-sm text-gray-400 mb-4">Perfect for weekend trips</p>
-                                <ul class="text-left mb-6 text-sm">
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>72-Hour Access</li>
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>Full Equipment Use</li>
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>1 Guest Pass</li>
-                                </ul>
-                                <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg uppercase transition w-full">
-                                    Get 3-Day Pass
-                                </a>
-                            </div>
-                            <div class="bg-gray-700 rounded-lg p-6 text-center">
-                                <div class="text-3xl font-bold text-orange-400 mb-2">$75</div>
-                                <p class="font-semibold mb-3">Weekly Pass</p>
-                                <p class="text-sm text-gray-400 mb-4">7 consecutive days</p>
-                                <ul class="text-left mb-6 text-sm">
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>7-Day Access</li>
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>Full Equipment Use</li>
-                                    <li class="mb-2"><i class="fas fa-check text-orange-400 mr-2"></i>2 Guest Passes</li>
-                                </ul>
-                                <a href="#" class="cta-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg uppercase transition w-full">
-                                    Get Weekly Pass
-                                </a>
-                            </div>
+                </div>
+                
+                <!-- Visitor Passes Tab -->
+                <div class="tab-content" id="visitor">
+                    <div class="membership-cards">
+                        <div class="membership-card">
+                            <div class="membership-price">$20</div>
+                            <h3 class="membership-title uppercase">Day Pass</h3>
+                            <p class="membership-desc">Full day access</p>
+                            <ul class="membership-features">
+                                <li><i class="fas fa-check"></i> 24-Hour Access</li>
+                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
+                            </ul>
+                            <a href="#" class="btn btn-orange">Get Day Pass</a>
+                        </div>
+                        <div class="membership-card">
+                            <div class="membership-price">$50</div>
+                            <h3 class="membership-title uppercase">3-Day Pass</h3>
+                            <p class="membership-desc">Perfect for weekend trips</p>
+                            <ul class="membership-features">
+                                <li><i class="fas fa-check"></i> 72-Hour Access</li>
+                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
+                                <li><i class="fas fa-check"></i> 1 Guest Pass</li>
+                            </ul>
+                            <a href="#" class="btn btn-orange">Get 3-Day Pass</a>
+                        </div>
+                        <div class="membership-card">
+                            <div class="membership-price">$75</div>
+                            <h3 class="membership-title uppercase">Weekly Pass</h3>
+                            <p class="membership-desc">7 consecutive days</p>
+                            <ul class="membership-features">
+                                <li><i class="fas fa-check"></i> 7-Day Access</li>
+                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
+                                <li><i class="fas fa-check"></i> 2 Guest Passes</li>
+                            </ul>
+                            <a href="#" class="btn btn-orange">Get Weekly Pass</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-gradient-to-b from-black to-gray-900">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
-                WHAT <span class="neon-text">MEMBERS</span> SAY
-            </h2>
-            
-            <div class="testimonial-container flex overflow-x-auto space-x-6 pb-6">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500 fade-in">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gray-700 rounded-full mr-4"></div>
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title uppercase fade-in">What Members Say</h2>
+            <div class="testimonials-container">
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"The atmosphere puts you in beast mode. Equipment is top-notch and the 24/7 access fits my crazy schedule. Best gym in Broken Bow!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">MR</div>
                         <div>
-                            <h4 class="font-bold font-oswald">Mike R.</h4>
-                            <div class="flex text-yellow-400">
+                            <div class="testimonial-name">Mike R.</div>
+                            <div class="testimonial-rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -431,16 +989,14 @@
                             </div>
                         </div>
                     </div>
-                    <p class="italic">"The atmosphere puts you in beast mode. Equipment is top-notch and the 24/7 access fits my crazy schedule. Best gym in Broken Bow!"</p>
                 </div>
-                
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500 fade-in">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gray-700 rounded-full mr-4"></div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"Super easy drop-in process when I was visiting for the weekend. Great equipment and clean facility. Will definitely be back!"</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">SL</div>
                         <div>
-                            <h4 class="font-bold font-oswald">Sarah L.</h4>
-                            <div class="flex text-yellow-400">
+                            <div class="testimonial-name">Sarah L.</div>
+                            <div class="testimonial-rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -449,16 +1005,14 @@
                             </div>
                         </div>
                     </div>
-                    <p class="italic">"Super easy drop-in process when I was visiting for the weekend. Great equipment and clean facility. Will definitely be back!"</p>
                 </div>
-                
-                <!-- Testimonial 3 -->
-                <div class="testimonial-card min-w-full md:min-w-[calc(50%-1rem)] bg-gray-800 rounded-lg p-8 border-b-2 border-green-500 fade-in">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gray-700 rounded-full mr-4"></div>
+                <div class="testimonial-card fade-in">
+                    <p class="testimonial-text">"The CrossFit area is incredible! Best rig I've used outside of a dedicated CrossFit box. Classes are challenging but welcoming."</p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">TH</div>
                         <div>
-                            <h4 class="font-bold font-oswald">Tom H.</h4>
-                            <div class="flex text-yellow-400">
+                            <div class="testimonial-name">Tom H.</div>
+                            <div class="testimonial-rating">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -467,124 +1021,157 @@
                             </div>
                         </div>
                     </div>
-                    <p class="italic">"The CrossFit area is incredible! Best rig I've used outside of a dedicated CrossFit box. Classes are challenging but welcoming."</p>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Contact Section -->
-    <section id="contact" class="footer-gradient py-20">
-        <div class="container mx-auto px-4">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-12 font-oswald fade-in">
-                FIND <span class="neon-text">US</span>
-            </h2>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                <!-- Map -->
-                <div class="h-64 md:h-96 bg-gray-800 rounded-lg overflow-hidden fade-in">
-                    <div class="w-full h-full flex items-center justify-center text-gray-500">
-                        <p>Google Maps Placeholder</p>
+    <section class="section contact" id="contact">
+        <div class="container">
+            <h2 class="section-title uppercase fade-in">Find Us</h2>
+            <div class="contact-container">
+                <div class="contact-info fade-in">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Location</h3>
+                            <p>2716 S Park Dr, Broken Bow, Oklahoma 74728</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Phone</h3>
+                            <p><a href="tel:580-743-7955" class="text-neon">580-743-7955</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>icfitness2023tipton@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Hours</h3>
+                            <p>Open 24/7 for Members</p>
+                        </div>
                     </div>
                 </div>
-                
-                <!-- Contact Info -->
-                <div class="flex flex-col justify-center space-y-6 fade-in">
-                    <div>
-                        <h3 class="text-2xl font-bold mb-2 font-oswald">IC Fitness</h3>
-                        <p class="text-lg">2716 S Park Dr, Broken Bow, Oklahoma 74728</p>
-                    </div>
-                    
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                            <i class="fas fa-phone text-black"></i>
+                <div class="contact-form fade-in">
+                    <h3 class="text-2xl mb-4">Get In Touch</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
                         </div>
-                        <p class="text-lg">580-743-7955</p>
-                    </div>
-                    
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                            <i class="fas fa-envelope text-black"></i>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
                         </div>
-                        <p class="text-lg">icfitness2023tipton@gmail.com</p>
-                    </div>
-                    
-                    <div class="flex items-center space-x-4">
-                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center">
-                            <i class="fas fa-clock text-black"></i>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="5" required></textarea>
                         </div>
-                        <p class="text-lg">Open 24/7 for Members</p>
-                    </div>
-                    
-                    <div class="flex space-x-4 pt-4">
-                        <a href="https://www.facebook.com/ICFitness2" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-500 transition">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-500 transition">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-500 transition">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                    </div>
+                        <button type="submit" class="form-btn">Send Message</button>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <!-- Footer -->
-    <footer class="bg-black py-8 border-t border-gray-800">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400">© 2023 IC Fitness. All rights reserved.</p>
-            <p class="text-gray-400 mt-2">"Let me INSPIRE you so that you can INSPIRE others!"</p>
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">IC</div>
+                <span>IC Fitness</span>
+            </div>
+            <div class="footer-links">
+                <a href="#home" class="footer-link">Home</a>
+                <a href="#features" class="footer-link">Features</a>
+                <a href="#membership" class="footer-link">Membership</a>
+                <a href="#testimonials" class="footer-link">Testimonials</a>
+                <a href="#contact" class="footer-link">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/ICFitness2" class="social-icon">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-icon">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2023 IC Fitness. All rights reserved. "Let me INSPIRE you so that you can INSPIRE others!"</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Sticky Navigation Bar - Shrinks and changes opacity as user scrolls
+        // Sticky Navigation
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
-            const navLogo = document.getElementById('nav-logo');
-            
             if (window.scrollY > 50) {
-                navbar.classList.add('nav-shrink');
-                navLogo.classList.add('nav-logo-shrink');
-                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
+                navbar.classList.add('scrolled');
             } else {
-                navbar.classList.remove('nav-shrink');
-                navLogo.classList.remove('nav-logo-shrink');
-                navbar.style.backgroundColor = 'rgba(10, 10, 10, 0.9)';
+                navbar.classList.remove('scrolled');
             }
         });
-
-        // Interactive Membership Toggle
-        const membershipToggle = document.getElementById('membership-toggle');
-        const localMemberships = document.getElementById('local-memberships');
-        const visitorPasses = document.getElementById('visitor-passes');
-
-        membershipToggle.addEventListener('change', function() {
-            if (this.checked) {
-                // Show visitor passes
-                localMemberships.classList.remove('visible');
-                localMemberships.classList.add('hidden');
-                
-                setTimeout(() => {
-                    visitorPasses.classList.remove('hidden');
-                    visitorPasses.classList.add('visible');
-                }, 300);
-            } else {
-                // Show local memberships
-                visitorPasses.classList.remove('visible');
-                visitorPasses.classList.add('hidden');
-                
-                setTimeout(() => {
-                    localMemberships.classList.remove('hidden');
-                    localMemberships.classList.add('visible');
-                }, 300);
-            }
+        
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
         });
-
-        // Smooth Scroll for anchor links
+        
+        mobileMenuClose.addEventListener('click', function() {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Tab System
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Remove active class from all tabs and tab contents
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(tc => tc.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding tab content
+                this.classList.add('active');
+                const tabId = this.getAttribute('data-tab');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Smooth Scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -597,13 +1184,8 @@
                 }
             });
         });
-
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        });
-
-        // Fade-in animations using Intersection Observer API
+        
+        // Fade-in Animation on Scroll
         const fadeElements = document.querySelectorAll('.fade-in');
         
         const fadeInObserver = new IntersectionObserver((entries) => {
@@ -616,29 +1198,27 @@
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         });
-
+        
         fadeElements.forEach(element => {
             fadeInObserver.observe(element);
         });
-
-        // Staggered animation for feature cards
-        const featureCards = document.querySelectorAll('.feature-card');
         
-        const featureObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        featureCards.forEach(card => {
-            featureObserver.observe(card);
+        // Form Submission
+        const contactForm = document.querySelector('.contact-form form');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would normally send the form data to a server
+            // For this demo, we'll just show an alert
+            alert(`Thank you, ${name}! Your message has been sent. We'll get back to you soon.`);
+            
+            // Reset form
+            this.reset();
         });
     </script>
 </body>
