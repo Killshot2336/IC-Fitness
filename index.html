@@ -1,1283 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IC Fitness - Broken Bow, Oklahoma | 24/7 Elite Training Facility</title>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* CSS Variables */
-        :root {
-            --deep-charcoal: #121212;
-            --matte-black: #1a1a1a;
-            --dark-gray: #252525;
-            --neon-green: #39FF14;
-            --athletic-orange: #FF5733;
-            --light-gray: #f5f5f5;
-            --text-gray: #e0e0e0;
-        }
-        
-        /* Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--deep-charcoal);
-            color: var(--text-gray);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Oswald', sans-serif;
-            font-weight: 700;
-        }
-        
-        /* Brand Logo Styles */
-        .brand-logo {
-            max-height: 45px;
-            width: auto;
-            object-fit: contain;
-            transition: all 0.3s ease;
-        }
-        
-        /* Profile Frame Styles */
-        .profile-frame {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .profile-image {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        /* Leadership Section Styles */
-        .leadership-section {
-            background-color: var(--matte-black);
-            padding: 4rem 0;
-        }
-        
-        .leadership-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        .leadership-content h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--neon-green);
-        }
-        
-        .leadership-copy {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-gray);
-        }
-        
-        /* Feature Image Styles */
-        .feature-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-        }
-        
-        /* Typography */
-        .uppercase {
-            text-transform: uppercase;
-        }
-        
-        .text-neon {
-            color: var(--neon-green);
-            text-shadow: 0 0 8px rgba(57, 255, 20, 0.5);
-        }
-        
-        .text-orange {
-            color: var(--athletic-orange);
-            text-shadow: 0 0 8px rgba(255, 87, 51, 0.5);
-        }
-        
-        /* Navigation */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-        
-        .navbar.scrolled {
-            padding: 0.5rem 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .navbar-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .nav-link {
-            color: var(--text-gray);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: var(--neon-green);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--light-gray);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 70%;
-            max-width: 300px;
-            height: 100vh;
-            background-color: var(--matte-black);
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            padding: 2rem;
-            transition: right 0.3s ease;
-            z-index: 999;
-        }
-        
-        .mobile-menu.active {
-            right: 0;
-        }
-        
-        .mobile-menu-link {
-            color: var(--text-gray);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.2rem;
-        }
-        
-        .mobile-menu-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: none;
-            border: none;
-            color: var(--text-gray);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 6rem 2rem 2rem;
-            background: linear-gradient(to bottom, rgba(18, 18, 18, 0.75), rgba(26, 26, 26, 0.95)), 
-                        url('assets/hero-facility.jpg') center/cover;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            max-width: 800px;
-            text-align: center;
-            z-index: 2;
-        }
-        
-        .hero-title {
-            font-size: 4rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            letter-spacing: 2px;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            color: var(--text-gray);
-        }
-        
-        .hero-tagline {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            line-height: 1.3;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: inline-block;
-        }
-        
-        .btn-neon {
-            background-color: rgba(57, 255, 20, 0.2);
-            border: 2px solid var(--neon-green);
-            color: var(--neon-green);
-        }
-        
-        .btn-neon:hover {
-            background-color: var(--neon-green);
-            color: var(--deep-charcoal);
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
-        }
-        
-        .btn-orange {
-            background-color: rgba(255, 87, 51, 0.2);
-            border: 2px solid var(--athletic-orange);
-            color: var(--athletic-orange);
-        }
-        
-        .btn-orange:hover {
-            background-color: var(--athletic-orange);
-            color: white;
-            box-shadow: 0 0 20px rgba(255, 87, 51, 0.5);
-        }
-        
-        /* Glassmorphism Button Effect */
-        .glass-btn {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 1rem 2rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .glass-btn-neon {
-            background: rgba(57, 255, 20, 0.1);
-            border: 1px solid rgba(57, 255, 20, 0.3);
-            color: var(--neon-green);
-        }
-        
-        .glass-btn-neon:hover {
-            background: rgba(57, 255, 20, 0.2);
-            border: 1px solid var(--neon-green);
-            box-shadow: 0 0 15px rgba(57, 255, 20, 0.4);
-        }
-        
-        .glass-btn-orange {
-            background: rgba(255, 87, 51, 0.1);
-            border: 1px solid rgba(255, 87, 51, 0.3);
-            color: var(--athletic-orange);
-        }
-        
-        .glass-btn-orange:hover {
-            background: rgba(255, 87, 51, 0.2);
-            border: 1px solid var(--athletic-orange);
-            box-shadow: 0 0 15px rgba(255, 87, 51, 0.4);
-        }
-        
-        /* Section Styles */
-        .section {
-            padding: 5rem 0;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .section-title {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background-color: var(--neon-green);
-        }
-        
-        /* Features Section */
-        .features {
-            background-color: var(--matte-black);
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        
-        .feature-card {
-            background-color: var(--dark-gray);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(57, 255, 20, 0.1));
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .feature-card:hover::before {
-            opacity: 1;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid var(--neon-green);
-        }
-        
-        .feature-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Membership Section */
-        .membership {
-            background-color: var(--deep-charcoal);
-        }
-        
-        .tabs-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 3rem;
-        }
-        
-        .tab {
-            padding: 1rem 2rem;
-            background-color: var(--dark-gray);
-            border: none;
-            color: var(--text-gray);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .tab:first-child {
-            border-radius: 8px 0 0 8px;
-        }
-        
-        .tab:last-child {
-            border-radius: 0 8px 8px 0;
-        }
-        
-        .tab.active {
-            background-color: var(--neon-green);
-            color: var(--deep-charcoal);
-        }
-        
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .membership-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .membership-card {
-            background-color: var(--dark-gray);
-            border-radius: 8px;
-            padding: 2rem;
-            text-align: center;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .membership-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .membership-card.featured {
-            border: 2px solid var(--neon-green);
-        }
-        
-        .membership-card.featured::before {
-            content: 'BEST VALUE';
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: var(--neon-green);
-            color: var(--deep-charcoal);
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.8rem;
-        }
-        
-        .membership-price {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--neon-green);
-        }
-        
-        .membership-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .membership-desc {
-            margin-bottom: 2rem;
-            color: var(--text-gray);
-        }
-        
-        .membership-features {
-            list-style: none;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-        
-        .membership-features li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-        
-        .membership-features li i {
-            color: var(--neon-green);
-            margin-right: 0.5rem;
-        }
-        
-        /* Testimonials Section */
-        .testimonials {
-            background-color: var(--matte-black);
-        }
-        
-        .testimonials-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .testimonial-card {
-            background-color: var(--dark-gray);
-            border-radius: 8px;
-            padding: 2rem;
-            position: relative;
-        }
-        
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 1rem;
-            left: 1.5rem;
-            font-size: 3rem;
-            color: var(--neon-green);
-            opacity: 0.3;
-        }
-        
-        .testimonial-text {
-            margin-bottom: 1.5rem;
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .testimonial-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--neon-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 1rem;
-            color: var(--deep-charcoal);
-            font-weight: 700;
-        }
-        
-        .testimonial-name {
-            font-weight: 600;
-        }
-        
-        .testimonial-rating {
-            color: var(--athletic-orange);
-        }
-        
-        /* Contact Section */
-        .contact {
-            background-color: var(--deep-charcoal);
-        }
-        
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background-color: var(--neon-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--deep-charcoal);
-        }
-        
-        .contact-details h3 {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .contact-details p {
-            color: var(--text-gray);
-        }
-        
-        .contact-link {
-            color: var(--neon-green);
-            text-decoration: none;
-        }
-        
-        .contact-form {
-            background-color: var(--dark-gray);
-            border-radius: 8px;
-            padding: 2rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            background-color: var(--matte-black);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            color: var(--text-gray);
-            font-family: inherit;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--neon-green);
-        }
-        
-        .form-btn {
-            background-color: var(--neon-green);
-            color: var(--deep-charcoal);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 4px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .form-btn:hover {
-            background-color: var(--athletic-orange);
-            color: white;
-        }
-        
-        /* Footer */
-        .footer {
-            background-color: var(--matte-black);
-            padding: 3rem 0 1rem;
-            border-top: 1px solid var(--dark-gray);
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        .footer-logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        
-        .footer-link {
-            color: var(--text-gray);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        
-        .footer-link:hover {
-            color: var(--neon-green);
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .social-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--dark-gray);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-gray);
-            transition: all 0.3s ease;
-        }
-        
-        .social-icon:hover {
-            background-color: var(--neon-green);
-            color: var(--deep-charcoal);
-        }
-        
-        .footer-copyright {
-            text-align: center;
-            color: var(--text-gray);
-            padding-top: 2rem;
-            border-top: 1px solid var(--dark-gray);
-            width: 100%;
-        }
-        
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .mobile-menu {
-                display: flex;
-            }
-            
-            .hero-title {
-                font-size: 3rem;
-            }
-            
-            .hero-tagline {
-                font-size: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.5rem;
-            }
-            
-            .tabs {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .tab {
-                width: 100%;
-                max-width: 300px;
-                border-radius: 8px !important;
-                margin-bottom: 0.5rem;
-            }
-            
-            .leadership-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="IC Fitness - 24/7 elite training facility in Broken Bow, Oklahoma. Let me INSPIRE you so that you can INSPIRE others! Join today.">
+<meta name="keywords" content="gym, fitness, Broken Bow, Oklahoma, 24/7 gym, CrossFit, personal training, IC Fitness">
+<meta name="author" content="IC Fitness">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://icfitness.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IC Fitness | 24/7 Elite Training Facility">
+<meta property="og:description" content="Let me INSPIRE you so that you can INSPIRE others! Premium gym in Broken Bow, OK.">
+<meta property="og:url" content="https://icfitness.com/">
+<meta property="og:image" content="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&h=630&fit=crop">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IC Fitness | Broken Bow, OK">
+<meta name="twitter:description" content="24/7 elite training facility. Join IC Fitness today!">
+<meta name="theme-color" content="#121212">
+<title>IC Fitness - Broken Bow, Oklahoma | 24/7 Elite Training Facility</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"HealthClub","name":"IC Fitness","description":"24/7 elite training facility in Broken Bow, Oklahoma","url":"https://icfitness.com","telephone":"+1-580-743-7955","email":"icfitness2023tipton@gmail.com","address":{"@type":"PostalAddress","streetAddress":"2716 S Park Dr","addressLocality":"Broken Bow","addressRegion":"OK","postalCode":"74728","addressCountry":"US"},"geo":{"@type":"GeoCoordinates","latitude":34.0293,"longitude":-94.7391},"openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"00:00","closes":"23:59"},"priceRange":"$$","image":"https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800"}
+</script>
+<style>
+:root{--charcoal:#121212;--black:#1a1a1a;--gray:#252525;--neon:#39FF14;--orange:#FF5733;--light:#f5f5f5;--text:#e0e0e0;--neon-dim:rgba(57,255,20,.15);--orange-dim:rgba(255,87,51,.15)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:'Montserrat',sans-serif;background:var(--charcoal);color:var(--text);line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4,h5,h6{font-family:'Oswald',sans-serif;font-weight:700}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--neon);text-decoration:none}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--neon);outline-offset:2px}
+.skip-link{position:absolute;top:-100px;left:1rem;background:var(--neon);color:var(--charcoal);padding:.75rem 1.5rem;z-index:10001;font-weight:700;border-radius:4px}
+.skip-link:focus{top:1rem}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+#loader{position:fixed;inset:0;background:var(--charcoal);display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:10000;transition:opacity .5s,visibility .5s}
+#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-logo{font-family:'Oswald',sans-serif;font-size:3rem;font-weight:900;color:var(--neon);letter-spacing:4px;margin-bottom:1.5rem}
+.loader-bar{width:200px;height:4px;background:var(--gray);border-radius:2px;overflow:hidden}
+.loader-progress{height:100%;background:linear-gradient(90deg,var(--neon),var(--orange));width:0;animation:loadBar 1.5s ease forwards}
+@keyframes loadBar{to{width:100%}}
+.navbar{position:fixed;top:0;left:0;width:100%;background:rgba(18,18,18,.95);backdrop-filter:blur(10px);z-index:1000;padding:1rem 0;transition:all .3s}
+.navbar.scrolled{padding:.5rem 0;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.navbar-container{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
+.logo-text{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:900;letter-spacing:2px;color:var(--text)}
+.logo-text span{color:var(--neon)}
+.nav-links{display:flex;gap:1.5rem;align-items:center;list-style:none}
+.nav-link{color:var(--text);font-weight:500;font-size:.9rem;transition:color .3s}
+.nav-link:hover,.nav-link.active{color:var(--neon)}
+.nav-actions{display:flex;gap:.75rem;align-items:center}
+.btn-nav{padding:.5rem 1rem;border-radius:4px;font-weight:600;font-size:.85rem;cursor:pointer;border:2px solid var(--neon);background:transparent;color:var(--neon);transition:all .3s;font-family:inherit}
+.btn-nav:hover{background:var(--neon);color:var(--charcoal)}
+.mobile-menu-btn{display:none;background:none;border:none;color:var(--light);font-size:1.5rem;cursor:pointer;padding:.5rem}
+.mobile-menu{display:none;position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;background:var(--black);flex-direction:column;padding:5rem 2rem 2rem;gap:1.5rem;z-index:999;transition:right .3s;list-style:none}
+.mobile-menu.active{right:0}
+.mobile-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:998}
+.mobile-overlay.active{display:block}
+.mobile-menu-close{position:absolute;top:1.5rem;right:1.5rem;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 4rem;background:linear-gradient(rgba(18,18,18,.7),rgba(26,26,26,.9)),url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80') center/cover no-repeat;position:relative;text-align:center}
+.hero-content{max-width:900px;z-index:2}
+.hero-title{font-size:clamp(2.5rem,8vw,5rem);font-weight:900;letter-spacing:3px;margin-bottom:.5rem}
+.text-neon{color:var(--neon);text-shadow:0 0 10px rgba(57,255,20,.5)}
+.text-orange{color:var(--orange);text-shadow:0 0 10px rgba(255,87,51,.5)}
+.hero-subtitle{font-size:clamp(1rem,3vw,1.5rem);font-weight:500;margin-bottom:1.5rem;opacity:.9}
+.hero-tagline{font-size:clamp(1.1rem,3vw,1.8rem);font-weight:600;margin-bottom:2.5rem;line-height:1.4}
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{padding:1rem 2rem;border-radius:4px;font-weight:600;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem;border:none;font-family:inherit;font-size:1rem}
+.btn-neon{background:rgba(57,255,20,.15);border:2px solid var(--neon);color:var(--neon)}
+.btn-neon:hover{background:var(--neon);color:var(--charcoal);box-shadow:0 0 25px rgba(57,255,20,.4)}
+.btn-orange{background:rgba(255,87,51,.15);border:2px solid var(--orange);color:var(--orange)}
+.btn-orange:hover{background:var(--orange);color:#fff;box-shadow:0 0 25px rgba(255,87,51,.4)}
+.scroll-indicator{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:bounce 2s infinite}
+.scroll-indicator i{font-size:1.5rem;color:var(--neon)}
+@keyframes bounce{0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-10px)}60%{transform:translateX(-50%) translateY(-5px)}}
+.section{padding:5rem 0}
+.container{max-width:1200px;margin:0 auto;padding:0 2rem}
+.section-title{font-size:clamp(2rem,5vw,3rem);text-align:center;margin-bottom:1rem}
+.section-subtitle{text-align:center;color:var(--text);opacity:.8;margin-bottom:3rem;max-width:600px;margin-left:auto;margin-right:auto}
+.section-title::after{content:'';display:block;width:80px;height:4px;background:var(--neon);margin:1rem auto 0}
+.about{background:var(--black)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;margin-bottom:4rem}
+.about-text h3{font-size:1.8rem;color:var(--neon);margin-bottom:1rem}
+.about-text p{margin-bottom:1rem;line-height:1.8}
+.about-image{border-radius:8px;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.about-image img{width:100%;height:400px;object-fit:cover}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+.stat-item{padding:2rem;background:var(--gray);border-radius:8px;transition:transform .3s}
+.stat-item:hover{transform:translateY(-5px);border:1px solid var(--neon)}
+.stat-number{font-family:'Oswald',sans-serif;font-size:3rem;font-weight:700;color:var(--neon);display:block}
+.stat-label{font-size:.9rem;opacity:.8;margin-top:.5rem}
+.highlights-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem;margin-top:3rem}
+.highlight-card{background:var(--gray);padding:2rem;border-radius:8px;text-align:center;transition:all .3s}
+.highlight-card:hover{transform:translateY(-5px);border:1px solid var(--neon)}
+.highlight-card i{font-size:2.5rem;color:var(--neon);margin-bottom:1rem}
+.highlight-card h4{font-size:1.2rem;margin-bottom:.5rem}
+.leadership{background:var(--charcoal);padding:4rem 0}
+.leadership-grid{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:1fr 2fr;gap:3rem;align-items:center}
+.leadership-photo{border-radius:8px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.leadership-photo img{width:100%;height:350px;object-fit:cover}
+.leadership-content h2{font-size:2.5rem;color:var(--neon);margin-bottom:1rem}
+.services{background:var(--black)}
+.classes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:4rem}
+.class-card{background:var(--gray);border-radius:8px;overflow:hidden;transition:all .3s}
+.class-card:hover{transform:translateY(-8px);box-shadow:0 15px 40px rgba(0,0,0,.3);border:1px solid var(--neon)}
+.class-card img{width:100%;height:180px;object-fit:cover}
+.class-card-body{padding:1.5rem}
+.class-card-body h3{margin-bottom:.5rem}
+.difficulty{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.75rem;font-weight:600;margin-bottom:.75rem}
+.diff-easy{background:rgba(57,255,20,.2);color:var(--neon)}
+.diff-medium{background:rgba(255,193,7,.2);color:#ffc107}
+.diff-hard{background:rgba(255,87,51,.2);color:var(--orange)}
+.schedule-section{margin-bottom:4rem}
+.schedule-filters{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;margin-bottom:2rem}
+.filter-btn{padding:.6rem 1.2rem;background:var(--gray);border:2px solid transparent;color:var(--text);border-radius:4px;cursor:pointer;font-weight:600;font-family:inherit;transition:all .3s}
+.filter-btn.active,.filter-btn:hover{border-color:var(--neon);color:var(--neon)}
+.schedule-table-wrap{overflow-x:auto;border-radius:8px}
+.schedule-table{width:100%;border-collapse:collapse;background:var(--gray);min-width:600px}
+.schedule-table th,.schedule-table td{padding:1rem;text-align:left;border-bottom:1px solid rgba(255,255,255,.1)}
+.schedule-table th{background:var(--black);color:var(--neon);font-family:'Oswald',sans-serif}
+.schedule-table tr:hover td{background:rgba(57,255,20,.05)}
+.instructors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem}
+.instructor-card{background:var(--gray);border-radius:8px;overflow:hidden;text-align:center;transition:all .3s}
+.instructor-card:hover{transform:translateY(-5px);border:1px solid var(--orange)}
+.instructor-card img{width:100%;height:250px;object-fit:cover}
+.instructor-card-body{padding:1.5rem}
+.instructor-card-body h4{font-size:1.3rem;margin-bottom:.25rem}
+.instructor-role{color:var(--orange);font-size:.9rem;margin-bottom:.75rem}
+.membership{background:var(--charcoal)}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-bottom:3rem}
+.pricing-card{background:var(--gray);border-radius:8px;padding:2rem;text-align:center;position:relative;transition:all .3s}
+.pricing-card:hover{transform:translateY(-10px);box-shadow:0 15px 40px rgba(0,0,0,.3)}
+.pricing-card.featured{border:2px solid var(--neon);transform:scale(1.03)}
+.pricing-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--neon);color:var(--charcoal);padding:.3rem 1rem;border-radius:20px;font-size:.75rem;font-weight:700}
+.pricing-price{font-family:'Oswald',sans-serif;font-size:3rem;color:var(--neon);margin:1rem 0}
+.pricing-price span{font-size:1rem;color:var(--text);opacity:.7}
+.pricing-title{font-size:1.5rem;margin-bottom:.5rem}
+.pricing-desc{opacity:.8;margin-bottom:1.5rem;font-size:.9rem}
+.pricing-features{list-style:none;text-align:left;margin-bottom:2rem}
+.pricing-features li{padding:.4rem 0;display:flex;align-items:center;gap:.5rem;font-size:.9rem}
+.pricing-features li i{color:var(--neon);width:16px}
+.special-offer{background:linear-gradient(135deg,var(--neon-dim),var(--orange-dim));border:1px solid var(--neon);border-radius:8px;padding:1.5rem;text-align:center;margin-bottom:3rem}
+.special-offer h3{color:var(--neon);margin-bottom:.5rem}
+.comparison-wrap{overflow-x:auto;margin-top:2rem}
+.comparison-table{width:100%;border-collapse:collapse;background:var(--gray);min-width:700px}
+.comparison-table th,.comparison-table td{padding:1rem;text-align:center;border:1px solid rgba(255,255,255,.1)}
+.comparison-table th{background:var(--black);color:var(--neon)}
+.comparison-table td:first-child{text-align:left;font-weight:600}
+.comparison-table .check{color:var(--neon)}
+.comparison-table .cross{color:var(--orange);opacity:.5}
+.gallery{background:var(--black)}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-bottom:3rem}
+.gallery-item{position:relative;border-radius:8px;overflow:hidden;cursor:pointer;aspect-ratio:4/3}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.gallery-item:hover img{transform:scale(1.05)}
+.gallery-item::after{content:'\f065';font-family:'Font Awesome 6 Free';font-weight:900;position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;opacity:0;transition:opacity .3s}
+.gallery-item:hover::after{opacity:1}
+.video-tour{margin-bottom:3rem;border-radius:8px;overflow:hidden;aspect-ratio:16/9;background:var(--gray)}
+.video-tour iframe{width:100%;height:100%;border:0}
+.equipment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
+.equipment-item{background:var(--gray);padding:1.5rem;border-radius:8px;text-align:center;transition:all .3s}
+.equipment-item:hover{border:1px solid var(--neon)}
+.equipment-item i{font-size:2rem;color:var(--neon);margin-bottom:.75rem}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:10001;display:none;align-items:center;justify-content:center;padding:2rem}
+.lightbox.active{display:flex}
+.lightbox img{max-width:90%;max-height:85vh;border-radius:8px}
+.lightbox-close,.lightbox-prev,.lightbox-next{position:absolute;background:rgba(255,255,255,.1);border:none;color:#fff;font-size:1.5rem;width:50px;height:50px;border-radius:50%;cursor:pointer;transition:background .3s}
+.lightbox-close{top:1rem;right:1rem}
+.lightbox-prev{left:1rem}
+.lightbox-next{right:1rem}
+.lightbox-close:hover,.lightbox-prev:hover,.lightbox-next:hover{background:var(--neon);color:var(--charcoal)}
+.testimonials{background:var(--charcoal)}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-bottom:3rem}
+.testimonial-card{background:var(--gray);border-radius:8px;padding:2rem;position:relative}
+.testimonial-card::before{content:'"';position:absolute;top:.5rem;left:1rem;font-size:4rem;color:var(--neon);opacity:.2;font-family:serif;line-height:1}
+.testimonial-text{font-style:italic;margin-bottom:1.5rem;position:relative;z-index:1}
+.testimonial-author{display:flex;align-items:center;gap:1rem}
+.testimonial-avatar{width:50px;height:50px;border-radius:50%;object-fit:cover}
+.testimonial-avatar-init{width:50px;height:50px;border-radius:50%;background:var(--neon);color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:700}
+.testimonial-name{font-weight:600}
+.testimonial-rating{color:var(--orange);font-size:.85rem}
+.success-stories{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-bottom:3rem}
+.success-card{background:var(--gray);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.success-card img{width:100%;height:200px;object-fit:cover}
+.success-card-body{padding:1.5rem;flex:1}
+.success-card-body h4{color:var(--neon);margin-bottom:.5rem}
+.social-proof{text-align:center;padding:2rem;background:var(--gray);border-radius:8px}
+.social-proof-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;margin-top:1rem}
+.social-stat{font-family:'Oswald',sans-serif;font-size:2rem;color:var(--neon)}
+.shop{background:var(--black)}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-bottom:3rem}
+.shop-item{background:var(--gray);border-radius:8px;overflow:hidden;transition:all .3s}
+.shop-item:hover{transform:translateY(-5px);border:1px solid var(--orange)}
+.shop-item img{width:100%;height:200px;object-fit:cover}
+.shop-item-body{padding:1.5rem;text-align:center}
+.shop-price{color:var(--neon);font-weight:700;font-size:1.2rem;margin:.5rem 0}
+.sponsors{display:flex;flex-wrap:wrap;gap:2rem;justify-content:center;align-items:center;padding:2rem;background:var(--gray);border-radius:8px}
+.sponsor-item{padding:1rem 2rem;background:var(--black);border-radius:4px;font-weight:600;opacity:.7;transition:opacity .3s}
+.sponsor-item:hover{opacity:1;color:var(--neon)}
+.contact{background:var(--charcoal)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem}
+.contact-item{display:flex;gap:1rem;align-items:flex-start}
+.contact-icon{width:50px;height:50px;background:var(--neon);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--charcoal);flex-shrink:0}
+.contact-item h3{font-size:1.1rem;margin-bottom:.25rem}
+.hours-table{width:100%;margin-top:.5rem}
+.hours-table td{padding:.25rem 0;font-size:.9rem}
+.hours-table td:last-child{text-align:right;color:var(--neon)}
+.map-container{border-radius:8px;overflow:hidden;height:300px;margin-top:1rem}
+.map-container iframe{width:100%;height:100%;border:0}
+.contact-form{background:var(--gray);padding:2rem;border-radius:8px}
+.form-group{margin-bottom:1.25rem}
+.form-group label{display:block;margin-bottom:.4rem;font-weight:600;font-size:.9rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.85rem;background:var(--black);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:var(--text);font-family:inherit;font-size:1rem}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--neon);outline:none}
+.form-error{color:var(--orange);font-size:.8rem;margin-top:.25rem;display:none}
+.form-error.visible{display:block}
+.form-btn{width:100%;padding:1rem;background:var(--neon);color:var(--charcoal);border:none;border-radius:4px;font-weight:700;font-size:1rem;cursor:pointer;transition:all .3s;font-family:inherit}
+.form-btn:hover{background:var(--orange);color:#fff}
+.footer{background:var(--black);padding:4rem 0 1rem;border-top:1px solid var(--gray)}
+.footer-grid{max-width:1200px;margin:0 auto;padding:0 2rem;display:grid;grid-template-columns:2fr 1fr 1fr 1.5fr;gap:3rem;margin-bottom:3rem}
+.footer-brand .logo-text{margin-bottom:1rem;display:inline-block}
+.footer-brand p{opacity:.7;font-size:.9rem;line-height:1.7}
+.footer-col h4{color:var(--neon);margin-bottom:1rem;font-size:1.1rem}
+.footer-links{list-style:none}
+.footer-links li{margin-bottom:.5rem}
+.footer-links a{color:var(--text);opacity:.7;transition:all .3s;font-size:.9rem}
+.footer-links a:hover{color:var(--neon);opacity:1}
+.newsletter-form{display:flex;gap:.5rem}
+.newsletter-form input{flex:1;padding:.75rem;background:var(--gray);border:1px solid rgba(255,255,255,.1);border-radius:4px;color:var(--text);font-family:inherit}
+.newsletter-form button{padding:.75rem 1rem;background:var(--neon);color:var(--charcoal);border:none;border-radius:4px;font-weight:700;cursor:pointer;font-family:inherit}
+.footer-social{display:flex;gap:.75rem;margin-top:1rem}
+.social-icon{width:40px;height:40px;background:var(--gray);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text);transition:all .3s}
+.social-icon:hover{background:var(--neon);color:var(--charcoal)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:1.5rem 2rem 0;border-top:1px solid var(--gray);display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;font-size:.85rem;opacity:.6}
+.footer-legal{display:flex;gap:1.5rem;list-style:none}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:10002;display:none;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.active{display:flex}
+.modal{background:var(--black);border-radius:8px;padding:2rem;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;position:relative;border:1px solid var(--gray)}
+.modal-lg{max-width:700px}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+.modal h2{color:var(--neon);margin-bottom:1.5rem}
+.chat-widget{position:fixed;bottom:2rem;right:2rem;z-index:9999}
+.chat-toggle{width:60px;height:60px;border-radius:50%;background:var(--neon);color:var(--charcoal);border:none;font-size:1.5rem;cursor:pointer;box-shadow:0 4px 20px rgba(57,255,20,.4);transition:all .3s}
+.chat-toggle:hover{transform:scale(1.1)}
+.chat-box{position:absolute;bottom:70px;right:0;width:350px;max-width:calc(100vw - 2rem);background:var(--black);border-radius:8px;border:1px solid var(--gray);display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.chat-box.active{display:flex}
+.chat-header{background:var(--gray);padding:1rem;display:flex;justify-content:space-between;align-items:center}
+.chat-header h4{color:var(--neon)}
+.chat-messages{height:250px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.75rem}
+.chat-msg{padding:.75rem;border-radius:8px;max-width:85%;font-size:.9rem}
+.chat-msg.bot{background:var(--gray);align-self:flex-start}
+.chat-msg.user{background:var(--neon-dim);border:1px solid var(--neon);align-self:flex-end}
+.chat-input{display:flex;padding:.75rem;gap:.5rem;border-top:1px solid var(--gray)}
+.chat-input input{flex:1;padding:.6rem;background:var(--gray);border:none;border-radius:4px;color:var(--text);font-family:inherit}
+.chat-input button{padding:.6rem 1rem;background:var(--neon);color:var(--charcoal);border:none;border-radius:4px;cursor:pointer;font-weight:600}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--neon);color:var(--charcoal);padding:1rem 2rem;border-radius:8px;font-weight:600;z-index:10003;transition:transform .3s;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+.tabs{display:flex;justify-content:center;margin-bottom:2rem;gap:0}
+.tab{padding:1rem 2rem;background:var(--gray);border:none;color:var(--text);font-weight:600;cursor:pointer;font-family:inherit;transition:all .3s}
+.tab:first-child{border-radius:8px 0 0 8px}
+.tab:last-child{border-radius:0 8px 8px 0}
+.tab.active{background:var(--neon);color:var(--charcoal)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+.tracker-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+.tracker-stat{background:var(--gray);padding:1rem;border-radius:8px;text-align:center}
+.tracker-stat .val{font-family:'Oswald',sans-serif;font-size:1.8rem;color:var(--neon)}
+.reservation-list{max-height:200px;overflow-y:auto;margin-top:1rem}
+.reservation-item{display:flex;justify-content:space-between;padding:.75rem;background:var(--gray);border-radius:4px;margin-bottom:.5rem;font-size:.9rem}
+.social-feed{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:1rem}
+.social-feed-item{aspect-ratio:1;border-radius:4px;overflow:hidden}
+.social-feed-item img{width:100%;height:100%;object-fit:cover}
+@media(max-width:992px){.about-grid,.leadership-grid,.contact-grid,.footer-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.pricing-card.featured{transform:none}}
+@media(max-width:768px){.nav-links,.nav-actions{display:none}.mobile-menu-btn{display:block}.mobile-menu{display:flex}.hero{padding-top:5rem}.stats-grid{grid-template-columns:1fr 1fr}.tabs{flex-direction:column;align-items:center}.tab{border-radius:8px!important;width:100%;max-width:300px;margin-bottom:.5rem}.footer-grid{grid-template-columns:1fr}.newsletter-form{flex-direction:column}}
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <div class="logo">
-                <img src="assets/ic-fitness-logo.png" alt="IC Fitness Corporate Logo" class="brand-logo">
-            </div>
-            <div class="nav-links">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#membership" class="nav-link">Membership</a>
-                <a href="#testimonials" class="nav-link">Testimonials</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <button class="mobile-menu-btn" id="mobile-menu-btn">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </nav>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobile-menu">
-        <button class="mobile-menu-close" id="mobile-menu-close">
-            <i class="fas fa-times"></i>
-        </button>
-        <a href="#home" class="mobile-menu-link">Home</a>
-        <a href="#features" class="mobile-menu-link">Features</a>
-        <a href="#membership" class="mobile-menu-link">Membership</a>
-        <a href="#testimonials" class="mobile-menu-link">Testimonials</a>
-        <a href="#contact" class="mobile-menu-link">Contact</a>
-    </div>
-    
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-content fade-in">
-            <h1 class="hero-title uppercase"><span class="text-neon">IC</span> FITNESS</h1>
-            <p class="hero-subtitle">24/7 ELITE TRAINING FACILITY</p>
-            <p class="hero-tagline">"LET ME <span class="text-orange">INSPIRE</span> YOU SO THAT YOU CAN <span class="text-orange">INSPIRE</span> OTHERS!"</p>
-            <div class="hero-buttons">
-                <a href="#membership" class="glass-btn glass-btn-neon">Join Local Membership</a>
-                <a href="#membership" class="glass-btn glass-btn-orange">Get Tourist/Drop-In Pass</a>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Leadership Section -->
-    <section id="leadership" class="leadership-section">
-        <div class="leadership-container">
-            <div class="profile-frame">
-                <img src="assets/candy-leadership.jpg" alt="Candy - Director of Operations" class="profile-image">
-            </div>
-            <div class="leadership-content">
-                <h2>Management & Operations</h2>
-                <p class="leadership-copy">IC Fitness operates under the direct leadership of Candy, focusing on providing high-tier athletic training facilities and tailored membership services within the Broken Bow region. The facility serves both long-term local members and short-term regional travelers with precise, data-driven wellness options.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Features Section -->
-    <section class="section features" id="features">
-        <div class="container">
-            <h2 class="section-title uppercase fade-in">Elite Features</h2>
-            <div class="features-grid">
-                <div class="feature-card fade-in">
-                    <img src="assets/247-access.jpg" alt="24/7 Access" class="feature-image">
-                    <h3 class="feature-title uppercase">24/7 Access</h3>
-                    <p>Train on your schedule with round-the-clock access to our facility. No excuses, no limitations.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <img src="assets/elite-equipment.jpg" alt="Elite Equipment" class="feature-image">
-                    <h3 class="feature-title uppercase">Elite Equipment</h3>
-                    <p>Professional-grade bodybuilding equipment from top brands. Everything you need for serious gains.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <img src="assets/crossfit-rig.jpg" alt="CrossFit Rig" class="feature-image">
-                    <h3 class="feature-title uppercase">CrossFit Rig</h3>
-                    <p>Full CrossFit setup with rigs, ropes, and functional training equipment for intense workouts.</p>
-                </div>
-                <div class="feature-card fade-in">
-                    <img src="assets/group-classes.jpg" alt="Group Classes" class="feature-image">
-                    <h3 class="feature-title uppercase">Group Classes</h3>
-                    <p>High-energy group fitness classes led by certified instructors. Motivation through community.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Membership Section -->
-    <section class="section membership" id="membership">
-        <div class="container">
-            <h2 class="section-title uppercase fade-in">Membership Options</h2>
-            <div class="tabs-container fade-in">
-                <div class="tabs">
-                    <button class="tab active" data-tab="local">Local Memberships</button>
-                    <button class="tab" data-tab="visitor">Visitor Passes</button>
-                </div>
-                
-                <!-- Local Memberships Tab -->
-                <div class="tab-content active" id="local">
-                    <div class="membership-cards">
-                        <div class="membership-card">
-                            <div class="membership-price">$45<span style="font-size: 1.5rem;">/mo</span></div>
-                            <h3 class="membership-title uppercase">Monthly Membership</h3>
-                            <p class="membership-desc">Unlimited 24/7 access to all equipment and facilities</p>
-                            <ul class="membership-features">
-                                <li><i class="fas fa-check"></i> 24/7 Key Fob Access</li>
-                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
-                                <li><i class="fas fa-check"></i> Free Fitness Assessment</li>
-                            </ul>
-                            <a href="#" class="btn btn-neon">Sign Up Now</a>
-                        </div>
-                        <div class="membership-card featured">
-                            <div class="membership-price">$40<span style="font-size: 1.5rem;">/mo</span></div>
-                            <h3 class="membership-title uppercase">Annual Membership</h3>
-                            <p class="membership-desc">Best value! Save $60 with annual commitment</p>
-                            <ul class="membership-features">
-                                <li><i class="fas fa-check"></i> Everything in Monthly</li>
-                                <li><i class="fas fa-check"></i> 2 Guest Passes/Month</li>
-                                <li><i class="fas fa-check"></i> Priority Class Booking</li>
-                            </ul>
-                            <a href="#" class="btn btn-neon">Sign Up Now</a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Visitor Passes Tab -->
-                <div class="tab-content" id="visitor">
-                    <div class="membership-cards">
-                        <div class="membership-card">
-                            <div class="membership-price">$20</div>
-                            <h3 class="membership-title uppercase">Day Pass</h3>
-                            <p class="membership-desc">Full day access</p>
-                            <ul class="membership-features">
-                                <li><i class="fas fa-check"></i> 24-Hour Access</li>
-                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
-                            </ul>
-                            <a href="#" class="btn btn-orange">Get Day Pass</a>
-                        </div>
-                        <div class="membership-card">
-                            <div class="membership-price">$50</div>
-                            <h3 class="membership-title uppercase">3-Day Pass</h3>
-                            <p class="membership-desc">Perfect for weekend trips</p>
-                            <ul class="membership-features">
-                                <li><i class="fas fa-check"></i> 72-Hour Access</li>
-                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
-                                <li><i class="fas fa-check"></i> 1 Guest Pass</li>
-                            </ul>
-                            <a href="#" class="btn btn-orange">Get 3-Day Pass</a>
-                        </div>
-                        <div class="membership-card">
-                            <div class="membership-price">$75</div>
-                            <h3 class="membership-title uppercase">Weekly Pass</h3>
-                            <p class="membership-desc">7 consecutive days</p>
-                            <ul class="membership-features">
-                                <li><i class="fas fa-check"></i> 7-Day Access</li>
-                                <li><i class="fas fa-check"></i> Full Equipment Use</li>
-                                <li><i class="fas fa-check"></i> 2 Guest Passes</li>
-                            </ul>
-                            <a href="#" class="btn btn-orange">Get Weekly Pass</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonials Section -->
-    <section class="section testimonials" id="testimonials">
-        <div class="container">
-            <h2 class="section-title uppercase fade-in">What Members Say</h2>
-            <div class="testimonials-container">
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-text">"The atmosphere puts you in beast mode. Equipment is top-notch and the 24/7 access fits my crazy schedule. Best gym in Broken Bow!"</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">MR</div>
-                        <div>
-                            <div class="testimonial-name">Mike R.</div>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-text">"Super easy drop-in process when I was visiting for the weekend. Great equipment and clean facility. Will definitely be back!"</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">SL</div>
-                        <div>
-                            <div class="testimonial-name">Sarah L.</div>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-card fade-in">
-                    <p class="testimonial-text">"The CrossFit area is incredible! Best rig I've used outside of a dedicated CrossFit box. Classes are challenging but welcoming."</p>
-                    <div class="testimonial-author">
-                        <div class="testimonial-avatar">TH</div>
-                        <div>
-                            <div class="testimonial-name">Tom H.</div>
-                            <div class="testimonial-rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Contact Section -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <h2 class="section-title uppercase fade-in">Find Us</h2>
-            <div class="contact-container">
-                <div class="contact-info fade-in">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Location</h3>
-                            <p>2716 S Park Dr, Broken Bow, Oklahoma 74728</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Phone</h3>
-                            <p><a href="tel:5807437955" class="contact-link">580-743-7955</a></p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Email</h3>
-                            <p>icfitness2023tipton@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div class="contact-details">
-                            <h3>Hours</h3>
-                            <p>Open 24/7 for Members</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form fade-in">
-                    <h3 class="text-2xl mb-4">Get In Touch</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="form-btn">Send Message</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-logo">
-                <img src="assets/ic-fitness-logo.png" alt="IC Fitness Corporate Logo" class="brand-logo">
-            </div>
-            <div class="footer-links">
-                <a href="#home" class="footer-link">Home</a>
-                <a href="#features" class="footer-link">Features</a>
-                <a href="#membership" class="footer-link">Membership</a>
-                <a href="#testimonials" class="footer-link">Testimonials</a>
-                <a href="#contact" class="footer-link">Contact</a>
-            </div>
-            <div class="footer-social">
-                <a href="https://www.facebook.com/ICFitness2" class="social-icon">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="#" class="social-icon">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="#" class="social-icon">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
-            <div class="footer-copyright">
-                <p>&copy; 2023 IC Fitness. All rights reserved. "Let me INSPIRE you so that you can INSPIRE others!"</p>
-            </div>
-        </div>
-    </footer>
 
-    <script>
-        // Sticky Navigation
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-        
-        // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuClose = document.getElementById('mobile-menu-close');
-        
-        mobileMenuBtn.addEventListener('click', function() {
-            mobileMenu.classList.add('active');
-        });
-        
-        mobileMenuClose.addEventListener('click', function() {
-            mobileMenu.classList.remove('active');
-        });
-        
-        // Close mobile menu when clicking on a link
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu-link');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-            });
-        });
-        
-        // Tab System with smooth transitions
-        const tabs = document.querySelectorAll('.tab');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabs.forEach(tab => {
-            tab.addEventListener('click', function() {
-                // Store scroll position
-                const scrollPosition = window.scrollY;
-                
-                // Remove active class from all tabs and tab contents
-                tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(tc => {
-                    tc.classList.remove('active');
-                    tc.style.opacity = '0';
-                });
-                
-                // Add active class to clicked tab and corresponding tab content
-                this.classList.add('active');
-                const tabId = this.getAttribute('data-tab');
-                const targetContent = document.getElementById(tabId);
-                
-                // Set display first, then animate opacity
-                targetContent.style.display = 'block';
-                
-                // Restore scroll position immediately
-                window.scrollTo(0, scrollPosition);
-                
-                // Animate opacity change
-                setTimeout(() => {
-                    targetContent.style.opacity = '1';
-                    targetContent.classList.add('active');
-                }, 10);
-            });
-        });
-        
-        // Initialize tab content opacity
-        tabContents.forEach(content => {
-            if (!content.classList.contains('active')) {
-                content.style.opacity = '0';
-                content.style.display = 'none';
-            } else {
-                content.style.opacity = '1';
-            }
-        });
-        
-        // Smooth Scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Fade-in Animation on Scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        const fadeInObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-        
-        fadeElements.forEach(element => {
-            fadeInObserver.observe(element);
-        });
-        
-        // Form Submission
-        const contactForm = document.querySelector('.contact-form form');
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would normally send the form data to a server
-            // For this demo, we'll just show an alert
-            alert(`Thank you, ${name}! Your message has been sent. We'll get back to you soon.`);
-            
-            // Reset form
-            this.reset();
-        });
-    </script>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<div id="loader" role="status" aria-label="Loading"><div class="loader-logo"><span class="text-neon">IC</span> FITNESS</div><div class="loader-bar"><div class="loader-progress"></div></div></div>
+<nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+<div class="navbar-container">
+<a href="#home" class="logo-text" aria-label="IC Fitness Home"><span>IC</span> FITNESS</a>
+<ul class="nav-links">
+<li><a href="#home" class="nav-link">Home</a></li>
+<li><a href="#about" class="nav-link">About</a></li>
+<li><a href="#services" class="nav-link">Classes</a></li>
+<li><a href="#membership" class="nav-link">Membership</a></li>
+<li><a href="#gallery" class="nav-link">Gallery</a></li>
+<li><a href="#testimonials" class="nav-link">Reviews</a></li>
+<li><a href="#shop" class="nav-link">Shop</a></li>
+<li><a href="#contact" class="nav-link">Contact</a></li>
+</ul>
+<div class="nav-actions">
+<button class="btn-nav" id="loginBtn" aria-label="Member login">Login</button>
+<button class="btn-nav" id="bookBtn" aria-label="Book appointment">Book Now</button>
+</div>
+<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Open menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<ul class="mobile-menu" id="mobileMenu" role="menu">
+<button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu"><i class="fas fa-times"></i></button>
+<li><a href="#home" class="nav-link">Home</a></li>
+<li><a href="#about" class="nav-link">About</a></li>
+<li><a href="#services" class="nav-link">Classes</a></li>
+<li><a href="#membership" class="nav-link">Membership</a></li>
+<li><a href="#gallery" class="nav-link">Gallery</a></li>
+<li><a href="#testimonials" class="nav-link">Reviews</a></li>
+<li><a href="#shop" class="nav-link">Shop</a></li>
+<li><a href="#contact" class="nav-link">Contact</a></li>
+<li><button class="btn-nav" id="mobileLoginBtn">Member Login</button></li>
+</ul>
+<main id="main-content">
+<section class="hero" id="home" aria-label="Hero">
+<div class="hero-content fade-in">
+<h1 class="hero-title"><span class="text-neon">IC</span> FITNESS</h1>
+<p class="hero-subtitle">24/7 ELITE TRAINING FACILITY &bull; BROKEN BOW, OK</p>
+<p class="hero-tagline">"LET ME <span class="text-orange">INSPIRE</span> YOU SO THAT YOU CAN <span class="text-orange">INSPIRE</span> OTHERS!"</p>
+<div class="hero-buttons">
+<a href="#membership" class="btn btn-neon"><i class="fas fa-dumbbell"></i> Join Now</a>
+<a href="#services" class="btn btn-orange"><i class="fas fa-calendar-alt"></i> View Classes</a>
+<a href="#contact" class="btn btn-neon"><i class="fas fa-map-marker-alt"></i> Visit Us</a>
+</div>
+</div>
+<a href="#about" class="scroll-indicator" aria-label="Scroll down"><i class="fas fa-chevron-down"></i></a>
+</section>
+<section class="section about" id="about">
+<div class="container">
+<h2 class="section-title fade-in">ABOUT IC FITNESS</h2>
+<p class="section-subtitle fade-in">Empowering the Broken Bow community through fitness, inspiration, and world-class training facilities.</p>
+<div class="about-grid fade-in">
+<div class="about-text">
+<h3>Our Mission</h3>
+<p>At IC Fitness, we believe fitness is more than physical transformation — it's about inspiring others through your own journey. Under the leadership of Candy, Director of Operations, we provide a premium 24/7 training environment where every member feels supported, motivated, and empowered.</p>
+<p>Whether you're a local resident or a regional traveler, IC Fitness offers tailored membership options, elite equipment, and a community that pushes you to be your best.</p>
+<a href="#membership" class="btn btn-neon">Become a Member</a>
+</div>
+<div class="about-image">
+<img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800&q=80" alt="IC Fitness gym interior with modern equipment" loading="lazy" decoding="async" width="800" height="400">
+</div>
+</div>
+<div class="stats-grid fade-in" id="statsGrid">
+<div class="stat-item"><span class="stat-number" data-target="500">0</span><span class="stat-label">Active Members</span></div>
+<div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-label">Years in Business</span></div>
+<div class="stat-item"><span class="stat-number" data-target="15">0</span><span class="stat-label">Expert Classes Weekly</span></div>
+<div class="stat-item"><span class="stat-number" data-target="24">0</span><span class="stat-label">Hours Access Daily</span></div>
+</div>
+<div class="highlights-grid fade-in">
+<div class="highlight-card"><i class="fas fa-clock" aria-hidden="true"></i><h4>24/7 Access</h4><p>Train anytime with secure key fob entry</p></div>
+<div class="highlight-card"><i class="fas fa-dumbbell" aria-hidden="true"></i><h4>Elite Equipment</h4><p>Professional-grade bodybuilding gear</p></div>
+<div class="highlight-card"><i class="fas fa-users" aria-hidden="true"></i><h4>Community</h4><p>Supportive, motivating member culture</p></div>
+<div class="highlight-card"><i class="fas fa-shield-alt" aria-hidden="true"></i><h4>Clean & Safe</h4><p>Meticulously maintained facility</p></div>
+</div>
+</div>
+</section>
+<section class="leadership" id="leadership">
+<div class="leadership-grid fade-in">
+<div class="leadership-photo">
+<img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="Candy - Director of Operations at IC Fitness" loading="lazy" decoding="async" width="600" height="350">
+</div>
+<div class="leadership-content">
+<h2>Meet Candy</h2>
+<p style="color:var(--orange);font-weight:600;margin-bottom:1rem">Director of Operations</p>
+<p>IC Fitness operates under the direct leadership of Candy, focusing on providing high-tier athletic training facilities and tailored membership services within the Broken Bow region. Candy's passion for fitness and community drives every aspect of our operations — from equipment selection to member experience.</p>
+<p style="margin-top:1rem">"Let me INSPIRE you so that you can INSPIRE others!" — Candy</p>
+</div>
+</div>
+</section>
+<section class="section services" id="services">
+<div class="container">
+<h2 class="section-title fade-in">CLASSES & SERVICES</h2>
+<p class="section-subtitle fade-in">From high-intensity CrossFit to restorative yoga — find the perfect class for your fitness journey.</p>
+<div class="classes-grid fade-in">
+<div class="class-card"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="CrossFit class" loading="lazy" width="600" height="180"><div class="class-card-body"><span class="difficulty diff-hard">Advanced</span><h3>CrossFit</h3><p>High-intensity functional fitness with rigs, ropes, and Olympic lifting.</p><button class="btn btn-neon btn-sm reserve-btn" data-class="CrossFit">Reserve Spot</button></div></div>
+<div class="class-card"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" alt="Yoga class" loading="lazy" width="600" height="180"><div class="class-card-body"><span class="difficulty diff-easy">Beginner</span><h3>Yoga Flow</h3><p>Improve flexibility, balance, and mental clarity with guided yoga sessions.</p><button class="btn btn-neon btn-sm reserve-btn" data-class="Yoga Flow">Reserve Spot</button></div></div>
+<div class="class-card"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Spin class" loading="lazy" width="600" height="180"><div class="class-card-body"><span class="difficulty diff-medium">Intermediate</span><h3>Spin Cycle</h3><p>Heart-pumping indoor cycling with energizing music and expert coaching.</p><button class="btn btn-neon btn-sm reserve-btn" data-class="Spin Cycle">Reserve Spot</button></div></div>
+<div class="class-card"><img src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=600&q=80" alt="HIIT training" loading="lazy" width="600" height="180"><div class="class-card-body"><span class="difficulty diff-hard">Advanced</span><h3>HIIT Blast</h3><p>Maximum calorie burn with short bursts of intense exercise and recovery.</p><button class="btn btn-neon btn-sm reserve-btn" data-class="HIIT Blast">Reserve Spot</button></div></div>
+<div class="class-card"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80" alt="Strength training" loading="lazy" width="600" height="180"><div class="class-card-body"><span class="difficulty diff-medium">Intermediate</span><h3>Strength & Conditioning</h3><p>Build muscle and power with structured weight training programs.</p><button class="btn btn-neon btn-sm reserve-btn" data-class="Strength">Reserve Spot</button></div></div>
+<div class="class-card"><img src="https://images.unsplash.com/photo-1576678927480-cc5889e056d2?w=600&q=80" alt="Personal training" loading="lazy" width="600" height="180"><div class="class-card-body"><span class="difficulty diff-easy">All Levels</span><h3>Personal Training</h3><p>One-on-one coaching tailored to your goals. Book with our expert trainers.</p><button class="btn btn-orange btn-sm" id="ptBookBtn">Book Session</button></div></div>
+</div>
+<div class="schedule-section fade-in">
+<h3 class="section-title" style="font-size:2rem">Class Schedule</h3>
+<div class="schedule-filters" role="group" aria-label="Filter schedule by day">
+<button class="filter-btn active" data-day="all">All Days</button>
+<button class="filter-btn" data-day="mon">Monday</button>
+<button class="filter-btn" data-day="tue">Tuesday</button>
+<button class="filter-btn" data-day="wed">Wednesday</button>
+<button class="filter-btn" data-day="thu">Thursday</button>
+<button class="filter-btn" data-day="fri">Friday</button>
+<button class="filter-btn" data-day="sat">Saturday</button>
+</div>
+<div class="schedule-table-wrap">
+<table class="schedule-table" aria-label="Weekly class schedule">
+<thead><tr><th>Day</th><th>Time</th><th>Class</th><th>Instructor</th><th>Level</th><th>Action</th></tr></thead>
+<tbody id="scheduleBody">
+<tr data-day="mon"><td>Monday</td><td>6:00 AM</td><td>HIIT Blast</td><td>Marcus T.</td><td><span class="difficulty diff-hard">Advanced</span></td><td><button class="btn btn-neon reserve-btn" data-class="HIIT Blast" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="mon"><td>Monday</td><td>12:00 PM</td><td>Yoga Flow</td><td>Emily R.</td><td><span class="difficulty diff-easy">Beginner</span></td><td><button class="btn btn-neon reserve-btn" data-class="Yoga Flow" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="tue"><td>Tuesday</td><td>5:30 PM</td><td>CrossFit</td><td>Jake S.</td><td><span class="difficulty diff-hard">Advanced</span></td><td><button class="btn btn-neon reserve-btn" data-class="CrossFit" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="wed"><td>Wednesday</td><td>6:00 AM</td><td>Spin Cycle</td><td>Lisa M.</td><td><span class="difficulty diff-medium">Intermediate</span></td><td><button class="btn btn-neon reserve-btn" data-class="Spin Cycle" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="wed"><td>Wednesday</td><td>6:30 PM</td><td>Strength</td><td>Marcus T.</td><td><span class="difficulty diff-medium">Intermediate</span></td><td><button class="btn btn-neon reserve-btn" data-class="Strength" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="thu"><td>Thursday</td><td>5:30 PM</td><td>CrossFit</td><td>Jake S.</td><td><span class="difficulty diff-hard">Advanced</span></td><td><button class="btn btn-neon reserve-btn" data-class="CrossFit" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="fri"><td>Friday</td><td>6:00 AM</td><td>HIIT Blast</td><td>Marcus T.</td><td><span class="difficulty diff-hard">Advanced</span></td><td><button class="btn btn-neon reserve-btn" data-class="HIIT Blast" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="sat"><td>Saturday</td><td>9:00 AM</td><td>Yoga Flow</td><td>Emily R.</td><td><span class="difficulty diff-easy">Beginner</span></td><td><button class="btn btn-neon reserve-btn" data-class="Yoga Flow" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+<tr data-day="sat"><td>Saturday</td><td>10:30 AM</td><td>Spin Cycle</td><td>Lisa M.</td><td><span class="difficulty diff-medium">Intermediate</span></td><td><button class="btn btn-neon reserve-btn" data-class="Spin Cycle" style="padding:.4rem .8rem;font-size:.8rem">Reserve</button></td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3 class="section-title fade-in" style="font-size:2rem;margin-top:3rem">Our Instructors</h3>
+<div class="instructors-grid fade-in">
+<div class="instructor-card"><img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=400&q=80" alt="Marcus T. - Strength Coach" loading="lazy" width="400" height="250"><div class="instructor-card-body"><h4>Marcus T.</h4><p class="instructor-role">Strength & HIIT Coach</p><p>10+ years experience. NASM certified. Specializes in powerlifting and metabolic conditioning.</p></div></div>
+<div class="instructor-card"><img src="https://images.unsplash.com/photo-1594381898411-8465977d25c3?w=400&q=80" alt="Emily R. - Yoga Instructor" loading="lazy" width="400" height="250"><div class="instructor-card-body"><h4>Emily R.</h4><p class="instructor-role">Yoga Instructor</p><p>RYT-500 certified. Focuses on vinyasa flow and restorative practices for all levels.</p></div></div>
+<div class="instructor-card"><img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&q=80" alt="Jake S. - CrossFit Coach" loading="lazy" width="400" height="250"><div class="instructor-card-body"><h4>Jake S.</h4><p class="instructor-role">CrossFit Level 2 Coach</p><p>Former competitive athlete. Expert in Olympic lifting and functional fitness programming.</p></div></div>
+<div class="instructor-card"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&q=80" alt="Lisa M. - Spin Instructor" loading="lazy" width="400" height="250"><div class="instructor-card-body"><h4>Lisa M.</h4><p class="instructor-role">Spin & Cardio Coach</p><p>ACE certified group fitness instructor. Creates high-energy rides that push your limits.</p></div></div>
+</div>
+</div>
+</section>
+
+<section class="section membership" id="membership">
+<div class="container">
+<h2 class="section-title fade-in">MEMBERSHIP PLANS</h2>
+<p class="section-subtitle fade-in">Choose the plan that fits your lifestyle. All memberships include 24/7 access.</p>
+<div class="special-offer fade-in"><h3><i class="fas fa-fire"></i> Limited Time Offer</h3><p>Join this month and get your first month FREE on any annual plan! Use code <strong>INSPIRE2026</strong> at checkout.</p></div>
+<div class="tabs fade-in"><button class="tab active" data-tab="plans">Membership Plans</button><button class="tab" data-tab="visitor">Visitor Passes</button></div>
+<div class="tab-content active" id="plans">
+<div class="pricing-grid fade-in">
+<div class="pricing-card"><h3 class="pricing-title">BASIC</h3><div class="pricing-price">$35<span>/mo</span></div><p class="pricing-desc">Essential gym access for the dedicated lifter</p><ul class="pricing-features"><li><i class="fas fa-check"></i> 24/7 Key Fob Access</li><li><i class="fas fa-check"></i> Full Equipment Use</li><li><i class="fas fa-check"></i> Locker Room Access</li><li><i class="fas fa-check"></i> Free Fitness Assessment</li></ul><button class="btn btn-neon join-btn" data-plan="Basic" data-price="35">Join Now</button></div>
+<div class="pricing-card featured"><div class="pricing-badge">MOST POPULAR</div><h3 class="pricing-title">PREMIUM</h3><div class="pricing-price">$45<span>/mo</span></div><p class="pricing-desc">Full access plus classes and guest privileges</p><ul class="pricing-features"><li><i class="fas fa-check"></i> Everything in Basic</li><li><i class="fas fa-check"></i> Unlimited Group Classes</li><li><i class="fas fa-check"></i> 2 Guest Passes/Month</li><li><i class="fas fa-check"></i> Priority Class Booking</li><li><i class="fas fa-check"></i> Workout Tracker App</li></ul><button class="btn btn-neon join-btn" data-plan="Premium" data-price="45">Join Now</button></div>
+<div class="pricing-card"><h3 class="pricing-title">ELITE</h3><div class="pricing-price">$75<span>/mo</span></div><p class="pricing-desc">Ultimate experience with personal training included</p><ul class="pricing-features"><li><i class="fas fa-check"></i> Everything in Premium</li><li><i class="fas fa-check"></i> 2 PT Sessions/Month</li><li><i class="fas fa-check"></i> Nutrition Consultation</li><li><i class="fas fa-check"></i> Unlimited Guest Passes</li><li><i class="fas fa-check"></i> Exclusive Merch Discount</li></ul><button class="btn btn-orange join-btn" data-plan="Elite" data-price="75">Join Now</button></div>
+</div>
+<div class="comparison-wrap fade-in">
+<table class="comparison-table" aria-label="Membership feature comparison">
+<thead><tr><th>Feature</th><th>Basic</th><th>Premium</th><th>Elite</th></tr></thead>
+<tbody>
+<tr><td>24/7 Gym Access</td><td class="check"><i class="fas fa-check"></i></td><td class="check"><i class="fas fa-check"></i></td><td class="check"><i class="fas fa-check"></i></td></tr>
+<tr><td>Group Classes</td><td class="cross"><i class="fas fa-times"></i></td><td class="check"><i class="fas fa-check"></i></td><td class="check"><i class="fas fa-check"></i></td></tr>
+<tr><td>Guest Passes</td><td class="cross"><i class="fas fa-times"></i></td><td>2/month</td><td>Unlimited</td></tr>
+<tr><td>Personal Training</td><td class="cross"><i class="fas fa-times"></i></td><td class="cross"><i class="fas fa-times"></i></td><td>2/month</td></tr>
+<tr><td>Workout Tracker</td><td class="cross"><i class="fas fa-times"></i></td><td class="check"><i class="fas fa-check"></i></td><td class="check"><i class="fas fa-check"></i></td></tr>
+<tr><td>Nutrition Consult</td><td class="cross"><i class="fas fa-times"></i></td><td class="cross"><i class="fas fa-times"></i></td><td class="check"><i class="fas fa-check"></i></td></tr>
+<tr><td>Merch Discount</td><td class="cross"><i class="fas fa-times"></i></td><td>10%</td><td>25%</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="tab-content" id="visitor">
+<div class="pricing-grid fade-in">
+<div class="pricing-card"><h3 class="pricing-title">DAY PASS</h3><div class="pricing-price">$20</div><p class="pricing-desc">Full 24-hour access</p><ul class="pricing-features"><li><i class="fas fa-check"></i> All Equipment</li><li><i class="fas fa-check"></i> Locker Room</li></ul><button class="btn btn-orange join-btn" data-plan="Day Pass" data-price="20">Get Pass</button></div>
+<div class="pricing-card"><h3 class="pricing-title">3-DAY PASS</h3><div class="pricing-price">$50</div><p class="pricing-desc">Perfect for weekend trips</p><ul class="pricing-features"><li><i class="fas fa-check"></i> 72-Hour Access</li><li><i class="fas fa-check"></i> 1 Guest Pass</li></ul><button class="btn btn-orange join-btn" data-plan="3-Day Pass" data-price="50">Get Pass</button></div>
+<div class="pricing-card"><h3 class="pricing-title">WEEKLY PASS</h3><div class="pricing-price">$75</div><p class="pricing-desc">7 consecutive days</p><ul class="pricing-features"><li><i class="fas fa-check"></i> 7-Day Access</li><li><i class="fas fa-check"></i> 2 Guest Passes</li></ul><button class="btn btn-orange join-btn" data-plan="Weekly Pass" data-price="75">Get Pass</button></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section gallery" id="gallery">
+<div class="container">
+<h2 class="section-title fade-in">FACILITY TOUR</h2>
+<p class="section-subtitle fade-in">Take a look inside our state-of-the-art training facility.</p>
+<div class="video-tour fade-in">
+<iframe src="https://www.youtube.com/embed/ml6cT4AZdqI?rel=0" title="IC Fitness Virtual Tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="gallery-grid fade-in" id="galleryGrid">
+<div class="gallery-item" data-index="0"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Main gym floor with free weights" loading="lazy" width="600" height="450"></div>
+<div class="gallery-item" data-index="1"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="Cardio equipment area" loading="lazy" width="600" height="450"></div>
+<div class="gallery-item" data-index="2"><img src="https://images.unsplash.com/photo-1540497077202-7a8a3998166e?w=600&q=80" alt="CrossFit rig and functional training" loading="lazy" width="600" height="450"></div>
+<div class="gallery-item" data-index="3"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="Group fitness studio" loading="lazy" width="600" height="450"></div>
+<div class="gallery-item" data-index="4"><img src="https://images.unsplash.com/photo-1583454110551-21f2f2b36d7a?w=600&q=80" alt="Weight training machines" loading="lazy" width="600" height="450"></div>
+<div class="gallery-item" data-index="5"><img src="https://images.unsplash.com/photo-1576678927480-cc5889e056d2?w=600&q=80" alt="Locker room facilities" loading="lazy" width="600" height="450"></div>
+</div>
+<h3 class="section-title fade-in" style="font-size:2rem;margin-top:2rem">Equipment Showcase</h3>
+<div class="equipment-grid fade-in">
+<div class="equipment-item"><i class="fas fa-weight-hanging"></i><h4>Free Weights</h4><p>Dumbbells to 150lbs</p></div>
+<div class="equipment-item"><i class="fas fa-running"></i><h4>Cardio Zone</h4><p>Treadmills, bikes, rowers</p></div>
+<div class="equipment-item"><i class="fas fa-grip-lines"></i><h4>CrossFit Rig</h4><p>Full functional setup</p></div>
+<div class="equipment-item"><i class="fas fa-bicycle"></i><h4>Spin Bikes</h4><p>Studio cycling fleet</p></div>
+<div class="equipment-item"><i class="fas fa-heartbeat"></i><h4>Recovery Area</h4><p>Foam rollers & stretching</p></div>
+<div class="equipment-item"><i class="fas fa-shower"></i><h4>Locker Rooms</h4><p>Clean showers & lockers</p></div>
+</div>
+</div>
+</section>
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Image gallery lightbox" aria-hidden="true">
+<button class="lightbox-close" id="lightboxClose" aria-label="Close lightbox"><i class="fas fa-times"></i></button>
+<button class="lightbox-prev" id="lightboxPrev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+<img src="" alt="" id="lightboxImg">
+<button class="lightbox-next" id="lightboxNext" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+</div>
+<section class="section testimonials" id="testimonials">
+<div class="container">
+<h2 class="section-title fade-in">MEMBER REVIEWS</h2>
+<p class="section-subtitle fade-in">Real stories from real members of the IC Fitness community.</p>
+<div class="testimonials-grid fade-in">
+<div class="testimonial-card"><p class="testimonial-text">"The atmosphere puts you in beast mode. Equipment is top-notch and the 24/7 access fits my crazy schedule. Best gym in Broken Bow!"</p><div class="testimonial-author"><div class="testimonial-avatar-init">MR</div><div><div class="testimonial-name">Mike R.</div><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div></div>
+<div class="testimonial-card"><p class="testimonial-text">"Super easy drop-in process when visiting for the weekend. Great equipment and clean facility. Will definitely be back!"</p><div class="testimonial-author"><img class="testimonial-avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt="Sarah L." loading="lazy" width="50" height="50"><div><div class="testimonial-name">Sarah L.</div><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div></div>
+<div class="testimonial-card"><p class="testimonial-text">"The CrossFit area is incredible! Best rig I've used outside of a dedicated CrossFit box. Classes are challenging but welcoming."</p><div class="testimonial-author"><div class="testimonial-avatar-init">TH</div><div><div class="testimonial-name">Tom H.</div><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div></div>
+</div>
+<h3 class="section-title fade-in" style="font-size:2rem">Success Stories</h3>
+<div class="success-stories fade-in">
+<div class="success-card"><img src="https://images.unsplash.com/photo-1583454110551-21f2f2b36d7a?w=600&q=80" alt="James transformation" loading="lazy" width="600" height="200"><div class="success-card-body"><h4>James lost 45 lbs in 6 months</h4><p>"IC Fitness changed my life. The 24/7 access meant I could train before my shifts. Candy and the team kept me accountable every step of the way."</p></div></div>
+<div class="success-card"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80" alt="Maria strength journey" loading="lazy" width="600" height="200"><div class="success-card-body"><h4>Maria hit her first deadlift PR</h4><p>"The strength classes and personal training helped me go from never touching a barbell to deadlifting 225 lbs. The community here is unmatched."</p></div></div>
+<div class="success-card"><img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80" alt="David marathon prep" loading="lazy" width="600" height="200"><div class="success-card-body"><h4>David completed his first marathon</h4><p>"Used IC Fitness for cross-training during marathon prep. The spin classes and recovery area were game-changers for my endurance goals."</p></div></div>
+</div>
+<div class="social-proof fade-in">
+<h3>Trusted by Our Community</h3>
+<div class="social-proof-stats">
+<div><div class="social-stat">4.9</div><div>Average Rating</div></div>
+<div><div class="social-stat">500+</div><div>Happy Members</div></div>
+<div><div class="social-stat">15+</div><div>Weekly Classes</div></div>
+<div><div class="social-stat">3</div><div>Years Strong</div></div>
+</div>
+<div class="social-feed fade-in" aria-label="Social media feed preview">
+<div class="social-feed-item"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&q=80" alt="Social post" loading="lazy" width="200" height="200"></div>
+<div class="social-feed-item"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=200&q=80" alt="Social post" loading="lazy" width="200" height="200"></div>
+<div class="social-feed-item"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=200&q=80" alt="Social post" loading="lazy" width="200" height="200"></div>
+</div>
+<p style="margin-top:1rem;opacity:.7">Follow us <a href="https://www.facebook.com/ICFitness2" target="_blank" rel="noopener noreferrer">@ICFitness2 on Facebook</a></p>
+</div>
+</div>
+</section>
+<section class="section shop" id="shop">
+<div class="container">
+<h2 class="section-title fade-in">SHOP & PARTNERS</h2>
+<p class="section-subtitle fade-in">Rep IC Fitness gear and explore our trusted partner brands.</p>
+<div class="shop-grid fade-in">
+<div class="shop-item"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80" alt="IC Fitness T-Shirt" loading="lazy" width="400" height="200"><div class="shop-item-body"><h4>IC Fitness Tee</h4><div class="shop-price">$24.99</div><button class="btn btn-neon shop-btn" data-item="IC Fitness Tee" data-price="24.99">Add to Cart</button></div></div>
+<div class="shop-item"><img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&q=80" alt="IC Fitness Hoodie" loading="lazy" width="400" height="200"><div class="shop-item-body"><h4>IC Fitness Hoodie</h4><div class="shop-price">$49.99</div><button class="btn btn-neon shop-btn" data-item="IC Fitness Hoodie" data-price="49.99">Add to Cart</button></div></div>
+<div class="shop-item"><img src="https://images.unsplash.com/photo-1620799140408-edc6dcb088d6?w=400&q=80" alt="IC Fitness Water Bottle" loading="lazy" width="400" height="200"><div class="shop-item-body"><h4>Insulated Bottle</h4><div class="shop-price">$19.99</div><button class="btn btn-neon shop-btn" data-item="Insulated Bottle" data-price="19.99">Add to Cart</button></div></div>
+<div class="shop-item"><img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&q=80" alt="IC Fitness Gym Bag" loading="lazy" width="400" height="200"><div class="shop-item-body"><h4>Gym Bag</h4><div class="shop-price">$34.99</div><button class="btn btn-neon shop-btn" data-item="Gym Bag" data-price="34.99">Add to Cart</button></div></div>
+</div>
+<h3 class="section-title fade-in" style="font-size:1.5rem">Our Sponsors & Partners</h3>
+<div class="sponsors fade-in">
+<a href="https://www.optimumnutrition.com" target="_blank" rel="noopener noreferrer" class="sponsor-item">Optimum Nutrition</a>
+<a href="https://www.underarmour.com" target="_blank" rel="noopener noreferrer" class="sponsor-item">Under Armour</a>
+<a href="https://www.roguefitness.com" target="_blank" rel="noopener noreferrer" class="sponsor-item">Rogue Fitness</a>
+<a href="https://www.myprotein.com" target="_blank" rel="noopener noreferrer" class="sponsor-item">MyProtein</a>
+</div>
+</div>
+</section>
+<section class="section contact" id="contact">
+<div class="container">
+<h2 class="section-title fade-in">CONTACT US</h2>
+<p class="section-subtitle fade-in">Visit us, call, or send a message — we'd love to hear from you.</p>
+<div class="contact-grid fade-in">
+<div class="contact-info">
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div><h3>Location</h3><p>2716 S Park Dr<br>Broken Bow, Oklahoma 74728</p><div class="map-container"><iframe src="https://maps.google.com/maps?q=2716+S+Park+Dr,+Broken+Bow,+OK+74728&output=embed" title="IC Fitness location on Google Maps" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"></iframe></div></div></div>
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div><h3>Phone</h3><p><a href="tel:+15807437955">580-743-7955</a></p></div></div>
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div><h3>Email</h3><p><a href="mailto:icfitness2023tipton@gmail.com">icfitness2023tipton@gmail.com</a></p></div></div>
+<div class="contact-item"><div class="contact-icon"><i class="fas fa-clock"></i></div><div><h3>Business Hours</h3><table class="hours-table"><tr><td>Monday – Sunday</td><td>24 Hours (Members)</td></tr><tr><td>Staffed Hours</td><td>Mon–Fri 9AM–6PM</td></tr><tr><td>Class Hours</td><td>See Schedule</td></tr><tr><td>Phone Support</td><td>Mon–Sat 8AM–8PM</td></tr></table></div></div>
+<div class="footer-social"><a href="https://www.facebook.com/ICFitness2" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a><a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a></div>
+</div>
+<form class="contact-form" id="contactForm" novalidate>
+<h3 style="margin-bottom:1.5rem;color:var(--neon)">Send a Message</h3>
+<div class="form-group"><label for="contactName">Name *</label><input type="text" id="contactName" name="name" required autocomplete="name" aria-describedby="nameError"><div class="form-error" id="nameError">Please enter your name</div></div>
+<div class="form-group"><label for="contactEmail">Email *</label><input type="email" id="contactEmail" name="email" required autocomplete="email" aria-describedby="emailError"><div class="form-error" id="emailError">Please enter a valid email</div></div>
+<div class="form-group"><label for="contactPhone">Phone</label><input type="tel" id="contactPhone" name="phone" autocomplete="tel"></div>
+<div class="form-group"><label for="contactSubject">Subject</label><select id="contactSubject" name="subject"><option value="general">General Inquiry</option><option value="membership">Membership</option><option value="classes">Classes</option><option value="training">Personal Training</option></select></div>
+<div class="form-group"><label for="contactMessage">Message *</label><textarea id="contactMessage" name="message" rows="5" required aria-describedby="messageError"></textarea><div class="form-error" id="messageError">Please enter a message</div></div>
+<button type="submit" class="form-btn">Send Message</button>
+</form>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer" role="contentinfo">
+<div class="footer-grid">
+<div class="footer-brand"><a href="#home" class="logo-text"><span>IC</span> FITNESS</a><p>24/7 elite training facility in Broken Bow, Oklahoma. Let me INSPIRE you so that you can INSPIRE others!</p><div class="footer-social"><a href="https://www.facebook.com/ICFitness2" class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a><a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a><a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a></div></div>
+<div class="footer-col"><h4>Quick Links</h4><ul class="footer-links"><li><a href="#about">About</a></li><li><a href="#services">Classes</a></li><li><a href="#membership">Membership</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#testimonials">Reviews</a></li><li><a href="#contact">Contact</a></li></ul></div>
+<div class="footer-col"><h4>Services</h4><ul class="footer-links"><li><a href="#services">Group Classes</a></li><li><a href="#" id="footerPT">Personal Training</a></li><li><a href="#membership">Visitor Passes</a></li><li><a href="#shop">Merchandise</a></li><li><a href="#" id="footerTracker">Workout Tracker</a></li></ul></div>
+<div class="footer-col"><h4>Newsletter</h4><p style="opacity:.7;font-size:.9rem;margin-bottom:1rem">Get fitness tips, class updates, and exclusive offers.</p>
+<form class="newsletter-form" id="newsletterForm" novalidate><input type="email" id="newsletterEmail" placeholder="Your email" required aria-label="Newsletter email"><button type="submit">Subscribe</button></form>
+<div class="form-error" id="newsletterError">Please enter a valid email</div>
+</div>
+</div>
+<div class="footer-bottom"><p>&copy; 2026 IC Fitness. All rights reserved.</p><ul class="footer-legal"><li><a href="#" id="privacyLink">Privacy Policy</a></li><li><a href="#" id="termsLink">Terms of Service</a></li><li><a href="tel:+15807437955">580-743-7955</a></li></ul></div>
+</footer>
+<div class="chat-widget" id="chatWidget"><div class="chat-box" id="chatBox" role="dialog" aria-label="Live chat"><div class="chat-header"><h4><i class="fas fa-comments"></i> IC Fitness Chat</h4><button id="chatClose" aria-label="Close chat" style="background:none;border:none;color:var(--text);cursor:pointer"><i class="fas fa-times"></i></button></div><div class="chat-messages" id="chatMessages" role="log" aria-live="polite"><div class="chat-msg bot">Hi! Welcome to IC Fitness. How can we help you today?</div></div><div class="chat-input"><input type="text" id="chatInput" placeholder="Type a message..." aria-label="Chat message"><button id="chatSend">Send</button></div></div><button class="chat-toggle" id="chatToggle" aria-label="Open live chat"><i class="fas fa-comment-dots"></i></button></div>
+<div class="toast" id="toast" role="alert" aria-live="assertive"></div>
+<div class="modal-overlay" id="loginModal"><div class="modal" role="dialog" aria-labelledby="loginTitle"><button class="modal-close" data-close aria-label="Close">&times;</button><h2 id="loginTitle">Member Login</h2><form id="loginForm"><div class="form-group"><label for="loginEmail">Email</label><input type="email" id="loginEmail" required autocomplete="email"></div><div class="form-group"><label for="loginPass">Password</label><input type="password" id="loginPass" required autocomplete="current-password"></div><button type="submit" class="form-btn">Sign In</button><p style="margin-top:1rem;font-size:.85rem;opacity:.7">Demo: any email/password works</p></form></div></div>
+<div class="modal-overlay" id="memberPortal"><div class="modal modal-lg" role="dialog" aria-labelledby="portalTitle"><button class="modal-close" data-close aria-label="Close">&times;</button><h2 id="portalTitle">Member Portal</h2><p style="margin-bottom:1rem">Welcome back, <span id="memberName">Member</span>!</p><div class="tracker-stats"><div class="tracker-stat"><div class="val" id="workoutCount">0</div><div>Workouts This Week</div></div><div class="tracker-stat"><div class="val" id="streakCount">0</div><div>Day Streak</div></div><div class="tracker-stat"><div class="val" id="classCount">0</div><div>Classes Booked</div></div></div><button class="btn btn-neon" id="logWorkoutBtn" style="width:100%;margin-bottom:1rem"><i class="fas fa-plus"></i> Log Workout</button><h3 style="color:var(--neon);margin-bottom:.75rem">Your Reservations</h3><div class="reservation-list" id="memberReservations"><p style="opacity:.6;font-size:.9rem">No reservations yet.</p></div></div></div>
+<div class="modal-overlay" id="bookModal"><div class="modal" role="dialog" aria-labelledby="bookTitle"><button class="modal-close" data-close aria-label="Close">&times;</button><h2 id="bookTitle">Book Appointment</h2><form id="bookForm"><div class="form-group"><label for="bookName">Name *</label><input type="text" id="bookName" required></div><div class="form-group"><label for="bookEmail">Email *</label><input type="email" id="bookEmail" required></div><div class="form-group"><label for="bookType">Appointment Type</label><select id="bookType"><option value="tour">Facility Tour</option><option value="pt">Personal Training</option><option value="assessment">Fitness Assessment</option><option value="consult">Membership Consultation</option></select></div><div class="form-group"><label for="bookDate">Preferred Date *</label><input type="date" id="bookDate" required></div><div class="form-group"><label for="bookTime">Preferred Time *</label><select id="bookTime" required><option value="">Select time</option><option value="09:00">9:00 AM</option><option value="10:00">10:00 AM</option><option value="11:00">11:00 AM</option><option value="14:00">2:00 PM</option><option value="15:00">3:00 PM</option><option value="16:00">4:00 PM</option><option value="17:00">5:00 PM</option></select></div><button type="submit" class="form-btn">Book Appointment</button></form></div></div>
+<div class="modal-overlay" id="reserveModal"><div class="modal" role="dialog" aria-labelledby="reserveTitle"><button class="modal-close" data-close aria-label="Close">&times;</button><h2 id="reserveTitle">Reserve Class</h2><form id="reserveForm"><div class="form-group"><label for="reserveName">Name *</label><input type="text" id="reserveName" required></div><div class="form-group"><label for="reserveEmail">Email *</label><input type="email" id="reserveEmail" required></div><div class="form-group"><label for="reserveClass">Class</label><input type="text" id="reserveClass" readonly></div><div class="form-group"><label for="reserveDate">Date *</label><input type="date" id="reserveDate" required></div><button type="submit" class="form-btn">Confirm Reservation</button></form></div></div>
+<div class="modal-overlay" id="paymentModal"><div class="modal" role="dialog" aria-labelledby="paymentTitle"><button class="modal-close" data-close aria-label="Close">&times;</button><h2 id="paymentTitle">Complete Purchase</h2><p style="margin-bottom:1rem">Plan: <strong id="paymentPlan"></strong> — $<strong id="paymentPrice"></strong>/mo</p><form id="paymentForm"><div class="form-group"><label for="payName">Full Name *</label><input type="text" id="payName" required></div><div class="form-group"><label for="payEmail">Email *</label><input type="email" id="payEmail" required></div><div class="form-group"><label for="payCard">Card Number *</label><input type="text" id="payCard" placeholder="4242 4242 4242 4242" required maxlength="19" inputmode="numeric"></div><div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem"><div class="form-group"><label for="payExpiry">Expiry *</label><input type="text" id="payExpiry" placeholder="MM/YY" required maxlength="5"></div><div class="form-group"><label for="payCvc">CVC *</label><input type="text" id="payCvc" placeholder="123" required maxlength="4" inputmode="numeric"></div></div><div class="form-group"><label for="promoCode">Promo Code</label><input type="text" id="promoCode" placeholder="INSPIRE2026"></div><button type="submit" class="form-btn"><i class="fas fa-lock"></i> Secure Checkout</button><p style="margin-top:1rem;font-size:.8rem;opacity:.6;text-align:center">Powered by Stripe (demo mode)</p></form></div></div>
+<script>
+/* IC Fitness - Main Application Script */
+(function(){
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const toast=(msg)=>{const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000)};
+const openModal=id=>{$(id).classList.add('active');document.body.style.overflow='hidden'};
+const closeModal=el=>{el.classList.remove('active');if(!$$('.modal-overlay.active').length)document.body.style.overflow=''};
+$$('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.closest('.modal-overlay'))));
+$$('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o)}));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$$('.modal-overlay.active').forEach(closeModal);if($('#lightbox').classList.contains('active')){if(e.key==='ArrowLeft')navLightbox(-1);if(e.key==='ArrowRight')navLightbox(1);if(e.key==='Escape')closeLightbox()}});
+window.addEventListener('load',()=>setTimeout(()=>$('#loader').classList.add('hidden'),1500));
+const nav=$('#navbar');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>50);const sections=$$('section[id]');let cur='';sections.forEach(s=>{if(scrollY>=s.offsetTop-100)cur=s.id});$$('.nav-link').forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+cur)})});
+const mobMenu=$('#mobileMenu'),mobOverlay=$('#mobileOverlay');
+const toggleMobile=open=>{mobMenu.classList.toggle('active',open);mobOverlay.classList.toggle('active',open);$('#mobileMenuBtn').setAttribute('aria-expanded',open)};
+$('#mobileMenuBtn').addEventListener('click',()=>toggleMobile(true));
+$('#mobileMenuClose').addEventListener('click',()=>toggleMobile(false));
+mobOverlay.addEventListener('click',()=>toggleMobile(false));
+$$('#mobileMenu .nav-link').forEach(l=>l.addEventListener('click',()=>toggleMobile(false)));
+$$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}}));
+const fadeObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+$$('.fade-in').forEach(el=>fadeObs.observe(el));
+const statsObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){$$('.stat-number').forEach(s=>{const t=+s.dataset.target,d=2000,sT=performance.now();const anim=now=>{const p=Math.min((now-sT)/d,1);s.textContent=Math.floor(t*(1-Math.pow(1-p,3)))+(t===24?'+':t>=500?'+':'');if(p<1)requestAnimationFrame(anim)};requestAnimationFrame(anim)});statsObs.disconnect()}})},{threshold:.5});
+const sg=$('#statsGrid');if(sg)statsObs.observe(sg);
+$$('.filter-btn').forEach(btn=>btn.addEventListener('click',function(){ $$('.filter-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active');const day=this.dataset.day;$$('#scheduleBody tr').forEach(r=>r.style.display=(day==='all'||r.dataset.day===day)?'':'none')}));
+$$('.tab').forEach(tab=>tab.addEventListener('click',function(){ $$('.tab').forEach(t=>t.classList.remove('active'));$$('.tab-content').forEach(c=>c.classList.remove('active'));this.classList.add('active');$('#'+this.dataset.tab).classList.add('active')}));
+const galleryImgs=[];$$('.gallery-item img').forEach((img,i)=>galleryImgs.push({src:img.src,alt:img.alt}));let lbIdx=0;
+const openLightbox=i=>{lbIdx=i;$('#lightboxImg').src=galleryImgs[i].src;$('#lightboxImg').alt=galleryImgs[i].alt;$('#lightbox').classList.add('active');$('#lightbox').setAttribute('aria-hidden','false');document.body.style.overflow='hidden'};
+const closeLightbox=()=>{$('#lightbox').classList.remove('active');$('#lightbox').setAttribute('aria-hidden','true');document.body.style.overflow=''};
+const navLightbox=d=>{lbIdx=(lbIdx+d+galleryImgs.length)%galleryImgs.length;$('#lightboxImg').src=galleryImgs[lbIdx].src;$('#lightboxImg').alt=galleryImgs[lbIdx].alt};
+$$('.gallery-item').forEach(item=>item.addEventListener('click',()=>openLightbox(+item.dataset.index)));
+$('#lightboxClose').addEventListener('click',closeLightbox);
+$('#lightboxPrev').addEventListener('click',()=>navLightbox(-1));
+$('#lightboxNext').addEventListener('click',()=>navLightbox(1));
+$('#lightbox').addEventListener('click',e=>{if(e.target===$('#lightbox'))closeLightbox()});
+const validateEmail=e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+$('#contactForm').addEventListener('submit',function(e){e.preventDefault();let ok=true;
+['contactName','contactEmail','contactMessage'].forEach(id=>{const el=$('#'+id);const errId={contactName:'nameError',contactEmail:'emailError',contactMessage:'messageError'}[id];const err=$('#'+errId);const invalid=id==='contactEmail'?!validateEmail(el.value):!el.value.trim();if(invalid){err.classList.add('visible');ok=false}else err.classList.remove('visible')});
+if(ok){toast('Message sent! We\'ll get back to you soon.');this.reset()}});
+$('#newsletterForm').addEventListener('submit',function(e){e.preventDefault();const em=$('#newsletterEmail');if(!validateEmail(em.value)){$('#newsletterError').classList.add('visible');return}$('#newsletterError').classList.remove('visible');const subs=JSON.parse(localStorage.getItem('ic_newsletter')||'[]');subs.push(em.value);localStorage.setItem('ic_newsletter',JSON.stringify(subs));toast('Subscribed! Welcome to the IC Fitness family.');this.reset()});
+const chatResponses={'hours':'We\'re open 24/7 for members! Staffed hours are Mon-Fri 9AM-6PM.','price':'Memberships start at $35/mo. Check our Membership section for details!','class':'We offer CrossFit, Yoga, Spin, HIIT, and more. View our full schedule online!','location':'We\'re at 2716 S Park Dr, Broken Bow, OK 74728.','tour':'You can book a facility tour through our Book Now button!','default':'Thanks for your message! A team member will respond shortly. For immediate help, call 580-743-7955.'};
+const getChatReply=msg=>{const m=msg.toLowerCase();if(m.includes('hour')||m.includes('open'))return chatResponses.hours;if(m.includes('price')||m.includes('cost')||m.includes('member'))return chatResponses.price;if(m.includes('class'))return chatResponses.class;if(m.includes('where')||m.includes('location')||m.includes('address'))return chatResponses.location;if(m.includes('tour'))return chatResponses.tour;return chatResponses.default};
+$('#chatToggle').addEventListener('click',()=>$('#chatBox').classList.toggle('active'));
+$('#chatClose').addEventListener('click',()=>$('#chatBox').classList.remove('active'));
+const sendChat=()=>{const input=$('#chatInput'),msg=input.value.trim();if(!msg)return;const msgs=$('#chatMessages');msgs.innerHTML+='<div class="chat-msg user">'+msg.replace(/</g,'&lt;')+'</div>';input.value='';setTimeout(()=>{msgs.innerHTML+='<div class="chat-msg bot">'+getChatReply(msg)+'</div>';msgs.scrollTop=msgs.scrollHeight},800);msgs.scrollTop=msgs.scrollHeight};
+$('#chatSend').addEventListener('click',sendChat);
+$('#chatInput').addEventListener('keypress',e=>{if(e.key==='Enter')sendChat()});
+const showLogin=()=>openModal('#loginModal');
+$('#loginBtn').addEventListener('click',showLogin);
+$('#mobileLoginBtn').addEventListener('click',()=>{toggleMobile(false);showLogin()});
+$('#bookBtn').addEventListener('click',()=>openModal('#bookModal'));
+$('#ptBookBtn').addEventListener('click',()=>openModal('#bookModal'));
+$('#footerPT').addEventListener('click',e=>{e.preventDefault();openModal('#bookModal')});
+$('#loginForm').addEventListener('submit',function(e){e.preventDefault();const email=$('#loginEmail').value;localStorage.setItem('ic_member',JSON.stringify({email,name:email.split('@')[0]}));closeModal($('#loginModal'));openModal('#memberPortal');$('#memberName').textContent=email.split('@')[0];updatePortal()});
+const updatePortal=()=>{const d=JSON.parse(localStorage.getItem('ic_tracker')||'{"workouts":0,"streak":0}');const r=JSON.parse(localStorage.getItem('ic_reservations')||'[]');$('#workoutCount').textContent=d.workouts;$('#streakCount').textContent=d.streak;$('#classCount').textContent=r.length;const rl=$('#memberReservations');if(r.length){rl.innerHTML=r.map(x=>'<div class="reservation-item"><span>'+x.class+' - '+x.date+'</span><span style="color:var(--neon)">Confirmed</span></div>').join('')}else rl.innerHTML='<p style="opacity:.6;font-size:.9rem">No reservations yet.</p>'};
+$('#logWorkoutBtn').addEventListener('click',()=>{const d=JSON.parse(localStorage.getItem('ic_tracker')||'{"workouts":0,"streak":0}');d.workouts++;d.streak++;localStorage.setItem('ic_tracker',JSON.stringify(d));updatePortal();toast('Workout logged! Keep it up!')});
+$('#footerTracker').addEventListener('click',e=>{e.preventDefault();if(localStorage.getItem('ic_member')){openModal('#memberPortal');updatePortal()}else showLogin()});
+if(localStorage.getItem('ic_member'))updatePortal();
+$('#bookForm').addEventListener('submit',function(e){e.preventDefault();const appts=JSON.parse(localStorage.getItem('ic_appointments')||'[]');appts.push({name:$('#bookName').value,email:$('#bookEmail').value,type:$('#bookType').value,date:$('#bookDate').value,time:$('#bookTime').value});localStorage.setItem('ic_appointments',JSON.stringify(appts));closeModal($('#bookModal'));toast('Appointment booked! Confirmation sent to '+$('#bookEmail').value);this.reset()});
+const openReserve=cls=>{openModal('#reserveModal');$('#reserveClass').value=cls;const tomorrow=new Date();tomorrow.setDate(tomorrow.getDate()+1);$('#reserveDate').min=tomorrow.toISOString().split('T')[0]};
+$$('.reserve-btn').forEach(btn=>btn.addEventListener('click',()=>openReserve(btn.dataset.class)));
+$('#reserveForm').addEventListener('submit',function(e){e.preventDefault();const res=JSON.parse(localStorage.getItem('ic_reservations')||'[]');res.push({name:$('#reserveName').value,email:$('#reserveEmail').value,class:$('#reserveClass').value,date:$('#reserveDate').value});localStorage.setItem('ic_reservations',JSON.stringify(res));closeModal($('#reserveModal'));toast('Class reserved! See you there.');this.reset();updatePortal()});
+$$('.join-btn').forEach(btn=>btn.addEventListener('click',()=>{openModal('#paymentModal');$('#paymentPlan').textContent=btn.dataset.plan;$('#paymentPrice').textContent=btn.dataset.price}));
+$$('.shop-btn').forEach(btn=>btn.addEventListener('click',()=>{openModal('#paymentModal');$('#paymentPlan').textContent=btn.dataset.item;$('#paymentPrice').textContent=btn.dataset.price}));
+$('#paymentForm').addEventListener('submit',function(e){e.preventDefault();closeModal($('#paymentModal'));toast('Payment successful! Welcome to IC Fitness.');this.reset()});
+$('#payCard').addEventListener('input',function(){let v=this.value.replace(/\D/g,'').substring(0,16);this.value=v.replace(/(.{4})/g,'$1 ').trim()});
+$('#payExpiry').addEventListener('input',function(){let v=this.value.replace(/\D/g,'').substring(0,4);if(v.length>=2)v=v.substring(0,2)+'/'+v.substring(2);this.value=v});
+const today=new Date().toISOString().split('T')[0];
+$('#bookDate').min=today;
+if('loading' in HTMLImageElement.prototype){$$('img[loading="lazy"]').forEach(img=>{if(!img.complete)img.dataset.src=img.src})}else{const imgObs=new IntersectionObserver((entries,obs)=>{entries.forEach(e=>{if(e.isIntersecting){const img=e.target;if(img.dataset.src){img.src=img.dataset.src;delete img.dataset.src}obs.unobserve(img)}})},{rootMargin:'200px'});$$('img[loading="lazy"]').forEach(img=>imgObs.observe(img))}
+/* Analytics: Replace GA_MEASUREMENT_ID with your Google Analytics 4 ID */
+/* (function(){var s=document.createElement('script');s.src='https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';s.async=true;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','GA_MEASUREMENT_ID')})(); */
+$('#privacyLink').addEventListener('click',e=>{e.preventDefault();toast('Privacy Policy: We protect your data and never share personal information.')});
+$('#termsLink').addEventListener('click',e=>{e.preventDefault();toast('Terms: Membership agreements apply. Cancel anytime with 30-day notice.')});
+})();
+</script>
 </body>
 </html>
