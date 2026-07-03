@@ -47,24 +47,63 @@
         
         /* Brand Logo Styles */
         .brand-logo {
-            max-height: 50px;
+            max-height: 45px;
             width: auto;
+            object-fit: contain;
             transition: all 0.3s ease;
-        }
-        
-        @media (max-width: 768px) {
-            .brand-logo {
-                max-height: 40px;
-            }
         }
         
         /* Profile Frame Styles */
         .profile-frame {
-            width: 100%;
-            max-width: 300px;
-            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
             border-radius: 8px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .profile-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Leadership Section Styles */
+        .leadership-section {
+            background-color: var(--matte-black);
+            padding: 4rem 0;
+        }
+        
+        .leadership-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .leadership-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--neon-green);
+        }
+        
+        .leadership-copy {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+        }
+        
+        /* Feature Image Styles */
+        .feature-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
         }
         
         /* Typography */
@@ -112,9 +151,6 @@
         .logo {
             display: flex;
             align-items: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--light-gray);
         }
         
         .nav-links {
@@ -302,39 +338,6 @@
             box-shadow: 0 0 15px rgba(255, 87, 51, 0.4);
         }
         
-        /* Executive Profile Section */
-        .executive-profile {
-            background-color: var(--matte-black);
-            padding: 4rem 0;
-        }
-        
-        .profile-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 3rem;
-            align-items: center;
-        }
-        
-        .profile-visual {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .profile-data h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--neon-green);
-        }
-        
-        .profile-copy {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--text-gray);
-        }
-        
         /* Section Styles */
         .section {
             padding: 5rem 0;
@@ -405,19 +408,6 @@
             transform: translateY(-10px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             border: 1px solid var(--neon-green);
-        }
-        
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background-color: var(--neon-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 1.5rem;
-            color: var(--deep-charcoal);
         }
         
         .feature-title {
@@ -548,26 +538,6 @@
         /* Testimonials Section */
         .testimonials {
             background-color: var(--matte-black);
-            background-image: url('assets/testimonial-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .testimonials::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(18, 18, 18, 0.85);
-            z-index: 1;
-        }
-        
-        .testimonials .container {
-            position: relative;
-            z-index: 2;
         }
         
         .testimonials-container {
@@ -669,6 +639,11 @@
             color: var(--text-gray);
         }
         
+        .contact-link {
+            color: var(--neon-green);
+            text-decoration: none;
+        }
+        
         .contact-form {
             background-color: var(--dark-gray);
             border-radius: 8px;
@@ -738,22 +713,6 @@
         .footer-logo {
             display: flex;
             align-items: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--light-gray);
-        }
-        
-        .footer-logo-icon {
-            width: 40px;
-            height: 40px;
-            background-color: var(--neon-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 0.5rem;
-            font-weight: 900;
-            color: var(--deep-charcoal);
         }
         
         .footer-links {
@@ -864,7 +823,7 @@
                 margin-bottom: 0.5rem;
             }
             
-            .profile-container {
+            .leadership-container {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
@@ -920,15 +879,15 @@
         </div>
     </section>
     
-    <!-- Executive Profile Section -->
-    <section class="executive-profile" id="executive">
-        <div class="profile-container">
-            <div class="profile-visual fade-in">
-                <img src="assets/candy-leadership.jpg" alt="Candy, Director of Operations" class="profile-frame">
+    <!-- Leadership Section -->
+    <section id="leadership" class="leadership-section">
+        <div class="leadership-container">
+            <div class="profile-frame">
+                <img src="assets/candy-leadership.jpg" alt="Candy - Director of Operations" class="profile-image">
             </div>
-            <div class="profile-data fade-in">
+            <div class="leadership-content">
                 <h2>Management & Operations</h2>
-                <p class="profile-copy">IC Fitness operates under the direct leadership of Candy, focusing on providing high-tier athletic training facilities and tailored membership services within the Broken Bow region. The facility serves both long-term local members and short-term regional travelers with precise, data-driven wellness options.</p>
+                <p class="leadership-copy">IC Fitness operates under the direct leadership of Candy, focusing on providing high-tier athletic training facilities and tailored membership services within the Broken Bow region. The facility serves both long-term local members and short-term regional travelers with precise, data-driven wellness options.</p>
             </div>
         </div>
     </section>
@@ -939,30 +898,22 @@
             <h2 class="section-title uppercase fade-in">Elite Features</h2>
             <div class="features-grid">
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-clock"></i>
-                    </div>
+                    <img src="assets/247-access.jpg" alt="24/7 Access" class="feature-image">
                     <h3 class="feature-title uppercase">24/7 Access</h3>
                     <p>Train on your schedule with round-the-clock access to our facility. No excuses, no limitations.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-dumbbell"></i>
-                    </div>
+                    <img src="assets/elite-equipment.jpg" alt="Elite Equipment" class="feature-image">
                     <h3 class="feature-title uppercase">Elite Equipment</h3>
                     <p>Professional-grade bodybuilding equipment from top brands. Everything you need for serious gains.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-fire"></i>
-                    </div>
+                    <img src="assets/crossfit-rig.jpg" alt="CrossFit Rig" class="feature-image">
                     <h3 class="feature-title uppercase">CrossFit Rig</h3>
                     <p>Full CrossFit setup with rigs, ropes, and functional training equipment for intense workouts.</p>
                 </div>
                 <div class="feature-card fade-in">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
+                    <img src="assets/group-classes.jpg" alt="Group Classes" class="feature-image">
                     <h3 class="feature-title uppercase">Group Classes</h3>
                     <p>High-energy group fitness classes led by certified instructors. Motivation through community.</p>
                 </div>
@@ -1127,7 +1078,7 @@
                         </div>
                         <div class="contact-details">
                             <h3>Phone</h3>
-                            <p><a href="tel:580-743-7955" class="text-neon">580-743-7955</a></p>
+                            <p><a href="tel:5807437955" class="contact-link">580-743-7955</a></p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -1233,21 +1184,49 @@
             });
         });
         
-        // Tab System
+        // Tab System with smooth transitions
         const tabs = document.querySelectorAll('.tab');
         const tabContents = document.querySelectorAll('.tab-content');
         
         tabs.forEach(tab => {
             tab.addEventListener('click', function() {
+                // Store scroll position
+                const scrollPosition = window.scrollY;
+                
                 // Remove active class from all tabs and tab contents
                 tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(tc => tc.classList.remove('active'));
+                tabContents.forEach(tc => {
+                    tc.classList.remove('active');
+                    tc.style.opacity = '0';
+                });
                 
                 // Add active class to clicked tab and corresponding tab content
                 this.classList.add('active');
                 const tabId = this.getAttribute('data-tab');
-                document.getElementById(tabId).classList.add('active');
+                const targetContent = document.getElementById(tabId);
+                
+                // Set display first, then animate opacity
+                targetContent.style.display = 'block';
+                
+                // Restore scroll position immediately
+                window.scrollTo(0, scrollPosition);
+                
+                // Animate opacity change
+                setTimeout(() => {
+                    targetContent.style.opacity = '1';
+                    targetContent.classList.add('active');
+                }, 10);
             });
+        });
+        
+        // Initialize tab content opacity
+        tabContents.forEach(content => {
+            if (!content.classList.contains('active')) {
+                content.style.opacity = '0';
+                content.style.display = 'none';
+            } else {
+                content.style.opacity = '1';
+            }
         });
         
         // Smooth Scrolling for anchor links
