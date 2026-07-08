@@ -9,8 +9,9 @@ export default defineConfig({
     rollupOptions: {
       input: 'src/main.jsx',
       output: {
+        format: 'iife',
+        name: 'ICFitnessTierDemo',
         entryFileNames: 'tier-demo.js',
-        chunkFileNames: 'tier-demo-[name].js',
         assetFileNames: 'tier-demo.[ext]',
         inlineDynamicImports: true,
       },

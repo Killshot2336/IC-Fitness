@@ -161,6 +161,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .gallery-item:hover::after{opacity:1}
 .video-tour{margin-bottom:3rem;border-radius:8px;overflow:hidden;aspect-ratio:16/9;background:var(--gray)}
 .video-tour iframe{width:100%;height:100%;border:0}
+.video-tour-poster{position:relative;width:100%;height:100%;padding:0;border:none;background:none;cursor:pointer;display:block}
+.video-tour-poster img{width:100%;height:100%;object-fit:cover;display:block}
+.video-play-icon{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.35);transition:background .3s}
+.video-tour-poster:hover .video-play-icon{background:rgba(0,0,0,.5)}
+.video-play-icon i{font-size:4rem;color:var(--neon);text-shadow:0 0 20px rgba(57,255,20,.6)}
 .equipment-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem}
 .equipment-item{background:var(--gray);padding:1.5rem;border-radius:8px;text-align:center;transition:all .3s}
 .equipment-item:hover{border:1px solid var(--neon)}
@@ -439,8 +444,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div class="container">
 <h2 class="section-title fade-in">FACILITY TOUR</h2>
 <p class="section-subtitle fade-in">Take a look inside our state-of-the-art training facility.</p>
-<div class="video-tour fade-in">
-<iframe src="https://www.youtube.com/embed/ml6cT4AZdqI?rel=0" title="IC Fitness Virtual Tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+<div class="video-tour fade-in" id="videoTour">
+<button type="button" class="video-tour-poster" id="videoTourBtn" aria-label="Play IC Fitness virtual tour video">
+<img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1280&q=80" alt="Click to play facility tour video" loading="lazy" width="1280" height="720">
+<span class="video-play-icon"><i class="fas fa-play" aria-hidden="true"></i></span>
+</button>
 </div>
 <div class="gallery-grid fade-in" id="galleryGrid">
 <div class="gallery-item" data-index="0"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Main gym floor with free weights" loading="lazy" width="600" height="450"></div>
@@ -561,8 +569,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div id="tier-demo-root"></div>
 <div class="toast" id="toast" role="alert" aria-live="assertive"></div>
 <div class="modal-overlay" id="bookModal"><div class="modal" role="dialog" aria-labelledby="bookTitle"><button class="modal-close" data-close aria-label="Close">&times;</button><h2 id="bookTitle">Book Appointment</h2><form id="bookForm"><div class="form-group"><label for="bookName">Name *</label><input type="text" id="bookName" required></div><div class="form-group"><label for="bookEmail">Email *</label><input type="email" id="bookEmail" required></div><div class="form-group"><label for="bookType">Appointment Type</label><select id="bookType"><option value="tour">Facility Tour</option><option value="pt">Personal Training</option><option value="assessment">Fitness Assessment</option><option value="consult">Membership Consultation</option></select></div><div class="form-group"><label for="bookDate">Preferred Date *</label><input type="date" id="bookDate" required></div><div class="form-group"><label for="bookTime">Preferred Time *</label><select id="bookTime" required><option value="">Select time</option><option value="09:00">9:00 AM</option><option value="10:00">10:00 AM</option><option value="11:00">11:00 AM</option><option value="14:00">2:00 PM</option><option value="15:00">3:00 PM</option><option value="16:00">4:00 PM</option><option value="17:00">5:00 PM</option></select></div><button type="submit" class="form-btn">Book Appointment</button></form></div></div>
-<link rel="stylesheet" href="assets/tier-demo.css">
-<script type="module" src="assets/tier-demo.js"></script>
+
+<script src="assets/tier-demo.js" defer onerror="window.__tierDemoLoadFailed=true"></script>
 <script>
 /* IC Fitness - Main Application Script */
 (function(){
@@ -621,6 +629,8 @@ if('loading' in HTMLImageElement.prototype){$$('img[loading="lazy"]').forEach(im
 /* (function(){var s=document.createElement('script');s.src='https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';s.async=true;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','GA_MEASUREMENT_ID')})(); */
 $('#privacyLink').addEventListener('click',e=>{e.preventDefault();toast('Privacy Policy: We protect your data and never share personal information.')});
 $('#termsLink').addEventListener('click',e=>{e.preventDefault();toast('Terms: Membership agreements apply. Cancel anytime with 30-day notice.')});
+$('#videoTourBtn')?.addEventListener('click',function(){const wrap=$('#videoTour');if(!wrap||wrap.querySelector('iframe'))return;wrap.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/ml6cT4AZdqI?rel=0&autoplay=1" title="IC Fitness Virtual Tour" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'});
+window.addEventListener('load',function(){setTimeout(function(){if((window.__tierDemoLoadFailed||!document.querySelector('.dev-tier-sidebar'))&&!document.getElementById('tier-demo-fail')){var el=document.createElement('div');el.id='tier-demo-fail';el.setAttribute('role','alert');el.style.cssText='position:fixed;bottom:1rem;left:1rem;right:1rem;max-width:480px;margin:0 auto;background:#252525;border:2px solid #FF5733;color:#e0e0e0;padding:1rem 1.25rem;border-radius:8px;z-index:10006;font-family:Montserrat,sans-serif;font-size:.9rem;line-height:1.5;box-shadow:0 8px 32px rgba(0,0,0,.5)';el.innerHTML='<strong style="color:#39FF14">Demo failed to load.</strong> Run <code style="background:#1a1a1a;padding:.2rem .4rem;border-radius:3px">python3 -m http.server 8080</code> in the project folder, then open <code style="background:#1a1a1a;padding:.2rem .4rem;border-radius:3px">http://localhost:8080</code>';document.body.appendChild(el)}},2500)});
 })();
 </script>
 </body>
