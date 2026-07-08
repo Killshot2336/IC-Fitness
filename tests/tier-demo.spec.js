@@ -85,4 +85,23 @@ test.describe('Voidline Platform Configuration Portal', () => {
     await page.keyboard.press('Escape');
     await expect(page.locator('#paymentTitle')).toHaveCount(0);
   });
+
+  test('shop and class reserve buttons show Module Locked without modules', async ({ page }) => {
+    await page.locator('#services').scrollIntoViewIfNeeded();
+    await expect(page.locator('.class-card .reserve-btn').first()).toHaveText('Module Locked');
+
+    await page.locator('#shop').scrollIntoViewIfNeeded();
+    await expect(page.locator('.shop-btn').first()).toHaveText('Module Locked');
+  });
+
+  test('enabling modules unlocks shop and class reserve buttons', async ({ page }) => {
+    await toggleModule(page, 'Dynamic Class Scheduling');
+    await toggleModule(page, 'Stripe E-Commerce');
+
+    await page.locator('#services').scrollIntoViewIfNeeded();
+    await expect(page.locator('.class-card .reserve-btn').first()).toHaveText('Reserve Spot');
+
+    await page.locator('#shop').scrollIntoViewIfNeeded();
+    await expect(page.locator('.shop-btn').first()).toHaveText('Add to Cart');
+  });
 });

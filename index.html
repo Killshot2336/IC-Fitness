@@ -279,9 +279,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .tracker-stat .val{font-family:'Oswald',sans-serif;font-size:1.8rem;color:var(--neon)}
 .reservation-list{max-height:200px;overflow-y:auto;margin-top:1rem}
 .reservation-item{display:flex;justify-content:space-between;padding:.75rem;background:var(--gray);border-radius:4px;margin-bottom:.5rem;font-size:.9rem}
-.social-feed{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-top:1rem}
-.social-feed-item{aspect-ratio:1;border-radius:4px;overflow:hidden}
-.social-feed-item img{width:100%;height:100%;object-fit:cover}
+.social-feed{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:1.5rem}
+.social-card{background:var(--black);border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;text-align:left;transition:border-color .3s,transform .3s}
+.social-card:hover{border-color:rgba(57,255,20,.35);transform:translateY(-4px)}
+.social-card-header{display:flex;align-items:center;gap:.75rem;padding:1rem 1rem .75rem}
+.social-card-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--neon),var(--orange));color:var(--charcoal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem;flex-shrink:0}
+.social-card-meta{display:flex;flex-direction:column;flex:1;min-width:0}
+.social-card-meta strong{font-size:.9rem;line-height:1.2}
+.social-card-meta span{font-size:.75rem;opacity:.6}
+.social-card-platform{color:#1877f2;font-size:1.1rem;margin-left:auto}
+.social-card-image{width:100%;height:180px;object-fit:cover;display:block}
+.social-card-body{padding:1rem}
+.social-card-caption{font-size:.9rem;line-height:1.5;margin-bottom:.75rem}
+.social-card-engagement{display:flex;gap:1.25rem;font-size:.8rem;opacity:.75}
+.social-card-engagement i{margin-right:.35rem;color:var(--neon)}
 @media(max-width:992px){.about-grid,.leadership-grid,.contact-grid,.footer-grid{grid-template-columns:1fr}.stats-grid{grid-template-columns:repeat(2,1fr)}.pricing-card.featured{transform:none}}
 @media(max-width:768px){.nav-links,.nav-actions{display:none}.mobile-menu-btn{display:block}.mobile-menu{display:flex}.hero{padding-top:5rem}.stats-grid{grid-template-columns:1fr 1fr}.tabs{flex-direction:column;align-items:center}.tab{border-radius:8px!important;width:100%;max-width:300px;margin-bottom:.5rem}.footer-grid{grid-template-columns:1fr}.newsletter-form{flex-direction:column}}
 </style>
@@ -353,10 +364,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 </div>
 </div>
 <div class="stats-grid fade-in" id="statsGrid">
-<div class="stat-item"><span class="stat-number" data-target="500">0</span><span class="stat-label">Active Members</span></div>
-<div class="stat-item"><span class="stat-number" data-target="3">0</span><span class="stat-label">Years in Business</span></div>
-<div class="stat-item"><span class="stat-number" data-target="15">0</span><span class="stat-label">Expert Classes Weekly</span></div>
-<div class="stat-item"><span class="stat-number" data-target="24">0</span><span class="stat-label">Hours Access Daily</span></div>
+<div class="stat-item"><span class="stat-number" data-target="500" data-suffix="+">500+</span><span class="stat-label">Active Members</span></div>
+<div class="stat-item"><span class="stat-number" data-target="3">3</span><span class="stat-label">Years Strong</span></div>
+<div class="stat-item"><span class="stat-number" data-target="15" data-suffix="+">15+</span><span class="stat-label">Weekly Classes</span></div>
+<div class="stat-item"><span class="stat-number" data-format="text">24/7</span><span class="stat-label">Access Daily</span></div>
 </div>
 <div class="highlights-grid fade-in">
 <div class="highlight-card"><i class="fas fa-clock" aria-hidden="true"></i><h4>24/7 Access</h4><p>Train anytime with secure key fob entry</p></div>
@@ -499,9 +510,42 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 <div><div class="social-stat">3</div><div>Years Strong</div></div>
 </div>
 <div class="social-feed fade-in" aria-label="Social media feed preview">
-<div class="social-feed-item"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=200&q=80" alt="Social post" loading="lazy" width="200" height="200"></div>
-<div class="social-feed-item"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=200&q=80" alt="Social post" loading="lazy" width="200" height="200"></div>
-<div class="social-feed-item"><img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=200&q=80" alt="Social post" loading="lazy" width="200" height="200"></div>
+<article class="social-card">
+<div class="social-card-header">
+<div class="social-card-avatar" aria-hidden="true">IC</div>
+<div class="social-card-meta"><strong>IC Fitness</strong><span>@ICFitness2 · 2d ago</span></div>
+<i class="fab fa-facebook social-card-platform" aria-hidden="true"></i>
+</div>
+<img class="social-card-image" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80" alt="Members training on the main gym floor" loading="lazy" width="600" height="180">
+<div class="social-card-body">
+<p class="social-card-caption">Monday motivation hits different at IC Fitness. Who's crushing their goals this week? 💪 #INSPIRE #BrokenBow</p>
+<div class="social-card-engagement"><span><i class="fas fa-heart" aria-hidden="true"></i>128 likes</span><span><i class="fas fa-comment" aria-hidden="true"></i>24 comments</span></div>
+</div>
+</article>
+<article class="social-card">
+<div class="social-card-header">
+<div class="social-card-avatar" aria-hidden="true">IC</div>
+<div class="social-card-meta"><strong>IC Fitness</strong><span>@ICFitness2 · 5d ago</span></div>
+<i class="fab fa-facebook social-card-platform" aria-hidden="true"></i>
+</div>
+<img class="social-card-image" src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80" alt="CrossFit class in the group fitness studio" loading="lazy" width="600" height="180">
+<div class="social-card-body">
+<p class="social-card-caption">CrossFit night was 🔥 Thanks to everyone who showed up and pushed through. New PRs all around!</p>
+<div class="social-card-engagement"><span><i class="fas fa-heart" aria-hidden="true"></i>96 likes</span><span><i class="fas fa-comment" aria-hidden="true"></i>18 comments</span></div>
+</div>
+</article>
+<article class="social-card">
+<div class="social-card-header">
+<div class="social-card-avatar" aria-hidden="true">IC</div>
+<div class="social-card-meta"><strong>IC Fitness</strong><span>@ICFitness2 · 1w ago</span></div>
+<i class="fab fa-facebook social-card-platform" aria-hidden="true"></i>
+</div>
+<img class="social-card-image" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80" alt="Cardio zone with treadmills and bikes" loading="lazy" width="600" height="180">
+<div class="social-card-body">
+<p class="social-card-caption">24/7 access means your schedule never has to wait. Train on your time — we're always open for members.</p>
+<div class="social-card-engagement"><span><i class="fas fa-heart" aria-hidden="true"></i>74 likes</span><span><i class="fas fa-comment" aria-hidden="true"></i>11 comments</span></div>
+</div>
+</article>
 </div>
 <p style="margin-top:1rem;opacity:.7">Follow us <a href="https://www.facebook.com/ICFitness2" target="_blank" rel="noopener noreferrer">@ICFitness2 on Facebook</a></p>
 </div>
@@ -594,7 +638,7 @@ $$('#mobileMenu .nav-link').forEach(l=>l.addEventListener('click',()=>toggleMobi
 $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=$(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'})}}));
 const fadeObs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1,rootMargin:'0px 0px -50px 0px'});
 $$('.fade-in').forEach(el=>fadeObs.observe(el));
-const statsObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){$$('.stat-number').forEach(s=>{const t=+s.dataset.target,d=2000,sT=performance.now();const anim=now=>{const p=Math.min((now-sT)/d,1);s.textContent=Math.floor(t*(1-Math.pow(1-p,3)))+(t===24?'+':t>=500?'+':'');if(p<1)requestAnimationFrame(anim)};requestAnimationFrame(anim)});statsObs.disconnect()}})},{threshold:.5});
+const statsObs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){$$('.stat-number').forEach(s=>{if(s.dataset.format==='text')return;const t=+s.dataset.target,suffix=s.dataset.suffix||'',d=2000,sT=performance.now();const anim=now=>{const p=Math.min((now-sT)/d,1);const val=Math.floor(t*(1-Math.pow(1-p,3)));s.textContent=val+suffix;if(p<1)requestAnimationFrame(anim)};s.textContent='0'+suffix;requestAnimationFrame(anim)});statsObs.disconnect()}})},{threshold:.5});
 const sg=$('#statsGrid');if(sg)statsObs.observe(sg);
 $$('.tab').forEach(tab=>tab.addEventListener('click',function(){ $$('.tab').forEach(t=>t.classList.remove('active'));$$('.tab-content').forEach(c=>c.classList.remove('active'));this.classList.add('active');$('#'+this.dataset.tab).classList.add('active')}));
 const galleryImgs=[];$$('.gallery-item img').forEach((img,i)=>galleryImgs.push({src:img.src,alt:img.alt}));let lbIdx=0;

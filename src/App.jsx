@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { TierProvider } from './context/TierContext';
 import VoidlineConfigSidebar from './components/VoidlineConfigSidebar';
+import ModuleGateSync from './components/ModuleGateSync';
 import ClassSchedule from './components/ClassSchedule';
 import CheckoutModal from './components/CheckoutModal';
 import MemberPortal from './components/MemberPortal';
@@ -55,7 +56,7 @@ function TierDemoApp() {
 
     const onShopClick = (e) => {
       const btn = e.target.closest('.shop-btn');
-      if (!btn) return;
+      if (!btn || btn.classList.contains('module-locked')) return;
       e.preventDefault();
       e.stopPropagation();
       openCheckout(btn.dataset.item || 'Item', btn.dataset.price || '0', false, 'ecommerce');
@@ -66,7 +67,7 @@ function TierDemoApp() {
 
     const onClassReserveClick = (e) => {
       const btn = e.target.closest('.class-card .reserve-btn');
-      if (!btn) return;
+      if (!btn || btn.classList.contains('module-locked')) return;
       e.preventDefault();
       document.getElementById('react-schedule-mount')?.scrollIntoView({ behavior: 'smooth' });
     };
@@ -108,6 +109,7 @@ function TierDemoApp() {
 
   return (
     <>
+      <ModuleGateSync />
       {sidebarMount && createPortal(<VoidlineConfigSidebar />, sidebarMount)}
       {scheduleMount && createPortal(<ClassSchedule />, scheduleMount)}
       <CheckoutModal
