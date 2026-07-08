@@ -1,0 +1,396 @@
+/* Tier-gated demo feature styles */
+
+.feature-gate {
+  position: relative;
+}
+
+.feature-gate-content.feature-gate-blurred {
+  pointer-events: none;
+  user-select: none;
+  filter: blur(3px);
+  opacity: 0.45;
+}
+
+.feature-locked-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(18, 18, 18, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 8px;
+  z-index: 10;
+  min-height: 120px;
+}
+
+.feature-locked-card {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.feature-locked-card i {
+  font-size: 2rem;
+  color: var(--orange, #ff5733);
+  margin-bottom: 0.75rem;
+}
+
+.feature-locked-card h4 {
+  color: var(--neon, #39ff14);
+  font-size: 1.2rem;
+  margin-bottom: 0.35rem;
+}
+
+.feature-locked-card p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.feature-locked-hint {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  color: var(--neon, #39ff14);
+}
+
+/* Developer tier sidebar */
+.dev-tier-sidebar {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 220px;
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(57, 255, 20, 0.25);
+  border-right: none;
+  border-radius: 12px 0 0 12px;
+  padding: 1.25rem;
+  z-index: 10005;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
+}
+
+.dev-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.dev-sidebar-header i {
+  color: var(--neon, #39ff14);
+}
+
+.dev-sidebar-header h3 {
+  font-size: 1rem;
+  color: var(--neon, #39ff14);
+}
+
+.dev-sidebar-desc {
+  font-size: 0.72rem;
+  opacity: 0.65;
+  margin-bottom: 1rem;
+  line-height: 1.4;
+}
+
+.dev-tier-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.dev-tier-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 0.85rem;
+  background: var(--gray, #252525);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: var(--text, #e0e0e0);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.25s;
+}
+
+.dev-tier-btn:hover {
+  border-color: var(--tier-color, #39ff14);
+}
+
+.dev-tier-btn.active {
+  border-color: var(--tier-color, #39ff14);
+  background: rgba(57, 255, 20, 0.08);
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.15);
+}
+
+.dev-tier-name {
+  font-weight: 700;
+  font-family: 'Oswald', sans-serif;
+}
+
+.dev-tier-price {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.dev-feature-status h4 {
+  font-size: 0.8rem;
+  color: var(--neon, #39ff14);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dev-feature-status ul {
+  list-style: none;
+  font-size: 0.75rem;
+}
+
+.dev-feature-status li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0;
+  opacity: 0.5;
+}
+
+.dev-feature-status li.unlocked {
+  opacity: 1;
+  color: var(--neon, #39ff14);
+}
+
+.dev-feature-status li.locked i {
+  color: var(--orange, #ff5733);
+}
+
+/* Schedule reserve button states */
+.schedule-reserve-btn {
+  padding: 0.4rem 0.8rem !important;
+  font-size: 0.8rem !important;
+}
+
+.schedule-reserve-btn.reserved {
+  background: rgba(57, 255, 20, 0.3) !important;
+  color: var(--charcoal, #121212) !important;
+  border-color: var(--neon, #39ff14) !important;
+  cursor: default;
+  opacity: 0.9;
+}
+
+.seats-count {
+  font-size: 0.85rem;
+  color: var(--neon, #39ff14);
+  font-weight: 600;
+}
+
+/* Checkout modal states */
+.checkout-plan-summary {
+  margin-bottom: 1rem;
+}
+
+.checkout-card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.checkout-powered-by {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.checkout-loading {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.checkout-spinner {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.5rem;
+  border: 4px solid rgba(57, 255, 20, 0.15);
+  border-top-color: var(--neon, #39ff14);
+  border-radius: 50%;
+  animation: checkoutSpin 0.8s linear infinite;
+}
+
+@keyframes checkoutSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.checkout-loading h2 {
+  color: var(--neon, #39ff14);
+  margin-bottom: 0.5rem;
+}
+
+.checkout-success {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.checkout-success-icon {
+  font-size: 4rem;
+  color: var(--neon, #39ff14);
+  margin-bottom: 1rem;
+  animation: successPop 0.4s ease;
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.checkout-success h2 {
+  color: var(--neon, #39ff14);
+  margin-bottom: 0.75rem;
+}
+
+.checkout-success-detail {
+  margin: 1rem 0 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+/* Member dashboard */
+.demo-hint {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.dashboard-welcome {
+  margin-bottom: 1.25rem;
+}
+
+.dashboard-log-btn {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-perks h3 {
+  color: var(--neon, #39ff14);
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.blend-perk-gate .feature-locked-overlay {
+  min-height: 100px;
+  border-radius: 8px;
+}
+
+.blend-perk-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--gray, #252525);
+  border-radius: 8px;
+  border: 1px solid rgba(57, 255, 20, 0.2);
+}
+
+.blend-perk-info h4 {
+  color: var(--orange, #ff5733);
+  margin-bottom: 0.35rem;
+  font-size: 1rem;
+}
+
+.blend-perk-info p {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+}
+
+.blend-perk-code {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  background: rgba(57, 255, 20, 0.1);
+  border: 1px solid var(--neon, #39ff14);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--neon, #39ff14);
+  letter-spacing: 1px;
+}
+
+.blend-qr-code {
+  width: 90px;
+  height: 90px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dashboard-signout {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.react-modal.active {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .dev-tier-sidebar {
+    top: auto;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    border-right: 1px solid rgba(57, 255, 20, 0.25);
+    border-bottom: none;
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+
+  .dev-tier-buttons {
+    flex-direction: row;
+  }
+
+  .dev-tier-btn {
+    flex: 1;
+    flex-direction: column;
+    gap: 0.15rem;
+    text-align: center;
+  }
+
+  .blend-perk-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkout-spinner {
+    animation-duration: 1.5s;
+  }
+
+  .checkout-success-icon {
+    animation: none;
+  }
+}
