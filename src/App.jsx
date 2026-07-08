@@ -1,21 +1,27 @@
 import { useState, useEffect, useCallback } from 'react';
 import { TierProvider } from './context/TierContext';
-import DevTierSidebar from './components/DevTierSidebar';
+import VoidlineConfigSidebar from './components/VoidlineConfigSidebar';
 import ClassSchedule from './components/ClassSchedule';
 import CheckoutModal from './components/CheckoutModal';
 import MemberPortal from './components/MemberPortal';
 import { createPortal } from 'react-dom';
 
 function TierDemoApp() {
-  const [checkout, setCheckout] = useState({ open: false, plan: '', price: '', recurring: true });
+  const [checkout, setCheckout] = useState({
+    open: false,
+    plan: '',
+    price: '',
+    recurring: true,
+    module: 'baseSite',
+  });
   const [portalOpen, setPortalOpen] = useState(false);
 
-  const openCheckout = useCallback((plan, price, recurring = true) => {
-    setCheckout({ open: true, plan, price, recurring });
+  const openCheckout = useCallback((plan, price, recurring = true, module = 'baseSite') => {
+    setCheckout({ open: true, plan, price, recurring, module });
   }, []);
 
   const closeCheckout = useCallback(() => {
-    setCheckout({ open: false, plan: '', price: '', recurring: true });
+    setCheckout({ open: false, plan: '', price: '', recurring: true, module: 'baseSite' });
   }, []);
 
   const openPortal = useCallback(() => setPortalOpen(true), []);
@@ -44,7 +50,7 @@ function TierDemoApp() {
       if (!btn) return;
       e.preventDefault();
       e.stopPropagation();
-      openCheckout(btn.dataset.plan || 'Membership', btn.dataset.price || '0', true);
+      openCheckout(btn.dataset.plan || 'Membership', btn.dataset.price || '0', true, 'baseSite');
     };
 
     const onShopClick = (e) => {
@@ -52,7 +58,7 @@ function TierDemoApp() {
       if (!btn) return;
       e.preventDefault();
       e.stopPropagation();
-      openCheckout(btn.dataset.item || 'Item', btn.dataset.price || '0', false);
+      openCheckout(btn.dataset.item || 'Item', btn.dataset.price || '0', false, 'ecommerce');
     };
 
     document.addEventListener('click', onJoinClick);
@@ -102,13 +108,14 @@ function TierDemoApp() {
 
   return (
     <>
-      {sidebarMount && createPortal(<DevTierSidebar />, sidebarMount)}
+      {sidebarMount && createPortal(<VoidlineConfigSidebar />, sidebarMount)}
       {scheduleMount && createPortal(<ClassSchedule />, scheduleMount)}
       <CheckoutModal
         isOpen={checkout.open}
         plan={checkout.plan}
         price={checkout.price}
         recurring={checkout.recurring}
+        requiredModule={checkout.module}
         onClose={closeCheckout}
       />
       <MemberPortal isOpen={portalOpen} onClose={closePortal} />

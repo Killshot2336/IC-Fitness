@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import FeatureGate from './FeatureGate';
-import { FEATURE_REQUIREMENTS } from '../tierConfig';
+import { FEATURE_MODULES } from '../platformConfig';
 
 /** Mock QR code SVG for Blend & Believe elite perk */
 function BlendQRCode() {
@@ -83,7 +83,7 @@ export default function MemberPortal({ isOpen, onClose }) {
           &times;
         </button>
 
-        <FeatureGate requiredTier={FEATURE_REQUIREMENTS.memberPortal}>
+        <FeatureGate requiredModule={FEATURE_MODULES.memberPortal}>
           {view === 'login' ? (
             <>
               <h2 id="portalTitle">Member Login</h2>
@@ -142,7 +142,7 @@ export default function MemberPortal({ isOpen, onClose }) {
 
               <div className="dashboard-perks">
                 <h3>Member Perks</h3>
-                <FeatureGate requiredTier={FEATURE_REQUIREMENTS.blendPerk} className="blend-perk-gate">
+                <FeatureGate requiredModule={FEATURE_MODULES.blendPerk} className="blend-perk-gate">
                   <div className="blend-perk-card">
                     <div className="blend-perk-info">
                       <h4>

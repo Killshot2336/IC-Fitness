@@ -1,17 +1,31 @@
-import { createContext, useContext, useState, useCallback } from 'react';
-import { tierMeetsRequirement } from '../tierConfig';
+import { createContext, useContext, useState, useCallback, useMemo } from 'react';
+import {
+  getDefaultModules,
+  calculateInvestment,
+  PLATFORM_MODULES,
+} from '../platformConfig';
 
-const TierContext = createContext(null);
+const PlatformContext = createContext(null);
 
 export function TierProvider({ children }) {
-  const [selectedTier, setSelectedTier] = useState('basic');
+  const [modules, setModules] = useState(getDefaultModules);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [memberName, setMemberName] = useState('');
 
-  const isFeatureUnlocked = useCallback(
-    (featureKey) => tierMeetsRequirement(selectedTier, featureKey),
-    [selectedTier]
+  const isModuleEnabled = useCallback(
+    (moduleId) => Boolean(modules[moduleId]),
+    [modules]
   );
+
+  /** @deprecated use isModuleEnabled — kept for FeatureGate compatibility */
+  const isFeatureUnlocked = isModuleEnabled;
+
+  const toggleModule = useCallback((moduleId) => {
+    if (PLATFORM_MODULES[moduleId]?.required) return;
+    setModules((prev) => ({ ...prev, [moduleId]: !prev[moduleId] }));
+  }, []);
+
+  const investment = useMemo(() => calculateInvestment(modules), [modules]);
 
   const login = useCallback((name) => {
     setMemberName(name || 'Member');
@@ -24,11 +38,14 @@ export function TierProvider({ children }) {
   }, []);
 
   return (
-    <TierContext.Provider
+    <PlatformContext.Provider
       value={{
-        selectedTier,
-        setSelectedTier,
+        modules,
+        setModules,
+        toggleModule,
+        isModuleEnabled,
         isFeatureUnlocked,
+        investment,
         isLoggedIn,
         memberName,
         login,
@@ -36,12 +53,12 @@ export function TierProvider({ children }) {
       }}
     >
       {children}
-    </TierContext.Provider>
+    </PlatformContext.Provider>
   );
 }
 
 export function useTier() {
-  const ctx = useContext(TierContext);
+  const ctx = useContext(PlatformContext);
   if (!ctx) throw new Error('useTier must be used within TierProvider');
   return ctx;
 }

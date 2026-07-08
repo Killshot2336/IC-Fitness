@@ -14,6 +14,6 @@ test('file:// protocol loads React demo (IIFE bundle)', async ({ page }) => {
   await page.goto(fileUrl);
   await page.waitForTimeout(3000);
 
-  await expect(page.locator('.dev-tier-sidebar')).toBeVisible();
+  await expect(page.locator('.voidline-config-sidebar')).toBeVisible();
   expect(errors).toEqual([]);
 });

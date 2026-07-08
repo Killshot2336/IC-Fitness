@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import FeatureGate from './FeatureGate';
-import { FEATURE_REQUIREMENTS } from '../tierConfig';
+import { FEATURE_MODULES } from '../platformConfig';
 
 const INITIAL_CLASSES = [
   { id: 'mon-6-hiit', day: 'Monday', dayKey: 'mon', time: '6:00 AM', name: 'HIIT Blast', instructor: 'Marcus T.', level: 'Advanced', levelClass: 'diff-hard', seats: 15, reserved: false },
@@ -42,7 +42,7 @@ export default function ClassSchedule() {
     dayFilter === 'all' ? classes : classes.filter((c) => c.dayKey === dayFilter);
 
   return (
-    <FeatureGate requiredTier={FEATURE_REQUIREMENTS.classSchedule}>
+    <FeatureGate requiredModule={FEATURE_MODULES.classSchedule}>
       <div className="fade-in visible">
         <h3 className="section-title" style={{ fontSize: '2rem' }}>
           Class Schedule

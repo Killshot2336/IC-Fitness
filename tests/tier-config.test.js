@@ -1,21 +1,34 @@
 import { describe, it, expect } from 'vitest';
-import { tierMeetsRequirement, FEATURE_REQUIREMENTS } from '../src/tierConfig.js';
+import {
+  getDefaultModules,
+  calculateInvestment,
+  formatCurrency,
+  PLATFORM_MODULES,
+} from '../src/platformConfig.js';
 
-describe('tierMeetsRequirement', () => {
-  it('Basic unlocks checkout only', () => {
-    expect(tierMeetsRequirement('basic', FEATURE_REQUIREMENTS.checkout)).toBe(true);
-    expect(tierMeetsRequirement('basic', FEATURE_REQUIREMENTS.classSchedule)).toBe(false);
-    expect(tierMeetsRequirement('basic', FEATURE_REQUIREMENTS.memberPortal)).toBe(false);
-    expect(tierMeetsRequirement('basic', FEATURE_REQUIREMENTS.blendPerk)).toBe(false);
+describe('platformConfig', () => {
+  it('defaults baseSite on and optional modules off', () => {
+    const modules = getDefaultModules();
+    expect(modules.baseSite).toBe(true);
+    expect(modules.scheduling).toBe(false);
+    expect(modules.ecommerce).toBe(false);
+    expect(modules.memberPortal).toBe(false);
   });
 
-  it('Premium unlocks schedule and portal', () => {
-    expect(tierMeetsRequirement('premium', FEATURE_REQUIREMENTS.classSchedule)).toBe(true);
-    expect(tierMeetsRequirement('premium', FEATURE_REQUIREMENTS.memberPortal)).toBe(true);
-    expect(tierMeetsRequirement('premium', FEATURE_REQUIREMENTS.blendPerk)).toBe(false);
+  it('calculates total and 50% deposit', () => {
+    const { total, deposit } = calculateInvestment(getDefaultModules());
+    expect(total).toBe(1000);
+    expect(deposit).toBe(500);
+    expect(formatCurrency(total)).toBe('$1,000');
+    expect(formatCurrency(deposit)).toBe('$500');
   });
 
-  it('Elite unlocks all features', () => {
-    expect(tierMeetsRequirement('elite', FEATURE_REQUIREMENTS.blendPerk)).toBe(true);
+  it('sums all modules when enabled', () => {
+    const allOn = Object.fromEntries(
+      Object.keys(PLATFORM_MODULES).map((key) => [key, true])
+    );
+    const { total, deposit } = calculateInvestment(allOn);
+    expect(total).toBe(5000);
+    expect(deposit).toBe(2500);
   });
 });

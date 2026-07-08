@@ -1,10 +1,16 @@
 import { useState, useEffect } from 'react';
 import FeatureGate from './FeatureGate';
-import { FEATURE_REQUIREMENTS } from '../tierConfig';
 
 const LOADING_MS = 1500;
 
-export default function CheckoutModal({ isOpen, plan, price, recurring = true, onClose }) {
+export default function CheckoutModal({
+  isOpen,
+  plan,
+  price,
+  recurring = true,
+  requiredModule = 'baseSite',
+  onClose,
+}) {
   const [step, setStep] = useState('form'); // form | loading | success
   const [form, setForm] = useState({ name: '', email: '', card: '', expiry: '', cvc: '' });
 
@@ -60,7 +66,7 @@ export default function CheckoutModal({ isOpen, plan, price, recurring = true, o
           &times;
         </button>
 
-        <FeatureGate requiredTier={FEATURE_REQUIREMENTS.checkout}>
+        <FeatureGate requiredModule={requiredModule}>
           {step === 'form' && (
             <>
               <h2 id="paymentTitle">Complete Purchase</h2>

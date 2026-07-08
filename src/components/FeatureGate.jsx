@@ -1,13 +1,13 @@
 import { useTier } from '../context/TierContext';
-import { getRequiredTierLabel } from '../tierConfig';
+import { getModuleLabel } from '../platformConfig';
 
 /**
  * Wraps demo features with a glassmorphism "Feature Locked" overlay
- * when the developer sidebar tier doesn't meet the requirement.
+ * when the matching Voidline platform module is not enabled.
  */
-export default function FeatureGate({ feature, requiredTier, children, className = '' }) {
-  const { isFeatureUnlocked } = useTier();
-  const unlocked = isFeatureUnlocked(requiredTier);
+export default function FeatureGate({ requiredModule, children, className = '' }) {
+  const { isModuleEnabled } = useTier();
+  const unlocked = isModuleEnabled(requiredModule);
 
   return (
     <div className={`feature-gate ${className}`} data-unlocked={unlocked}>
@@ -20,9 +20,9 @@ export default function FeatureGate({ feature, requiredTier, children, className
             <i className="fas fa-lock" aria-hidden="true" />
             <h4>Feature Locked</h4>
             <p>
-              Requires <strong>{getRequiredTierLabel(requiredTier)}</strong> tier
+              Enable <strong>{getModuleLabel(requiredModule)}</strong> in the Voidline portal
             </p>
-            <span className="feature-locked-hint">Select tier in Dev Sidebar →</span>
+            <span className="feature-locked-hint">Toggle module in sidebar →</span>
           </div>
         </div>
       )}
