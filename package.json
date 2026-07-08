@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/build-deploy.mjs",
     "test:e2e": "playwright test tests/tier-demo.spec.js",
     "test:unit": "vitest run",
     "preview": "vite preview"
