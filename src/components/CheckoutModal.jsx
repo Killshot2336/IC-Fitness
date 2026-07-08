@@ -4,7 +4,7 @@ import { FEATURE_REQUIREMENTS } from '../tierConfig';
 
 const LOADING_MS = 1500;
 
-export default function CheckoutModal({ isOpen, plan, price, onClose }) {
+export default function CheckoutModal({ isOpen, plan, price, recurring = true, onClose }) {
   const [step, setStep] = useState('form'); // form | loading | success
   const [form, setForm] = useState({ name: '', email: '', card: '', expiry: '', cvc: '' });
 
@@ -12,7 +12,13 @@ export default function CheckoutModal({ isOpen, plan, price, onClose }) {
     if (!isOpen) {
       setStep('form');
       setForm({ name: '', email: '', card: '', expiry: '', cvc: '' });
+      return;
     }
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [isOpen]);
 
   const resetAndClose = () => {
@@ -60,7 +66,7 @@ export default function CheckoutModal({ isOpen, plan, price, onClose }) {
               <h2 id="paymentTitle">Complete Purchase</h2>
               <p className="checkout-plan-summary">
                 Plan: <strong>{plan}</strong> — $<strong>{price}</strong>
-                {price < 100 ? '/mo' : ''}
+                {recurring ? '/mo' : ''}
               </p>
               <form onSubmit={handleSubmit}>
                 <div className="form-group">

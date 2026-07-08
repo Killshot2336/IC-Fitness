@@ -45,7 +45,13 @@ export default function MemberPortal({ isOpen, onClose }) {
     if (!isOpen) {
       setView('login');
       setLoginInput('');
+      return;
     }
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = prev;
+    };
   }, [isOpen]);
 
   const handleLogin = (e) => {

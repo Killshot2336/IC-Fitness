@@ -7,19 +7,29 @@ import MemberPortal from './components/MemberPortal';
 import { createPortal } from 'react-dom';
 
 function TierDemoApp() {
-  const [checkout, setCheckout] = useState({ open: false, plan: '', price: '' });
+  const [checkout, setCheckout] = useState({ open: false, plan: '', price: '', recurring: true });
   const [portalOpen, setPortalOpen] = useState(false);
 
-  const openCheckout = useCallback((plan, price) => {
-    setCheckout({ open: true, plan, price });
+  const openCheckout = useCallback((plan, price, recurring = true) => {
+    setCheckout({ open: true, plan, price, recurring });
   }, []);
 
   const closeCheckout = useCallback(() => {
-    setCheckout({ open: false, plan: '', price: '' });
+    setCheckout({ open: false, plan: '', price: '', recurring: true });
   }, []);
 
   const openPortal = useCallback(() => setPortalOpen(true), []);
   const closePortal = useCallback(() => setPortalOpen(false), []);
+
+  useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key !== 'Escape') return;
+      if (checkout.open) closeCheckout();
+      if (portalOpen) closePortal();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [checkout.open, portalOpen, closeCheckout, closePortal]);
 
   useEffect(() => {
     window.ICFitnessDemo = { openCheckout, openPortal };
@@ -34,7 +44,7 @@ function TierDemoApp() {
       if (!btn) return;
       e.preventDefault();
       e.stopPropagation();
-      openCheckout(btn.dataset.plan || 'Membership', btn.dataset.price || '0');
+      openCheckout(btn.dataset.plan || 'Membership', btn.dataset.price || '0', true);
     };
 
     const onShopClick = (e) => {
@@ -42,14 +52,24 @@ function TierDemoApp() {
       if (!btn) return;
       e.preventDefault();
       e.stopPropagation();
-      openCheckout(btn.dataset.item || 'Item', btn.dataset.price || '0');
+      openCheckout(btn.dataset.item || 'Item', btn.dataset.price || '0', false);
     };
 
     document.addEventListener('click', onJoinClick);
     document.addEventListener('click', onShopClick);
+
+    const onClassReserveClick = (e) => {
+      const btn = e.target.closest('.class-card .reserve-btn');
+      if (!btn) return;
+      e.preventDefault();
+      document.getElementById('react-schedule-mount')?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    document.addEventListener('click', onClassReserveClick);
     return () => {
       document.removeEventListener('click', onJoinClick);
       document.removeEventListener('click', onShopClick);
+      document.removeEventListener('click', onClassReserveClick);
     };
   }, [openCheckout]);
 
@@ -88,6 +108,7 @@ function TierDemoApp() {
         isOpen={checkout.open}
         plan={checkout.plan}
         price={checkout.price}
+        recurring={checkout.recurring}
         onClose={closeCheckout}
       />
       <MemberPortal isOpen={portalOpen} onClose={closePortal} />

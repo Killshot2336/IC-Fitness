@@ -573,7 +573,7 @@ const openModal=id=>{$(id).classList.add('active');document.body.style.overflow=
 const closeModal=el=>{el.classList.remove('active');if(!$$('.modal-overlay.active').length)document.body.style.overflow=''};
 $$('[data-close]').forEach(b=>b.addEventListener('click',()=>closeModal(b.closest('.modal-overlay'))));
 $$('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)closeModal(o)}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')$$('.modal-overlay.active').forEach(closeModal);if($('#lightbox').classList.contains('active')){if(e.key==='ArrowLeft')navLightbox(-1);if(e.key==='ArrowRight')navLightbox(1);if(e.key==='Escape')closeLightbox()}});
+document.addEventListener('keydown',e=>{if($('#lightbox').classList.contains('active')){if(e.key==='ArrowLeft')navLightbox(-1);if(e.key==='ArrowRight')navLightbox(1);if(e.key==='Escape')closeLightbox();return}if(e.key==='Escape')$$('.modal-overlay.active').forEach(el=>{if(!el.classList.contains('react-modal'))closeModal(el)})});
 window.addEventListener('load',()=>setTimeout(()=>$('#loader').classList.add('hidden'),1500));
 const nav=$('#navbar');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',scrollY>50);const sections=$$('section[id]');let cur='';sections.forEach(s=>{if(scrollY>=s.offsetTop-100)cur=s.id});$$('.nav-link').forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+cur)})});

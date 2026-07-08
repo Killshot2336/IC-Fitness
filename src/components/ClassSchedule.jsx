@@ -43,7 +43,7 @@ export default function ClassSchedule() {
 
   return (
     <FeatureGate requiredTier={FEATURE_REQUIREMENTS.classSchedule}>
-      <div className="schedule-section fade-in visible">
+      <div className="fade-in visible">
         <h3 className="section-title" style={{ fontSize: '2rem' }}>
           Class Schedule
         </h3>
