@@ -3,15 +3,14 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { Section, SectionHeader } from '@/components/layout/Section';
 import { GymImage } from '@/components/ui/GymImage';
 import { FadeIn } from '@/components/motion';
-import { MembershipFlipCard } from '@/components/memberships/MembershipFlipCard';
-import { MembershipJoinModal } from '@/components/memberships/MembershipJoinModal';
+import { MembershipHoverCard } from '@/components/memberships/MembershipHoverCard';
 import { MEMBERSHIP_TIERS, MEMBERSHIP_FAQ, VISITOR_PASSES } from '@/lib/data/memberships';
 import { formatCurrency } from '@/lib/utils';
 import { IMAGES } from '@/lib/images';
-import { useMemberAuth } from '@/context/MemberAuthContext';
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
@@ -30,35 +29,6 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 export default function MembershipsPage() {
   const [annual, setAnnual] = useState(false);
-  const [loading, setLoading] = useState<string | null>(null);
-  const [joinModal, setJoinModal] = useState<{ tierId: string; tierName: string; price: string } | null>(null);
-  const { login } = useMemberAuth();
-
-  const openJoin = (tierId: string, tierName: string) => {
-    const tier = MEMBERSHIP_TIERS.find((t) => t.id === tierId)!;
-    const price = formatCurrency(annual ? tier.annualPrice : tier.monthlyPrice) + (annual ? '/yr' : '/mo');
-    setJoinModal({ tierId, tierName, price });
-  };
-
-  const handleJoinSubmit = async (data: { name: string; email: string; membershipNumber: string }) => {
-    if (!joinModal) return;
-    const memberNum = data.membershipNumber || `IC-${Date.now().toString().slice(-5)}`;
-    login(data.email, memberNum, data.name);
-    setJoinModal(null);
-    setLoading(joinModal.tierId);
-    try {
-      const res = await fetch('/api/stripe/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tierId: joinModal.tierId, annual }),
-      });
-      const result = await res.json();
-      if (result.url) window.location.href = result.url;
-      else alert('Checkout is in demo mode. Your membership signup was recorded — welcome to the IC Family!');
-    } finally {
-      setLoading(null);
-    }
-  };
 
   return (
     <>
@@ -68,13 +38,18 @@ export default function MembershipsPage() {
         <div className="relative z-10 flex h-full items-center">
           <div className="mx-auto w-full max-w-7xl px-4">
             <h1 className="font-display text-5xl font-black text-white">Memberships</h1>
-            <p className="mt-2 text-lg text-white/70">24/7 access at 2716 South Park Drive. No corporate nonsense — just results.</p>
+            <p className="mt-2 text-lg text-white/70">
+              Explore plans and pricing. Visit us at 2716 South Park Drive to get started.
+            </p>
           </div>
         </div>
       </section>
 
-      <Section>
-        <SectionHeader title="Choose Your Plan" subtitle="All plans include 24/7 key fob access. Hover a card to flip and see features." />
+      <Section id="plans">
+        <SectionHeader
+          title="Choose Your Plan"
+          subtitle="Hover any card to reveal features. This page is an informational preview of IC Fitness memberships."
+        />
 
         <FadeIn className="mb-10 flex justify-center">
           <div className="inline-flex rounded-xl border border-surface-border bg-surface p-1">
@@ -86,19 +61,21 @@ export default function MembershipsPage() {
         <div className="grid gap-8 lg:grid-cols-3">
           {MEMBERSHIP_TIERS.map((tier, i) => (
             <FadeIn key={tier.id} delay={i * 0.1}>
-              <MembershipFlipCard
-                tier={tier}
-                annual={annual}
-                onJoin={() => openJoin(tier.id, tier.name)}
-                loading={loading === tier.id}
-              />
+              <MembershipHoverCard tier={tier} annual={annual} />
             </FadeIn>
           ))}
         </div>
+
+        <FadeIn className="mt-12 text-center">
+          <p className="text-sm text-white/50">Ready to talk memberships? Call 580-743-7955 or visit in person.</p>
+          <Link href="/contact" className="mt-4 inline-flex rounded-xl border border-accent px-8 py-3 font-semibold text-accent transition-colors hover:bg-accent-muted">
+            Learn More
+          </Link>
+        </FadeIn>
       </Section>
 
       <Section dark>
-        <SectionHeader title="Visitor Passes" subtitle="Visiting Broken Bow? Drop in at South Park Drive." />
+        <SectionHeader title="Visitor Passes" subtitle="Perfect for travelers and weekend warriors." />
         <div className="grid gap-6 sm:grid-cols-3">
           {VISITOR_PASSES.map((pass) => (
             <FadeIn key={pass.id}>
@@ -112,7 +89,7 @@ export default function MembershipsPage() {
         </div>
       </Section>
 
-      <Section dark>
+      <Section dark id="faq">
         <SectionHeader title="Frequently Asked Questions" />
         <div className="mx-auto max-w-3xl">
           {MEMBERSHIP_FAQ.map((item) => (
@@ -120,16 +97,6 @@ export default function MembershipsPage() {
           ))}
         </div>
       </Section>
-
-      {joinModal ? (
-        <MembershipJoinModal
-          isOpen
-          tierName={joinModal.tierName}
-          price={joinModal.price}
-          onClose={() => setJoinModal(null)}
-          onSubmit={handleJoinSubmit}
-        />
-      ) : null}
     </>
   );
 }

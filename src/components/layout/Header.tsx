@@ -61,7 +61,7 @@ export function Header() {
             Member Portal
           </Link>
           <Link href="/memberships">
-            <Button size="sm">Start Free Trial</Button>
+            <Button size="sm">View Plans</Button>
           </Link>
         </div>
 
@@ -102,7 +102,7 @@ export function Header() {
                   Member Portal
                 </Link>
                 <Link href="/memberships" onClick={() => setMobileOpen(false)}>
-                  <Button className="w-full">Start Free Trial</Button>
+                  <Button className="w-full">View Plans</Button>
                 </Link>
               </div>
             </nav>

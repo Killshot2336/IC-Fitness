@@ -56,7 +56,7 @@ export function FacilitiesPreview() {
 
       <FadeIn className="mt-12 text-center">
         <Link href="/facilities" className="inline-flex items-center gap-2 font-semibold text-accent transition-colors hover:text-accent-hover">
-          Take the Virtual Tour <ArrowRight size={18} />
+          View Our Facilities <ArrowRight size={18} />
         </Link>
       </FadeIn>
     </Section>

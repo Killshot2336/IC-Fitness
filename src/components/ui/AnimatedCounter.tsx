@@ -1,18 +1,25 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import CountUp from 'react-countup';
 
 interface AnimatedCounterProps {
   value: number;
   suffix?: string;
   duration?: number;
   className?: string;
+  decimals?: number;
 }
 
-export function AnimatedCounter({ value, suffix = '', duration = 2000, className }: AnimatedCounterProps) {
-  const [count, setCount] = useState(0);
+export function AnimatedCounter({
+  value,
+  suffix = '',
+  duration = 2,
+  className,
+  decimals = 0,
+}: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const hasAnimated = useRef(false);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -20,28 +27,25 @@ export function AnimatedCounter({ value, suffix = '', duration = 2000, className
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          const start = performance.now();
-          const animate = (now: number) => {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(value * eased));
-            if (progress < 1) requestAnimationFrame(animate);
-          };
-          requestAnimationFrame(animate);
+        if (entry.isIntersecting) {
+          setInView(true);
+          observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, duration]);
+  }, []);
 
   return (
     <span ref={ref} className={className}>
-      {count}
+      {inView ? (
+        <CountUp end={value} duration={duration} decimals={decimals} useEasing enableScrollSpy={false} />
+      ) : (
+        '0'
+      )}
       {suffix}
     </span>
   );

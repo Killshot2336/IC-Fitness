@@ -35,9 +35,7 @@ export function SocialProofSection() {
         <FadeIn delay={0.2} className="rounded-2xl border border-surface-border bg-surface p-8 text-center">
           <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center">
             <Facebook className="mb-2 text-accent transition-transform group-hover:scale-110" size={32} />
-            <p className="font-display text-4xl font-bold text-accent">
-              <AnimatedCounter value={1200} suffix="+" />
-            </p>
+            <p className="font-display text-4xl font-bold text-accent">{SITE.facebookFollowers}</p>
             <p className="mt-2 text-sm text-white/60">Facebook Followers</p>
           </a>
         </FadeIn>

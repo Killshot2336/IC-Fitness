@@ -10,7 +10,7 @@ import { IMAGES } from '@/lib/images';
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Meet the IC Fitness team in Broken Bow, OK. Locally owned, 4 years strong, 560+ members.',
+  description: 'Meet the IC Fitness team in Broken Bow, OK. Locally owned, 11 years strong, 1,494+ members.',
 };
 
 export default function AboutPage() {
@@ -22,7 +22,7 @@ export default function AboutPage() {
         <div className="relative z-10 flex h-full items-end pb-16">
           <div className="mx-auto w-full max-w-7xl px-4">
             <h1 className="font-display text-5xl font-black text-white">Our Story</h1>
-            <p className="mt-2 text-lg text-white/70">4 Years Strong in Broken Bow</p>
+            <p className="mt-2 text-lg text-white/70">11 Years Strong in Broken Bow</p>
           </div>
         </div>
       </section>
@@ -33,7 +33,7 @@ export default function AboutPage() {
             <p className="text-lg leading-relaxed text-white/75">
               IC Fitness opened April 3rd, 2023 at <strong className="text-white">{SITE.address.street}</strong> when{' '}
               {SITE.owner} turned a lifelong dream into Broken Bow&apos;s only true 24/7 gym. What started with community
-              support and an SBA loan has grown into a <strong className="text-white">560+ member</strong> family —
+              support and an SBA loan has grown into a <strong className="text-white">1,494+ member</strong> family —
               traditional gym, box gym, and fitness studio all under one roof.
             </p>
             <p className="mt-6 text-lg leading-relaxed text-white/75">

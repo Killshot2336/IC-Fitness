@@ -24,6 +24,7 @@
     "next-sanity": "^9.8.57",
     "next-seo": "^6.6.0",
     "react": "^18.3.1",
+    "react-countup": "^6.5.3",
     "react-dom": "^18.3.1",
     "resend": "^4.1.2",
     "stripe": "^17.7.0",

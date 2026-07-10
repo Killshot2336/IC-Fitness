@@ -31,7 +31,11 @@ export function MemberLoginSection() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    login(email, membershipNumber, name || 'Member');
+    login(
+      email.trim() || 'member@icfitness.com',
+      membershipNumber.trim() || 'IC-DEMO',
+      name.trim() || 'IC Member'
+    );
     router.push('/dashboard');
   };
 
@@ -40,17 +44,16 @@ export function MemberLoginSection() {
       <p className="text-sm font-semibold uppercase tracking-wider text-accent">Member Portal</p>
       <h3 className="mt-2 font-display text-2xl font-bold text-white">Member Sign In</h3>
       <p className="mt-2 text-sm text-white/60">
-        Access your bookings, check-in history, and account details.
+        Demo login — enter any details to access your dashboard preview.
       </p>
       <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-        <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your name" />
-        <Input label="Email" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input label="Name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Any name" />
+        <Input label="Email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="any@email.com" />
         <Input
           label="Membership Number"
-          required
           value={membershipNumber}
           onChange={(e) => setMembershipNumber(e.target.value)}
-          placeholder="e.g. IC-12345"
+          placeholder="Any number (demo)"
         />
         <Button type="submit" className="w-full">Sign In to Dashboard</Button>
       </form>

@@ -57,10 +57,10 @@ export function HeroSection() {
           className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <Link href="/memberships">
-            <Button size="lg">Start Free Trial</Button>
+            <Button size="lg">View Plans</Button>
           </Link>
           <Link href="/memberships">
-            <Button variant="secondary" size="lg">View Memberships</Button>
+            <Button variant="secondary" size="lg">Learn More</Button>
           </Link>
         </motion.div>
       </div>
