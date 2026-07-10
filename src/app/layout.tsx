@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Providers } from '@/components/providers/Providers';
+import { MemberAuthProvider } from '@/context/MemberAuthContext';
 import { healthClubJsonLd } from '@/lib/seo-jsonld';
 
 const inter = Inter({
@@ -59,9 +60,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body className="font-sans">
         <Providers>
-          <Header />
-          <main className="min-h-screen pt-20">{children}</main>
-          <Footer />
+          <MemberAuthProvider>
+            <Header />
+            <main className="min-h-screen pt-20">{children}</main>
+            <Footer />
+          </MemberAuthProvider>
         </Providers>
       </body>
     </html>

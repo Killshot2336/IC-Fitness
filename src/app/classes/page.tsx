@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { Section, SectionHeader } from '@/components/layout/Section';
 import { Badge, Button } from '@/components/ui';
+import { GymImage } from '@/components/ui/GymImage';
 import { FadeIn } from '@/components/motion';
-import { CLASSES, CLASS_SESSIONS, TRAINERS, DAY_NAMES } from '@/lib/data/classes';
+import { ClassBookingModal } from '@/components/classes/ClassBookingModal';
+import { CLASSES, CLASS_SESSIONS, TRAINERS, DAY_NAMES, DAY_NAMES_FULL } from '@/lib/data/classes';
+import { useMemberAuth } from '@/context/MemberAuthContext';
+import { IMAGES } from '@/lib/images';
 
 const INTENSITY_VARIANT = {
   beginner: 'accent' as const,
@@ -14,157 +16,135 @@ const INTENSITY_VARIANT = {
   advanced: 'default' as const,
 };
 
+type BookingTarget = {
+  sessionId: string;
+  className: string;
+  day: string;
+  time: string;
+  instructor: string;
+};
+
 export default function ClassesPage() {
-  const [dayFilter, setDayFilter] = useState<number | 'all'>('all');
-  const [intensityFilter, setIntensityFilter] = useState<string>('all');
+  const [selectedDay, setSelectedDay] = useState(new Date().getDay());
+  const [bookingTarget, setBookingTarget] = useState<BookingTarget | null>(null);
+  const { addBooking } = useMemberAuth();
 
-  const filteredSessions =
-    dayFilter === 'all'
-      ? CLASS_SESSIONS
-      : CLASS_SESSIONS.filter((s) => s.dayOfWeek === dayFilter);
+  const daySessions = CLASS_SESSIONS.filter((s) => s.dayOfWeek === selectedDay);
 
-  const filteredClasses =
-    intensityFilter === 'all'
-      ? CLASSES
-      : CLASSES.filter((c) => c.intensity === intensityFilter);
-
-  const bookClass = async (sessionId: string) => {
-    const res = await fetch('/api/classes/book', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId }),
+  const handleBook = (data: { name: string; email: string; membershipNumber: string }) => {
+    if (!bookingTarget) return;
+    addBooking({
+      className: bookingTarget.className,
+      day: bookingTarget.day,
+      time: bookingTarget.time,
+      instructor: bookingTarget.instructor,
     });
-    const data = await res.json();
-    if (data.success) alert('Class booked successfully!');
-    else alert(data.error ?? 'Please sign in to book classes.');
   };
 
   return (
     <>
       <section className="relative h-[50vh] min-h-[400px]">
-        <Image
-          src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1920&q=80"
-          alt="Group fitness class"
-          fill
-          className="object-cover"
-          priority
-        />
+        <GymImage src={IMAGES.classes} fallback={IMAGES.classes} alt="IC Fitness class in session" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-hero-overlay" />
         <div className="relative z-10 flex h-full items-end pb-16">
           <div className="mx-auto w-full max-w-7xl px-4">
             <h1 className="font-display text-5xl font-black text-white">Classes</h1>
-            <p className="mt-2 text-lg text-white/70">From CrossFit to yoga — find your perfect class.</p>
+            <p className="mt-2 text-lg text-white/70">CrossFit, HIIT, and strength — coached by our Broken Bow team.</p>
           </div>
         </div>
       </section>
 
       <Section>
-        <SectionHeader title="Weekly Schedule" subtitle="Click a class to register. Premium members get priority booking." />
-        <div className="mb-6 flex flex-wrap gap-2">
-          <Button size="sm" variant={dayFilter === 'all' ? 'primary' : 'outline'} onClick={() => setDayFilter('all')}>
-            All Days
-          </Button>
+        <SectionHeader title="Weekly Schedule" subtitle="Select a day, then book your spot. Premium members get priority." />
+
+        <div className="mb-8 grid grid-cols-7 gap-2">
           {DAY_NAMES.map((day, i) => (
-            <Button
+            <button
               key={day}
-              size="sm"
-              variant={dayFilter === i ? 'primary' : 'outline'}
-              onClick={() => setDayFilter(i)}
+              type="button"
+              onClick={() => setSelectedDay(i)}
+              className={`rounded-xl border py-3 text-center text-sm font-semibold transition-colors ${
+                selectedDay === i ? 'border-accent bg-accent text-white' : 'border-surface-border bg-surface text-white/60 hover:border-accent/40'
+              }`}
             >
-              {day}
-            </Button>
+              <span className="block text-xs opacity-70">{day}</span>
+              <span className="block">{DAY_NAMES_FULL[i].slice(0, 3)}</span>
+            </button>
           ))}
         </div>
-        <div className="overflow-x-auto rounded-2xl border border-surface-border">
-          <table className="w-full min-w-[640px] text-left text-sm">
-            <thead className="bg-charcoal-900 text-accent">
-              <tr>
-                <th className="p-4">Day</th>
-                <th className="p-4">Time</th>
-                <th className="p-4">Class</th>
-                <th className="p-4">Instructor</th>
-                <th className="p-4">Seats</th>
-                <th className="p-4">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredSessions.map((session) => {
-                const gymClass = CLASSES.find((c) => c.id === session.classId)!;
-                const instructor = TRAINERS.find((t) => t.id === gymClass.instructorId);
-                return (
-                  <tr key={session.id} className="border-t border-surface-border bg-surface">
-                    <td className="p-4">{DAY_NAMES[session.dayOfWeek]}</td>
-                    <td className="p-4">{session.startTime}</td>
-                    <td className="p-4 font-semibold">{gymClass.name}</td>
-                    <td className="p-4">{instructor?.name}</td>
-                    <td className="p-4">{session.seatsRemaining} left</td>
-                    <td className="p-4">
-                      <Button size="sm" onClick={() => bookClass(session.id)}>Reserve</Button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+
+        <div className="space-y-4">
+          {daySessions.length === 0 ? (
+            <p className="rounded-2xl border border-surface-border bg-surface p-8 text-center text-white/60">
+              No classes scheduled for {DAY_NAMES_FULL[selectedDay]}. Check another day or train open gym 24/7.
+            </p>
+          ) : (
+            daySessions.map((session) => {
+              const gymClass = CLASSES.find((c) => c.id === session.classId)!;
+              const instructor = TRAINERS.find((t) => t.id === gymClass.instructorId);
+              return (
+                <FadeIn key={session.id}>
+                  <div className="flex flex-col gap-4 rounded-2xl border border-surface-border bg-surface p-6 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <p className="text-sm text-accent">{session.startTime} – {session.endTime}</p>
+                      <h3 className="font-display text-xl font-bold text-white">{gymClass.name}</h3>
+                      <p className="text-sm text-white/60">with {instructor?.name}</p>
+                      <Badge variant={INTENSITY_VARIANT[gymClass.intensity]} className="mt-2">{gymClass.intensity}</Badge>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span className="text-sm text-white/50">{session.seatsRemaining} spots left</span>
+                      <Button
+                        size="sm"
+                        onClick={() =>
+                          setBookingTarget({
+                            sessionId: session.id,
+                            className: gymClass.name,
+                            day: DAY_NAMES_FULL[session.dayOfWeek],
+                            time: session.startTime,
+                            instructor: instructor?.name ?? 'IC Coach',
+                          })
+                        }
+                      >
+                        Book Class
+                      </Button>
+                    </div>
+                  </div>
+                </FadeIn>
+              );
+            })
+          )}
         </div>
       </Section>
 
       <Section dark>
-        <SectionHeader title="Class Catalog" />
-        <div className="mb-6 flex gap-2">
-          {['all', 'beginner', 'intermediate', 'advanced'].map((level) => (
-            <Button
-              key={level}
-              size="sm"
-              variant={intensityFilter === level ? 'primary' : 'outline'}
-              onClick={() => setIntensityFilter(level)}
-            >
-              {level === 'all' ? 'All Levels' : level.charAt(0).toUpperCase() + level.slice(1)}
-            </Button>
-          ))}
-        </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredClasses.map((gymClass, i) => {
-            const instructor = TRAINERS.find((t) => t.id === gymClass.instructorId);
-            return (
-              <FadeIn key={gymClass.id} delay={i * 0.05}>
-                <div className="overflow-hidden rounded-2xl border border-surface-border bg-surface">
-                  <div className="relative h-48">
-                    <Image src={gymClass.image} alt={gymClass.name} fill className="object-cover" />
-                  </div>
-                  <div className="p-6">
-                    <Badge variant={INTENSITY_VARIANT[gymClass.intensity]}>{gymClass.intensity}</Badge>
-                    <h3 className="mt-3 font-display text-xl font-bold text-white">{gymClass.name}</h3>
-                    <p className="mt-2 text-sm text-white/60">{gymClass.description}</p>
-                    <p className="mt-3 text-sm text-accent">with {instructor?.name}</p>
-                  </div>
-                </div>
-              </FadeIn>
-            );
-          })}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeader title="Our Instructors" />
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <SectionHeader title="Meet Our Broken Bow Trainers" />
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {TRAINERS.map((trainer, i) => (
             <FadeIn key={trainer.id} delay={i * 0.08}>
               <div className="text-center">
                 <div className="relative mx-auto h-48 w-48 overflow-hidden rounded-full border-2 border-accent/30">
-                  <Image src={trainer.image} alt={trainer.name} fill className="object-cover" />
+                  <GymImage src={trainer.image} fallback={IMAGES.heroFallback} alt={trainer.name} fill className="object-cover" />
                 </div>
                 <h3 className="mt-4 font-display text-xl font-bold text-white">{trainer.name}</h3>
                 <p className="text-sm text-accent">{trainer.role}</p>
                 <p className="mt-2 text-sm text-white/60">{trainer.bio}</p>
-                <Link href="/classes" className="mt-4 inline-block">
-                  <Button size="sm" variant="outline">Book Class</Button>
-                </Link>
               </div>
             </FadeIn>
           ))}
         </div>
       </Section>
+
+      {bookingTarget ? (
+        <ClassBookingModal
+          isOpen
+          className={bookingTarget.className}
+          day={bookingTarget.day}
+          time={bookingTarget.time}
+          instructor={bookingTarget.instructor}
+          onClose={() => setBookingTarget(null)}
+          onBook={handleBook}
+        />
+      ) : null}
     </>
   );
 }

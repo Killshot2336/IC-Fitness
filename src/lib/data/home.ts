@@ -1,8 +1,9 @@
 import type { Testimonial } from '@/types';
+import { IMAGES } from '@/lib/images';
 
 export const STATS = [
-  { value: 500, suffix: '+', label: 'Active Members' },
-  { value: 3, suffix: '', label: 'Years Strong' },
+  { value: 560, suffix: '+', label: 'Active Members' },
+  { value: 4, suffix: '', label: 'Years Strong' },
   { value: 15, suffix: '+', label: 'Weekly Classes' },
   { value: '24/7', label: 'Access Daily', isText: true },
 ] as const;
@@ -15,87 +16,97 @@ export const TESTIMONIALS: Testimonial[] = [
       'The atmosphere puts you in beast mode. Equipment is top-notch and the 24/7 access fits my crazy schedule. Best gym in Broken Bow!',
     rating: 5,
   },
-  {
-    id: '2',
-    name: 'Sarah L.',
-    quote:
-      'Super easy drop-in process when visiting for the weekend. Great equipment and clean facility. Will definitely be back!',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80',
-    rating: 5,
-  },
-  {
-    id: '3',
-    name: 'Tom H.',
-    quote:
-      'The CrossFit area is incredible! Best rig I\'ve used outside of a dedicated CrossFit box. Classes are challenging but welcoming.',
-    rating: 5,
-  },
-  {
-    id: '4',
-    name: 'Jessica M.',
-    quote:
-      'Premium feels premium here. From the locker rooms to the coaching staff, IC Fitness is on another level for Southeast Oklahoma.',
-    rating: 5,
-  },
 ];
 
 export const COMMUNITY_EVENTS = [
   {
     id: '1',
-    title: 'Summer Shred Challenge',
-    image: 'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&q=80',
-    date: 'Jun 2026',
+    title: 'Kaitlyn Clouse Powerlifting Competition',
+    image: IMAGES.eventKaitlyn,
+    imageFallback: IMAGES.eventKaitlynFallback,
+    date: 'Community Event',
+    description: 'IC Fitness members showing out at local competition — proud of our athletes!',
   },
   {
     id: '2',
-    title: 'Charity Lift-A-Thon',
-    image: 'https://images.unsplash.com/photo-1583454110551-21f2f2b36d7a?w=600&q=80',
-    date: 'Apr 2026',
+    title: 'New Equipment Day',
+    image: IMAGES.equipment,
+    imageFallback: IMAGES.equipmentFallback,
+    date: 'Facility Upgrade',
+    description: 'Fresh gear on the floor — because Broken Bow deserves better.',
   },
   {
     id: '3',
-    title: 'Member Appreciation BBQ',
-    image: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80',
-    date: 'Mar 2026',
+    title: 'Member Appreciation Night',
+    image: IMAGES.community,
+    imageFallback: IMAGES.communityFallback,
+    date: 'IC Family',
+    description: 'Celebrating the community that built IC Fitness at 2716 South Park Drive.',
   },
   {
     id: '4',
-    title: 'New Year Transformation',
-    image: 'https://images.unsplash.com/photo-1599058917212-d750089bc07e?w=600&q=80',
-    date: 'Jan 2026',
+    title: 'Blend & Believe Partner Perk',
+    image: IMAGES.studio,
+    imageFallback: IMAGES.studioFallback,
+    date: 'Local Partnership',
+    description: 'IC Fitness members get exclusive perks at Blend & Believe next door.',
   },
 ];
 
 export const TIMELINE = [
-  { year: '2023', title: 'IC Fitness Opens', description: 'Launched as Broken Bow\'s premier 24/7 training facility.' },
-  { year: '2024', title: 'Studio Expansion', description: 'Added dedicated fitness studio and expanded class schedule.' },
-  { year: '2025', title: 'Box Gym Upgrade', description: 'Installed professional CrossFit rig and functional training zone.' },
-  { year: '2026', title: '500+ Members', description: 'Celebrated 500 active members and launched digital member portal.' },
+  {
+    year: '2023',
+    title: 'Grand Opening — April 3rd',
+    description:
+      'Candy Tipton opens IC Fitness at 2716 South Park Drive after securing an SBA loan with help from the Oklahoma SBDC. Broken Bow finally gets a true 24/7 gym.',
+  },
+  {
+    year: '2024',
+    title: 'Studio & Class Expansion',
+    description:
+      'Added our dedicated fitness studio and grew the weekly class schedule — yoga, spin, HIIT, and CrossFit for the IC Family.',
+  },
+  {
+    year: '2025',
+    title: 'Box Gym Upgrade',
+    description:
+      'Installed professional functional training equipment and expanded our box gym — the rig our members asked for.',
+  },
+  {
+    year: '2026',
+    title: '4 Years Strong · 560+ Members',
+    description:
+      'Four years of INSPIRE-ing Broken Bow. Partnered with Blend & Believe next door and launched our digital member portal.',
+  },
 ];
 
-export const INSTAGRAM_POSTS = [
+export const FACEBOOK_POSTS = [
   {
     id: '1',
-    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&q=80',
-    caption: 'Monday motivation hits different at IC Fitness 💪',
+    image: IMAGES.hero,
+    imageFallback: IMAGES.heroFallback,
+    caption: 'Another night at IC Fitness on South Park Drive. Who\'s training tonight? 💪',
     likes: 128,
   },
   {
     id: '2',
-    image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=600&q=80',
-    caption: 'CrossFit night was 🔥 New PRs all around!',
+    image: IMAGES.boxGym,
+    imageFallback: IMAGES.boxGymFallback,
+    caption: 'New equipment on the floor! Come see what we added.',
     likes: 96,
   },
   {
     id: '3',
-    image: 'https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&q=80',
-    caption: 'Train on your time — we\'re always open.',
+    image: IMAGES.community,
+    imageFallback: IMAGES.communityFallback,
+    caption: '24/7 access means YOUR schedule runs the show. Key fob in, grind out.',
     likes: 74,
   },
   {
     id: '4',
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80',
-    caption: 'Find your flow with Emily\'s yoga classes 🧘',
-    likes: 62,
+    image: IMAGES.eventKaitlyn,
+    imageFallback: IMAGES.eventKaitlynFallback,
+    caption: 'Proud of Kaitlyn Clouse and every IC athlete representing at competition!',
+    likes: 112,
   },
 ];

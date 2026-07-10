@@ -2,11 +2,11 @@
 const nextConfig = {
   images: {
     formats: ['image/webp', 'image/avif'],
-    remotePatterns: [
-      { protocol: 'https', hostname: 'images.unsplash.com' },
-      { protocol: 'https', hostname: 'cdn.sanity.io' },
-      { protocol: 'https', hostname: 'scontent.cdninstagram.com' },
-    ],
+      remotePatterns: [
+        { protocol: 'https', hostname: 'backend.findgymnow.com' },
+        { protocol: 'https', hostname: 'cdn.sanity.io' },
+        { protocol: 'https', hostname: 'scontent.cdninstagram.com' },
+      ],
   },
   experimental: {
     optimizePackageImports: ['framer-motion', 'lucide-react'],

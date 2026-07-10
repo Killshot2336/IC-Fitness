@@ -1,18 +1,20 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui';
+import { GymImage } from '@/components/ui/GymImage';
 import { SITE } from '@/lib/constants';
+import { IMAGES } from '@/lib/images';
 
 export function HeroSection() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
-      <Image
-        src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1920&q=80"
-        alt="IC Fitness gym interior"
+      <GymImage
+        src={IMAGES.hero}
+        fallback={IMAGES.heroFallback}
+        alt="IC Fitness gym interior with members training — Broken Bow, OK"
         fill
         priority
         className="object-cover"
@@ -27,14 +29,14 @@ export function HeroSection() {
           transition={{ duration: 0.6 }}
           className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-accent"
         >
-          Broken Bow, Oklahoma
+          2716 South Park Drive · Broken Bow, OK
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-display text-5xl font-black leading-tight tracking-tight text-white sm:text-6xl lg:text-7xl"
+          className="font-display text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl"
         >
           {SITE.tagline}
         </motion.h1>
@@ -45,7 +47,7 @@ export function HeroSection() {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-white/70 sm:text-xl"
         >
-          {SITE.motto} Elite equipment, expert coaching, and a community that pushes you to inspire others.
+          {SITE.motto} Train anytime with 24/7 key fob access — traditional gym, box gym, and fitness studio under one roof.
         </motion.p>
 
         <motion.div

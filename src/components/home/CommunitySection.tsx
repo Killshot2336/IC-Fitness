@@ -1,10 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import { Section, SectionHeader } from '@/components/layout/Section';
+import { GymImage } from '@/components/ui/GymImage';
 import { FadeIn, StaggerContainer, StaggerItem } from '@/components/motion';
 import { COMMUNITY_EVENTS, STATS } from '@/lib/data/home';
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
+import { SITE } from '@/lib/constants';
 
 export function CommunitySection() {
   return (
@@ -33,8 +34,8 @@ export function CommunitySection() {
 
       <Section id="community">
         <SectionHeader
-          title="Community & Events"
-          subtitle="More than a gym — a family that celebrates every milestone together."
+          title="The IC Family in Broken Bow"
+          subtitle={`Located at ${SITE.address.street}, next door to ${SITE.partner.name}. This is our community — not a corporate chain.`}
         />
 
         <StaggerContainer className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -42,8 +43,9 @@ export function CommunitySection() {
             <StaggerItem key={event.id}>
               <div className="group overflow-hidden rounded-2xl border border-surface-border">
                 <div className="relative h-48 overflow-hidden">
-                  <Image
+                  <GymImage
                     src={event.image}
+                    fallback={event.imageFallback}
                     alt={event.title}
                     fill
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -53,6 +55,7 @@ export function CommunitySection() {
                 <div className="bg-surface p-4">
                   <p className="text-xs font-semibold uppercase tracking-wider text-accent">{event.date}</p>
                   <h3 className="mt-1 font-display text-lg font-bold text-white">{event.title}</h3>
+                  <p className="mt-2 text-sm text-white/60">{event.description}</p>
                 </div>
               </div>
             </StaggerItem>

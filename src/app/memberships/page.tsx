@@ -1,59 +1,60 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import { ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Check, ChevronDown } from 'lucide-react';
 import { Section, SectionHeader } from '@/components/layout/Section';
-import { Badge, Button } from '@/components/ui';
+import { GymImage } from '@/components/ui/GymImage';
 import { FadeIn } from '@/components/motion';
+import { MembershipFlipCard } from '@/components/memberships/MembershipFlipCard';
+import { MembershipJoinModal } from '@/components/memberships/MembershipJoinModal';
 import { MEMBERSHIP_TIERS, MEMBERSHIP_FAQ, VISITOR_PASSES } from '@/lib/data/memberships';
 import { formatCurrency } from '@/lib/utils';
+import { IMAGES } from '@/lib/images';
+import { useMemberAuth } from '@/context/MemberAuthContext';
 
 function FaqItem({ question, answer }: { question: string; answer: string }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-surface-border">
-      <button
-        type="button"
-        onClick={() => setOpen(!open)}
-        className="flex w-full items-center justify-between py-5 text-left"
-      >
+      <button type="button" onClick={() => setOpen(!open)} className="flex w-full items-center justify-between py-5 text-left">
         <span className="font-semibold text-white">{question}</span>
-        <ChevronDown
-          size={20}
-          className={`shrink-0 text-accent transition-transform ${open ? 'rotate-180' : ''}`}
-        />
+        <ChevronDown size={20} className={`shrink-0 text-accent transition-transform ${open ? 'rotate-180' : ''}`} />
       </button>
-      <motion.div
-        initial={false}
-        animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }}
-        className="overflow-hidden"
-      >
+      <motion.div initial={false} animate={{ height: open ? 'auto' : 0, opacity: open ? 1 : 0 }} className="overflow-hidden">
         <p className="pb-5 text-white/60">{answer}</p>
       </motion.div>
     </div>
   );
 }
 
-async function handleCheckout(tierId: string, annual: boolean) {
-  const res = await fetch('/api/stripe/checkout', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ tierId, annual }),
-  });
-  const data = await res.json();
-  if (data.url) window.location.href = data.url;
-}
-
 export default function MembershipsPage() {
   const [annual, setAnnual] = useState(false);
   const [loading, setLoading] = useState<string | null>(null);
+  const [joinModal, setJoinModal] = useState<{ tierId: string; tierName: string; price: string } | null>(null);
+  const { login } = useMemberAuth();
 
-  const checkout = async (tierId: string) => {
-    setLoading(tierId);
+  const openJoin = (tierId: string, tierName: string) => {
+    const tier = MEMBERSHIP_TIERS.find((t) => t.id === tierId)!;
+    const price = formatCurrency(annual ? tier.annualPrice : tier.monthlyPrice) + (annual ? '/yr' : '/mo');
+    setJoinModal({ tierId, tierName, price });
+  };
+
+  const handleJoinSubmit = async (data: { name: string; email: string; membershipNumber: string }) => {
+    if (!joinModal) return;
+    const memberNum = data.membershipNumber || `IC-${Date.now().toString().slice(-5)}`;
+    login(data.email, memberNum, data.name);
+    setJoinModal(null);
+    setLoading(joinModal.tierId);
     try {
-      await handleCheckout(tierId, annual);
+      const res = await fetch('/api/stripe/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ tierId: joinModal.tierId, annual }),
+      });
+      const result = await res.json();
+      if (result.url) window.location.href = result.url;
+      else alert('Checkout is in demo mode. Your membership signup was recorded — welcome to the IC Family!');
     } finally {
       setLoading(null);
     }
@@ -62,82 +63,42 @@ export default function MembershipsPage() {
   return (
     <>
       <section className="relative h-[40vh] min-h-[320px]">
-        <Image
-          src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1920&q=80"
-          alt="IC Fitness members training"
-          fill
-          className="object-cover"
-          priority
-        />
+        <GymImage src={IMAGES.community} fallback={IMAGES.communityFallback} alt="IC Fitness members at Broken Bow gym" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-hero-overlay" />
         <div className="relative z-10 flex h-full items-center">
           <div className="mx-auto w-full max-w-7xl px-4">
             <h1 className="font-display text-5xl font-black text-white">Memberships</h1>
-            <p className="mt-2 text-lg text-white/70">Invest in yourself. Train without limits.</p>
+            <p className="mt-2 text-lg text-white/70">24/7 access at 2716 South Park Drive. No corporate nonsense — just results.</p>
           </div>
         </div>
       </section>
 
       <Section>
-        <SectionHeader title="Choose Your Plan" subtitle="All plans include 24/7 key fob access." />
+        <SectionHeader title="Choose Your Plan" subtitle="All plans include 24/7 key fob access. Hover a card to flip and see features." />
 
         <FadeIn className="mb-10 flex justify-center">
           <div className="inline-flex rounded-xl border border-surface-border bg-surface p-1">
-            <button
-              type="button"
-              onClick={() => setAnnual(false)}
-              className={`rounded-lg px-6 py-2 text-sm font-semibold ${!annual ? 'bg-accent text-white' : 'text-white/60'}`}
-            >
-              Monthly
-            </button>
-            <button
-              type="button"
-              onClick={() => setAnnual(true)}
-              className={`rounded-lg px-6 py-2 text-sm font-semibold ${annual ? 'bg-accent text-white' : 'text-white/60'}`}
-            >
-              Annual (Save 17%)
-            </button>
+            <button type="button" onClick={() => setAnnual(false)} className={`rounded-lg px-6 py-2 text-sm font-semibold ${!annual ? 'bg-accent text-white' : 'text-white/60'}`}>Monthly</button>
+            <button type="button" onClick={() => setAnnual(true)} className={`rounded-lg px-6 py-2 text-sm font-semibold ${annual ? 'bg-accent text-white' : 'text-white/60'}`}>Annual (Save 17%)</button>
           </div>
         </FadeIn>
 
         <div className="grid gap-8 lg:grid-cols-3">
           {MEMBERSHIP_TIERS.map((tier, i) => (
             <FadeIn key={tier.id} delay={i * 0.1}>
-              <div
-                className={`rounded-2xl border p-8 ${
-                  tier.popular ? 'border-accent bg-surface shadow-glow' : 'border-surface-border bg-surface'
-                }`}
-              >
-                {tier.popular ? <Badge variant="accent" className="mb-4">Most Popular</Badge> : null}
-                <h3 className="font-display text-2xl font-bold">{tier.name}</h3>
-                <p className="mt-2 text-sm text-white/60">{tier.description}</p>
-                <p className="mt-6 font-display text-5xl font-bold text-accent">
-                  {formatCurrency(annual ? tier.annualPrice : tier.monthlyPrice)}
-                  <span className="text-base font-normal text-white/50">/{annual ? 'yr' : 'mo'}</span>
-                </p>
-                <ul className="mt-8 space-y-3">
-                  {tier.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2 text-sm text-white/80">
-                      <Check size={16} className="mt-0.5 text-accent" /> {f}
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  className="mt-8 w-full"
-                  variant={tier.popular ? 'primary' : 'outline'}
-                  isLoading={loading === tier.id}
-                  onClick={() => checkout(tier.id)}
-                >
-                  Join {tier.name}
-                </Button>
-              </div>
+              <MembershipFlipCard
+                tier={tier}
+                annual={annual}
+                onJoin={() => openJoin(tier.id, tier.name)}
+                loading={loading === tier.id}
+              />
             </FadeIn>
           ))}
         </div>
       </Section>
 
       <Section dark>
-        <SectionHeader title="Visitor Passes" subtitle="Perfect for travelers and weekend warriors." />
+        <SectionHeader title="Visitor Passes" subtitle="Visiting Broken Bow? Drop in at South Park Drive." />
         <div className="grid gap-6 sm:grid-cols-3">
           {VISITOR_PASSES.map((pass) => (
             <FadeIn key={pass.id}>
@@ -151,24 +112,6 @@ export default function MembershipsPage() {
         </div>
       </Section>
 
-      <Section>
-        <SectionHeader title="Add-On Services" />
-        <div className="grid gap-6 md:grid-cols-2">
-          <FadeIn>
-            <div className="rounded-2xl border border-surface-border bg-surface p-8">
-              <h3 className="font-display text-xl font-bold text-white">Personal Training</h3>
-              <p className="mt-3 text-white/60">One-on-one coaching tailored to your goals. From $60/session.</p>
-            </div>
-          </FadeIn>
-          <FadeIn delay={0.1}>
-            <div className="rounded-2xl border border-surface-border bg-surface p-8">
-              <h3 className="font-display text-xl font-bold text-white">Nutrition Coaching</h3>
-              <p className="mt-3 text-white/60">Custom meal plans and macro guidance. From $75/consultation.</p>
-            </div>
-          </FadeIn>
-        </div>
-      </Section>
-
       <Section dark>
         <SectionHeader title="Frequently Asked Questions" />
         <div className="mx-auto max-w-3xl">
@@ -177,6 +120,16 @@ export default function MembershipsPage() {
           ))}
         </div>
       </Section>
+
+      {joinModal ? (
+        <MembershipJoinModal
+          isOpen
+          tierName={joinModal.tierName}
+          price={joinModal.price}
+          onClose={() => setJoinModal(null)}
+          onSubmit={handleJoinSubmit}
+        />
+      ) : null}
     </>
   );
 }
