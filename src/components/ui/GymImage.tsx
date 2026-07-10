@@ -10,19 +10,38 @@ interface GymImageProps extends Omit<ImageProps, 'src' | 'alt'> {
 }
 
 /**
- * Tries local IC Fitness asset first, falls back to verified listing photo.
+ * Renders a local IC Fitness asset with automatic fallback on load failure.
  */
-export function GymImage({ src, fallback, alt, ...props }: GymImageProps) {
+export function GymImage({ src, fallback, alt, fill, className, ...props }: GymImageProps) {
   const [current, setCurrent] = useState(src);
+  const [useUnoptimized, setUseUnoptimized] = useState(false);
 
-  return (
+  const handleError = () => {
+    if (current !== fallback) {
+      setCurrent(fallback);
+      setUseUnoptimized(true);
+    }
+  };
+
+  const image = (
     <Image
       {...props}
       src={current}
       alt={alt}
-      onError={() => {
-        if (current !== fallback) setCurrent(fallback);
-      }}
+      fill={fill}
+      className={className}
+      unoptimized={useUnoptimized}
+      onError={handleError}
     />
   );
+
+  if (fill) {
+    return (
+      <div className="absolute inset-0">
+        {image}
+      </div>
+    );
+  }
+
+  return image;
 }

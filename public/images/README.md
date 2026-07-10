@@ -1,10 +1,12 @@
-# IC Fitness — Real Image Assets
+# IC Fitness — Image Assets
 
-Drop your Facebook-exported photos into these folders. The site will use them automatically via `src/lib/images.ts`.
+All site images are bundled under `public/images/ic-fitness/` and referenced from `src/lib/images.ts`.
+
+## Folder structure
 
 ```
 public/images/ic-fitness/
-├── hero/gym-main.jpg              # Homepage hero — gym interior with members
+├── hero/gym-main.jpg
 ├── facilities/
 │   ├── weight-floor.jpg
 │   ├── cardio-zone.jpg
@@ -12,9 +14,9 @@ public/images/ic-fitness/
 │   ├── fitness-studio.jpg
 │   ├── locker-rooms.jpg
 │   ├── building-exterior.jpg
-│   └── new-equipment.jpg          # New equipment posts from Facebook
+│   └── new-equipment.jpg
 ├── team/
-│   ├── candy-tipton.jpg           # Owner / Director of Operations
+│   ├── candy-tipton.jpg
 │   ├── coach-sarah.jpg
 │   └── coach-marcus.jpg
 ├── events/
@@ -23,6 +25,8 @@ public/images/ic-fitness/
     └── member-workout.jpg
 ```
 
-Until local files are added, the site falls back to verified IC Fitness listing photos (not generic stock).
+## Replacing with real photos
 
-**Recommended sources:** @ICFitness2 Facebook page, @candyfit_tipton Instagram.
+Drop Facebook or Instagram exports into the matching paths above. The site will pick them up automatically on the next build — no code changes required.
+
+**Recommended sources:** @ICFitness2 on Facebook, @candyfit_tipton on Instagram.

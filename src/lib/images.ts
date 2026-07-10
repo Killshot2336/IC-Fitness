@@ -1,13 +1,8 @@
 /**
- * IC Fitness authentic image assets.
- * Primary source: verified listing photos of IC Fitness, Broken Bow, OK.
- * Replace local paths in /public/images/ic-fitness/ when Facebook assets are added.
+ * IC Fitness image assets — all served from /public/images/ic-fitness/.
+ * Replace individual files to swap in real Facebook exports when available.
  */
 
-const FINDGYMNOW_GYM =
-  'https://backend.findgymnow.com/v1/files/69f3b682-694a-4959-802e-9bf70d7da1a8';
-
-/** Local paths — drop Facebook exports into these locations */
 const LOCAL = {
   hero: '/images/ic-fitness/hero/gym-main.jpg',
   weights: '/images/ic-fitness/facilities/weight-floor.jpg',
@@ -24,48 +19,47 @@ const LOCAL = {
   equipment: '/images/ic-fitness/facilities/new-equipment.jpg',
 } as const;
 
-/**
- * Remote fallbacks are real IC Fitness photos from public gym listings.
- * Next.js Image is configured to allow backend.findgymnow.com.
- */
+/** Ultimate fallback when a specific asset fails to load */
+const DEFAULT_FALLBACK = LOCAL.hero;
+
 export const IMAGES = {
   hero: LOCAL.hero,
-  heroFallback: FINDGYMNOW_GYM,
+  heroFallback: DEFAULT_FALLBACK,
   weights: LOCAL.weights,
-  weightsFallback: FINDGYMNOW_GYM,
+  weightsFallback: LOCAL.weights,
   cardio: LOCAL.cardio,
-  cardioFallback: FINDGYMNOW_GYM,
+  cardioFallback: LOCAL.cardio,
   boxGym: LOCAL.boxGym,
-  boxGymFallback: FINDGYMNOW_GYM,
+  boxGymFallback: LOCAL.boxGym,
   studio: LOCAL.studio,
-  studioFallback: FINDGYMNOW_GYM,
+  studioFallback: LOCAL.studio,
   locker: LOCAL.locker,
-  lockerFallback: FINDGYMNOW_GYM,
+  lockerFallback: LOCAL.locker,
   exterior: LOCAL.exterior,
-  exteriorFallback: FINDGYMNOW_GYM,
+  exteriorFallback: LOCAL.exterior,
   candy: LOCAL.candy,
-  candyFallback: FINDGYMNOW_GYM,
+  candyFallback: LOCAL.candy,
   coachSarah: LOCAL.coachSarah,
-  coachSarahFallback: FINDGYMNOW_GYM,
+  coachSarahFallback: LOCAL.coachSarah,
   coachMarcus: LOCAL.coachMarcus,
-  coachMarcusFallback: FINDGYMNOW_GYM,
+  coachMarcusFallback: LOCAL.coachMarcus,
   eventKaitlyn: LOCAL.eventKaitlyn,
-  eventKaitlynFallback: FINDGYMNOW_GYM,
+  eventKaitlynFallback: LOCAL.eventKaitlyn,
   community: LOCAL.community,
-  communityFallback: FINDGYMNOW_GYM,
+  communityFallback: LOCAL.community,
   equipment: LOCAL.equipment,
-  equipmentFallback: FINDGYMNOW_GYM,
-  memberships: FINDGYMNOW_GYM,
-  classes: FINDGYMNOW_GYM,
-  about: FINDGYMNOW_GYM,
-  og: FINDGYMNOW_GYM,
+  equipmentFallback: LOCAL.equipment,
+  memberships: LOCAL.community,
+  classes: LOCAL.studio,
+  about: LOCAL.hero,
+  og: LOCAL.hero,
 } as const;
 
 export const GALLERY_WALKTHROUGH = [
-  { src: IMAGES.heroFallback, alt: 'IC Fitness main training floor — Broken Bow, OK' },
-  { src: IMAGES.weightsFallback, alt: 'Free weights and power racks at IC Fitness' },
-  { src: IMAGES.boxGymFallback, alt: 'IC Fitness box gym and functional training area' },
-  { src: IMAGES.studioFallback, alt: 'IC Fitness group fitness studio' },
-  { src: IMAGES.cardioFallback, alt: 'Cardio equipment zone at IC Fitness' },
-  { src: IMAGES.equipmentFallback, alt: 'New equipment at IC Fitness' },
+  { src: LOCAL.hero, alt: 'IC Fitness main training floor — Broken Bow, OK' },
+  { src: LOCAL.weights, alt: 'Free weights and power racks at IC Fitness' },
+  { src: LOCAL.boxGym, alt: 'IC Fitness box gym and functional training area' },
+  { src: LOCAL.studio, alt: 'IC Fitness group fitness studio' },
+  { src: LOCAL.cardio, alt: 'Cardio equipment zone at IC Fitness' },
+  { src: LOCAL.equipment, alt: 'New equipment at IC Fitness' },
 ] as const;

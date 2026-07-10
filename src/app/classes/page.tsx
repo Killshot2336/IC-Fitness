@@ -44,7 +44,7 @@ export default function ClassesPage() {
   return (
     <>
       <section className="relative h-[50vh] min-h-[400px]">
-        <GymImage src={IMAGES.classes} fallback={IMAGES.classes} alt="IC Fitness class in session" fill className="object-cover" priority />
+        <GymImage src={IMAGES.classes} fallback={IMAGES.heroFallback} alt="IC Fitness class in session" fill className="object-cover" priority />
         <div className="absolute inset-0 bg-hero-overlay" />
         <div className="relative z-10 flex h-full items-end pb-16">
           <div className="mx-auto w-full max-w-7xl px-4">

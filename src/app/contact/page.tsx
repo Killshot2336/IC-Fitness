@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
+import { GymImage } from '@/components/ui/GymImage';
+import { IMAGES } from '@/lib/images';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import { Section, SectionHeader } from '@/components/layout/Section';
 import { Button, Input } from '@/components/ui';
@@ -86,9 +87,10 @@ export default function ContactPage() {
               </li>
             </ul>
             <div className="relative mt-8 h-48 overflow-hidden rounded-2xl">
-              <Image
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80"
-                alt="IC Fitness building exterior"
+              <GymImage
+                src={IMAGES.exterior}
+                fallback={IMAGES.exteriorFallback}
+                alt="IC Fitness building exterior at 2716 South Park Drive"
                 fill
                 className="object-cover"
               />
