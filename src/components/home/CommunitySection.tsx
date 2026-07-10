@@ -21,6 +21,7 @@ export function CommunitySection() {
                   ) : (
                     <AnimatedCounter
                       value={stat.value as number}
+                      start={'start' in stat ? stat.start : undefined}
                       suffix={'suffix' in stat ? stat.suffix : ''}
                     />
                   )}

@@ -2,9 +2,9 @@ import type { Testimonial } from '@/types';
 import { IMAGES } from '@/lib/images';
 
 export const STATS = [
-  { value: 1494, suffix: '+', label: 'Active Members' },
-  { value: 11, suffix: '', label: 'Years Strong' },
-  { value: 15, suffix: '+', label: 'Weekly Classes' },
+  { value: 560, start: 400, suffix: '+', label: 'Active Members' },
+  { value: 4, start: 2, suffix: '', label: 'Years Strong' },
+  { value: 7, start: 5, suffix: '+', label: 'Weekly Classes' },
   { value: '24/7', label: 'Access Daily', isText: true },
 ] as const;
 
@@ -74,7 +74,7 @@ export const TIMELINE = [
   },
   {
     year: '2026',
-    title: '11 Years Strong · 1,494+ Members',
+    title: '4 Years Strong · 560+ Members',
     description:
       'Over a decade serving Broken Bow. Partnered with Blend & Believe next door and launched our digital member portal.',
   },

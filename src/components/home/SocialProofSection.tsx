@@ -28,7 +28,7 @@ export function SocialProofSection() {
         </FadeIn>
         <FadeIn delay={0.1} className="rounded-2xl border border-surface-border bg-surface p-8 text-center">
           <p className="font-display text-4xl font-bold text-accent">
-            <AnimatedCounter value={SITE.memberCount} suffix="+" />
+            <AnimatedCounter value={SITE.memberCount} start={400} suffix="+" />
           </p>
           <p className="mt-2 text-sm text-white/60">Active Members</p>
         </FadeIn>
